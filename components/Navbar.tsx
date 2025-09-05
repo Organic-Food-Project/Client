@@ -18,7 +18,9 @@ export default function Navbar() {
     <nav className="mainPadding py-6 flex justify-between bg-white font-poppins font-500">
       <ul className="max-lg3:hidden flex items-center text-gray-500 text-body-medium gap-7">
         <li className="flex items-center hover:text-gray-900">
-          <ActiveLink href="/">Home</ActiveLink>
+          <ActiveLink href="/" exact>
+            Home
+          </ActiveLink>
         </li>
         <li className="flex items-center hover:text-gray-900">
           <ActiveLink href="/shop">Shop</ActiveLink>
@@ -29,10 +31,14 @@ export default function Navbar() {
           <ChevronDown size={24} />
         </li>
         <li className="flex items-center hover:text-gray-900">
-          <ActiveLink href="/Blog">Blog</ActiveLink>
+          <ActiveLink href="/Blog" exact>
+            Blog
+          </ActiveLink>
         </li>
         <li className="flex items-center hover:text-gray-900">
-          <ActiveLink href="/about-us">About Us</ActiveLink>
+          <ActiveLink href="/about-us" exact>
+            About Us
+          </ActiveLink>
         </li>
       </ul>
       <div>

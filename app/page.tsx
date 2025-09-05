@@ -1,3 +1,7 @@
 export default function Home() {
-  return <>hello world</>;
+  return (
+    <main className="mainPadding h-[50vh] flex justify-center items-center">
+      hello world
+    </main>
+  );
 }
