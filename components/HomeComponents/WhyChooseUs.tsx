@@ -11,19 +11,22 @@ import StaticsCard from '../StaticsCard';
 const WhyChooseUs = () => {
   const Statics = [
     {
-      title: '37+',
+      title: 37,
+      suffix: '+',
       description: 'Years of Hard Work',
     },
     {
-      title: '500k+',
+      title: 500,
+      suffix: 'k+',
       description: 'Happy Customer',
     },
     {
-      title: '28',
+      title: 28,
       description: 'Qualified Team Member',
     },
     {
-      title: '750k',
+      title: 750,
+      suffix: 'k',
       description: 'Total Orders',
     },
   ];
@@ -107,6 +110,7 @@ const WhyChooseUs = () => {
             <StaticsCard
               key={index}
               title={item.title}
+              suffix={item.suffix}
               description={item.description}
             />
           ))}
