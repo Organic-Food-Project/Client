@@ -7,7 +7,7 @@ import Heart from '@/assets/icons/Heart.svg';
 import Logo from '@/assets/Logo.png';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ChevronDown, Menu } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import ActiveLink from './ActiveLink';
 
 export default function Navbar() {
@@ -24,16 +24,9 @@ export default function Navbar() {
         </li>
         <li className="flex items-center hover:text-gray-900">
           <ActiveLink href="/shop">Shop</ActiveLink>
-          <ChevronDown size={24} />
         </li>
         <li className="flex items-center hover:text-gray-900">
           <ActiveLink href="/pages">Pages</ActiveLink>
-          <ChevronDown size={24} />
-        </li>
-        <li className="flex items-center hover:text-gray-900">
-          <ActiveLink href="/Blog" exact>
-            Blog
-          </ActiveLink>
         </li>
         <li className="flex items-center hover:text-gray-900">
           <ActiveLink href="/about-us" exact>
