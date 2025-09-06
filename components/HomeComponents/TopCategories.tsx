@@ -7,7 +7,7 @@ import Image from 'next/image';
 
 const TopCategories = () => {
   return (
-    <>
+    <div className=" bg-gradient-to-b from-green-50 to-white py-[80px]">
       <Image
         src={Leaf}
         width={41}
@@ -43,14 +43,7 @@ const TopCategories = () => {
           <ArrowRight />
         </button>
       </div>
-      <Image
-        src={Leaf}
-        width={41}
-        height={107}
-        alt="Leaf"
-        className="absolute bottom-0 translate-y-[50%] right-[10vw] rotate-[-33deg]"
-      />
-    </>
+    </div>
   );
 };
 

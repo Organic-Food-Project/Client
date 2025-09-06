@@ -1,0 +1,119 @@
+import Image from 'next/image';
+import React from 'react';
+import WhyUs from '@/assets/WhyUS.svg';
+import Link from 'next/link';
+import { ArrowRight, Check } from 'lucide-react';
+import Leaf from '@/assets/icons/Leaf.svg';
+import Leaf2 from '@/assets/icons/Leaf2.svg';
+import StaticsBG from '@/assets/StaticsBG.png';
+import VigBG from '@/assets/VigBG.png';
+import StaticsCard from '../StaticsCard';
+const WhyChooseUs = () => {
+  const Statics = [
+    {
+      title: '37+',
+      description: 'Years of Hard Work',
+    },
+    {
+      title: '500k+',
+      description: 'Happy Customer',
+    },
+    {
+      title: '28',
+      description: 'Qualified Team Member',
+    },
+    {
+      title: '750k',
+      description: 'Total Orders',
+    },
+  ];
+  const CheckBox = () => {
+    return (
+      <div className="flex gap-2 bg-primary rounded-full w-fit p-1">
+        <Check color="white" size={20} />
+      </div>
+    );
+  };
+  return (
+    <>
+      <div className="z-1 relative flex justify-center items-center gap-10 pt-[24px] pb-[80px]">
+        <Image src={WhyUs} width={809} height={513} alt="Why choose us" />
+        <div className="max-w-[540px] self-end space-y-[26px]">
+          <h2 className="max-w-[389px] text-4xl sm:text-heading-03 font-poppins font-bold">
+            100% Trusted Organic Food Store
+          </h2>
+          <div className="space-y-[10px]">
+            <h3 className="text-body-large font-semibold text-black/400 flex items-center gap-3">
+              <CheckBox />
+              Healthy & natural food for lovers of healthy food.
+            </h3>
+            <p className="pl-[34px] text-gray-500 text-body-small">
+              Ut quis tempus erat. Phasellus euismod bibendum magna non
+              tristique. Pellentesque semper vestibulum elit sed condimentum.
+              Nunc pretium fermentum interdum.{' '}
+            </p>
+          </div>
+          <div className="space-y-[10px]">
+            <h3 className="text-body-large font-semibold text-black/400 flex items-center gap-3">
+              <CheckBox />
+              Every day fresh and quality products for you.
+            </h3>
+            <p className="pl-[34px] text-gray-500 text-body-small">
+              Maecenas vehicula a justo quis laoreet. Sed in placerat nibh, a
+              posuere ex. Morbi sem neque, aliquam sed orci et, rhoncus lobortis
+              felis. Sed vestibulum nisl sit amet sapien.
+            </p>
+          </div>
+          <Link
+            href="/shop"
+            aria-label="Shop now"
+            className="w-fit flex items-center justify-center gap-4 font-bold text-body-medium font-semibold bg-primary text-white rounded-full px-10 py-4"
+          >
+            Shop now
+            <ArrowRight />
+          </Link>
+        </div>
+        <Image
+          src={Leaf}
+          width={41}
+          height={107}
+          alt="Leaf"
+          className="absolute top-0 translate-y-[50%] right-[10vw] rotate-[-33deg]"
+        />
+        <Image
+          src={VigBG}
+          width={1920}
+          height={617}
+          alt="Leaf"
+          className="absolute top-0 left-0 w-full h-full z-[-1]"
+        />
+      </div>
+      <div className="mainPadding z-1 relative h-[331px]">
+        <Image
+          src={Leaf2}
+          width={56}
+          alt="Leaf"
+          className="z-[-1] absolute top-0 translate-y-[-65%]  right-[10vw] rotate-[25deg]"
+        />
+        <Image
+          src={StaticsBG}
+          width={1920}
+          height={331}
+          className="z-[-1] w-full h-full absolute top-0 left-0 max-lg:object-cover"
+          alt="Statics BG"
+        />
+        <div className="grid lg:grid-cols-4 gap-6 flex justify-center items-center w-full h-full">
+          {Statics.map((item, index) => (
+            <StaticsCard
+              key={index}
+              title={item.title}
+              description={item.description}
+            />
+          ))}
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default WhyChooseUs;
