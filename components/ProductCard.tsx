@@ -20,7 +20,7 @@ const ProductCard = () => {
     <motion.div
       onMouseEnter={() => setIsHoverd(true)}
       onMouseLeave={() => setIsHoverd(false)}
-      className="relative border rounded-[8px] border-gray-100 hover:border-hard-primary hover:shadow hover:shadow-soft-primary p-4"
+      className="relative group border rounded-[8px] border-gray-100 hover:border-hard-primary hover:shadow hover:shadow-soft-primary p-4 bg-white"
     >
       <Link href="/shop/1">
         <Image
@@ -30,7 +30,6 @@ const ProductCard = () => {
           alt={ProductData.imgAlt}
           className="w-full"
         />
-
         <div className="self-end flex justify-between items-center">
           <div className="space-y-2">
             <p className="text-gray-700 text-body-small">{ProductData.title}</p>
