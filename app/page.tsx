@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import HeroBG from '@/assets/HeroBG.png';
 import Hero1 from '@/assets/Hero1.svg';
+import Leaf from '@/assets/icons/Leaf.svg';
 import IconFrame from '@/assets/icons/IconFrame.svg';
 import IconFrameSelected from '@/assets/icons/IconFrameSelected.svg';
 import Delivery from '@/assets/icons/delivery.svg';
@@ -9,8 +10,9 @@ import ShoppingBag from '@/assets/icons/shopping-bag.svg';
 import Package from '@/assets/icons/package.svg';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import FeaturedProducts from '@/components/HomeComponents/FeaturedProducts';
 
-export default function Home() {
+const Home = () => {
   const Cards = [
     {
       title: 'Free Shipping',
@@ -57,9 +59,9 @@ export default function Home() {
               <p className="font-poppins text-primary pb-2">
                 Welcome to shopery
               </p>
-              <h2 className="text-4xl sm:text-display-03 md:text-display-01 font-poppins font-bold  pb-[28px]">
+              <h1 className="text-4xl sm:text-display-03 md:text-display-01 font-poppins font-bold  pb-[28px]">
                 Fresh & Healthy Organic Food
-              </h2>
+              </h1>
               <h3 className="text-heading-05 text-black/400">
                 Sale up to{' '}
                 <span className="text-warning font-bold">30% OFF</span>
@@ -86,6 +88,13 @@ export default function Home() {
             <button className="size-[12px] rounded-full bg-green-200" />
           </div>
         </div>
+        <Image
+          src={Leaf}
+          width={41}
+          height={107}
+          alt="Leaf"
+          className="absolute bottom-0 translate-y-[50%] right-[10vw] rotate-[-33deg]"
+        />
       </section>
       <section className="mainPadding">
         <div className="border-b border-[#CCCCCC] grid grid-cols-1 md:grid-cols-4 gap-[24px]">
@@ -114,6 +123,11 @@ export default function Home() {
           ))}
         </div>
       </section>
+      <section className="mainPadding py-[80px]">
+        <FeaturedProducts />
+      </section>
     </main>
   );
-}
+};
+
+export default Home;
