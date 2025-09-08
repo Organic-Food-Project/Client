@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 import { cn } from '@/lib/utils';
-import { Eye } from 'lucide-react';
+import { Eye, EyeClosed } from 'lucide-react';
 
 function Input({ className, type, ...props }: React.ComponentProps<'input'>) {
   const [inputType, setInputType] = useState(type);
@@ -27,7 +27,8 @@ function Input({ className, type, ...props }: React.ComponentProps<'input'>) {
           }
           className="cursor-pointer flex items-center justify-center absolute top-0 right-0 w-fit h-full px-2"
         >
-          <Eye className="text-gray-600" />
+          {inputType === 'password' && <EyeClosed className="text-gray-600" />}
+          {inputType === 'text' && <Eye className="text-gray-600" />}
         </button>
       )}
     </div>
