@@ -1,9 +1,11 @@
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 import Category from '../Category';
 import Leaf from '@/assets/icons/Leaf.svg';
 import Image from 'next/image';
+import ButtonLeft from '../ButtonLeft';
+import ButtonRight from '../ButtonRight';
 
 const TopCategories = () => {
   return (
@@ -28,9 +30,7 @@ const TopCategories = () => {
         </Link>
       </div>
       <div className="sliderPadding px-6 flex items-center gap-10">
-        <button className="bg-white rounded-full border border-gray-200 p-3 h-fit">
-          <ArrowLeft />
-        </button>
+        <ButtonLeft />
         <div className="grid grid-cols-6 gap-6 flex-grow">
           <Category />
           <Category />
@@ -39,9 +39,7 @@ const TopCategories = () => {
           <Category />
           <Category />
         </div>
-        <button className="bg-white rounded-full border border-gray-200 p-3 h-fit">
-          <ArrowRight />
-        </button>
+        <ButtonRight />
       </div>
     </div>
   );

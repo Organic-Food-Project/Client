@@ -8,8 +8,10 @@ import Delivery from '@/assets/icons/delivery.svg';
 import CustomerSupport from '@/assets/icons/customer-support.svg';
 import ShoppingBag from '@/assets/icons/shopping-bag.svg';
 import Package from '@/assets/icons/package.svg';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import ButtonLeft from '../ButtonLeft';
+import ButtonRight from '../ButtonRight';
 
 const HeroSection = () => {
   const Cards = [
@@ -49,9 +51,7 @@ const HeroSection = () => {
           className="absolute top-0 left-0 w-full h-full z-[-1] object-cover"
         />
         <div className="w-full h-full flex justify-center items-center py-[70px] px-6 gap-5">
-          <button className="bg-white rounded-full border border-gray-200 p-3">
-            <ArrowLeft />
-          </button>
+          <ButtonLeft />
           <div className="xl:flex gap-[43px]">
             <Image src={Hero1} width={742} height={498} alt="Hero 1" />
             <div className="max-w-[596px] self-end">
@@ -78,9 +78,7 @@ const HeroSection = () => {
               </Link>
             </div>
           </div>
-          <button className="bg-white rounded-full border border-gray-200 p-3">
-            <ArrowRight />
-          </button>
+          <ButtonRight />
           <div className="absolute bottom-[24px] left-0 w-full flex items-center justify-center gap-2">
             <button className="size-[12px] rounded-full bg-green-200" />
             <button className="size-[12px] rounded-full bg-primary" />
