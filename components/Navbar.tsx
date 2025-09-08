@@ -8,7 +8,7 @@ import Logo from '@/assets/Logo.png';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu } from 'lucide-react';
-import ActiveLink from './ActiveLink';
+import ActiveLink from './ui/ActiveLink';
 
 export default function Navbar() {
   const handleShowNav = () => {};

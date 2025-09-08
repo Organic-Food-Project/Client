@@ -10,8 +10,8 @@ import ShoppingBag from '@/assets/icons/shopping-bag.svg';
 import Package from '@/assets/icons/package.svg';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import ButtonLeft from '../ButtonLeft';
-import ButtonRight from '../ButtonRight';
+import ButtonLeft from '../ui/ButtonLeft';
+import ButtonRight from '../ui/ButtonRight';
 
 const HeroSection = () => {
   const Cards = [

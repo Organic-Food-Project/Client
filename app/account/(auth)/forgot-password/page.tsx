@@ -1,3 +1,4 @@
+import { Input } from '@/components/ui/input';
 import type { Metadata } from 'next';
 import React from 'react';
 
@@ -11,7 +12,22 @@ export const metadata: Metadata = {
 };
 
 const ForgotPassword = () => {
-  return <div>ForgotPassword</div>;
+  return (
+    <div className="p-[24px] space-y-5">
+      <h3 className="text-heading-05 font-bold text-black text-center">
+        Reset password
+      </h3>
+      <form action="">
+        <Input placeholder="Email" type="email" className="mb-5 h-[49px]" />
+        <button
+          type="submit"
+          className="cursor-pointer bg-primary text-body-small font-bold text-white py-[14px] w-full rounded-full"
+        >
+          Reset password
+        </button>
+      </form>
+    </div>
+  );
 };
 
 export default ForgotPassword;

@@ -4,8 +4,8 @@ import React from 'react';
 import Category from '../Category';
 import Leaf from '@/assets/icons/Leaf.svg';
 import Image from 'next/image';
-import ButtonLeft from '../ButtonLeft';
-import ButtonRight from '../ButtonRight';
+import ButtonLeft from '../ui/ButtonLeft';
+import ButtonRight from '../ui/ButtonRight';
 
 const TopCategories = () => {
   return (

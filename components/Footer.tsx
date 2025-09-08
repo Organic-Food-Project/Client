@@ -2,7 +2,7 @@ import NewsletterSubscribe from './NewsletterSubscribe';
 import Logo from '@/assets/LogoPlant.png';
 import Payments from '@/assets/Payments.png';
 import Image from 'next/image';
-import ActiveLink from './ActiveLink';
+import ActiveLink from './ui/ActiveLink';
 
 export default function Footer() {
   const navItems = [
