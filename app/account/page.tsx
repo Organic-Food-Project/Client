@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 const Account = () => {
@@ -8,7 +9,11 @@ const Account = () => {
   if (!loggedIn) {
     return <div>Redirecting to login</div>;
   }
-  return <div>Account</div>;
+  return (
+    <div>
+      this is Account go to <Link href="/account/login">Login</Link>
+    </div>
+  );
 };
 
 export default Account;

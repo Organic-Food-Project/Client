@@ -8,7 +8,11 @@ export const metadata: Metadata = {
 };
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  return <div>hello world {children}</div>;
+  return (
+    <div>
+      hello world {children}
+    </div>
+  );
 };
 
 export default Layout;
