@@ -2,16 +2,20 @@ import Link from 'next/link';
 import React from 'react';
 
 const Account = () => {
-  // first we await and fetch user profile
-  // if user is logged in we continue
-  // else we redirect to login page
-  const loggedIn = true;
-  if (!loggedIn) {
-    return <div>Redirecting to login</div>;
-  }
   return (
     <div>
-      this is Account go to <Link href="/account/login">Login</Link>
+      <p>
+        go to <Link href="/account/login">Login</Link>
+      </p>
+      <p>
+        go to <Link href="/account/forgot-password">forgot-password</Link>
+      </p>
+      <p>
+        go to <Link href="/account/signup">signup</Link>
+      </p>
+      <p>
+        go to <Link href="/account/dashboard">Dashboard</Link>
+      </p>
     </div>
   );
 };

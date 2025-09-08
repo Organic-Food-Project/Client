@@ -16,27 +16,39 @@ const BreadCrumbs = () => {
   };
 
   return (
-    <div className="z-1 relative w-full h-[120px] mainPadding flex items-center">
+    <nav
+      aria-label="breadcrumb"
+      className="z-1 relative w-full h-[120px] mainPadding flex items-center"
+    >
       <Image
         src={BreadCrumbsBg}
-        alt="Bread Crumbs Bg"
+        alt="Breadcrumbs background"
         className="z-[-1] absolute top-0 left-0 w-full h-full object-cover select-none pointer-events-none"
       />
-      <div className="text-4xl text-white flex gap-3 items-center">
-        <Link href="/">
-          <House className="text-gray-400" />
-        </Link>
+
+      <ol className="flex gap-3 items-center text-4xl text-white">
+        <li>
+          <Link href="/" aria-label="Home">
+            <House className="text-gray-400" />
+          </Link>
+        </li>
 
         {pathArray.map((segment, index) => {
           const href = generateHref(index);
           const isLast = index === pathArray.length - 1;
-          const label = segment.charAt(0).toUpperCase() + segment.slice(1);
+          const title = segment.replaceAll('-', ' ');
+          const label = title.charAt(0).toUpperCase() + title.slice(1);
 
           return (
-            <div key={href} className="flex items-center gap-3">
+            <li key={href} className="flex items-center gap-3">
               <ChevronRight size={20} className="text-gray-400" />
               {isLast ? (
-                <span className="text-body-medium text-primary">{label}</span>
+                <span
+                  className="text-body-medium text-primary"
+                  aria-current="page"
+                >
+                  {label}
+                </span>
               ) : (
                 <Link
                   href={href}
@@ -45,11 +57,11 @@ const BreadCrumbs = () => {
                   {label}
                 </Link>
               )}
-            </div>
+            </li>
           );
         })}
-      </div>
-    </div>
+      </ol>
+    </nav>
   );
 };
 

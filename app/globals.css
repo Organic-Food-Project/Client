@@ -93,6 +93,9 @@
 .active {
   @apply text-gray-900;
 }
+.dropShadow {
+  box-shadow: 0 0 56px 0 rgba(0, 38, 3, 0.08);
+}
 .clip-half {
   clip-path: inset(0 50% 0 0);
 }
