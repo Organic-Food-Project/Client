@@ -45,8 +45,8 @@ const HeroSection = () => {
       <section className="z-1 relative bg-green-50 xl:h-[640px]">
         <Image
           src={HeroBG}
-          width={1920}
-          height={640}
+          width={742}
+          height={498}
           alt="Hero background"
           className="absolute top-0 left-0 w-full h-full z-[-1] object-cover"
         />
