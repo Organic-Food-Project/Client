@@ -1,9 +1,19 @@
 import { ArrowLeft } from 'lucide-react';
 import React from 'react';
+import { cn } from '@/lib/utils';
 
-const ButtonLeft = () => {
+interface ButtonLeftProps {
+  className?: string;
+}
+
+const ButtonLeft: React.FC<ButtonLeftProps> = ({ className = '' }) => {
   return (
-    <button className="group cursor-pointer hover:bg-primary duration-300 bg-white rounded-full border border-gray-200 p-3">
+    <button
+      className={cn(
+        'group cursor-pointer hover:bg-primary duration-300 bg-white rounded-full border border-gray-200 p-3',
+        className
+      )}
+    >
       <ArrowLeft className="group-hover:text-white duration-300" />
     </button>
   );

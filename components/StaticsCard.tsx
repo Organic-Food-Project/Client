@@ -14,7 +14,7 @@ const StaticsCard: React.FC<StaticsCardProps> = ({
   description,
 }) => {
   return (
-    <div className="bg-white/[0.07] flex items-center justify-center flex-col p-4 h-[174px] rounded-[8px]">
+    <div className="bg-white/[0.07] flex items-center justify-center flex-col w-full p-4 h-[174px] rounded-[8px]">
       <p className="text-primary font-poppins text-[56px] leading-[120%] h-[62px]">
         <CountUp enableScrollSpy end={title} />
         {suffix}

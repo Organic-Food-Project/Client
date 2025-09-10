@@ -45,13 +45,13 @@ const HeroSection = () => {
       <section className="z-1 relative bg-green-50 xl:h-[640px]">
         <Image
           src={HeroBG}
-          width={742}
+          width={1920}
           height={498}
           alt="Hero background"
           className="absolute top-0 left-0 w-full h-full z-[-1] object-cover"
         />
         <div className="w-full h-full flex justify-center items-center py-[70px] px-6 gap-5">
-          <ButtonLeft />
+          <ButtonLeft className="max-md:hidden" />
           <div className="xl:flex gap-[43px]">
             <Image src={Hero1} width={742} height={498} alt="Hero 1" />
             <div className="max-w-[596px] self-end">
@@ -78,7 +78,7 @@ const HeroSection = () => {
               </Link>
             </div>
           </div>
-          <ButtonRight />
+          <ButtonRight className="max-md:hidden" />
           <div className="absolute bottom-[24px] left-0 w-full flex items-center justify-center gap-2">
             <button className="size-[12px] rounded-full bg-green-200" />
             <button className="size-[12px] rounded-full bg-primary" />
@@ -94,11 +94,11 @@ const HeroSection = () => {
         />
       </section>
       <section className="mainPadding">
-        <div className="border-b border-[#CCCCCC] grid grid-cols-1 md:grid-cols-4 gap-[24px]">
+        <div className="border-b border-[#CCCCCC] grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-x-[24px]">
           {Cards.map((el, idx) => (
             <div
               key={idx}
-              className="h-[244px] flex items-center justify-center gap-4 flex-col hover:border-b-[5px] hover:border-primary transition-all duration-100 cursor-pointer"
+              className="h-[200px] md:h-[244px] flex items-center justify-center gap-4 flex-col hover:border-b-[5px] hover:border-primary transition-all duration-100 cursor-pointer"
             >
               <div className="relative size-[72px] z-1 flex justify-center items-center">
                 <Image

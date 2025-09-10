@@ -39,9 +39,9 @@ const WhyChooseUs = () => {
   };
   return (
     <>
-      <div className="z-1 relative flex justify-center items-center gap-10 pt-[24px] pb-[80px]">
+      <div className="z-1 relative flex max-xl:flex-col justify-center items-center gap-10 mainPadding pt-[24px] pb-[80px]">
         <Image src={WhyUs} width={809} height={513} alt="Why choose us" />
-        <div className="max-w-[540px] self-end space-y-[26px]">
+        <div className="max-w-[540px] xl:self-end space-y-[26px]">
           <h2 className="max-w-[389px] text-4xl sm:text-heading-03 font-poppins font-bold">
             100% Trusted Organic Food Store
           </h2>
@@ -91,7 +91,7 @@ const WhyChooseUs = () => {
           className="absolute top-0 left-0 w-full h-full z-[-1]"
         />
       </div>
-      <div className="mainPadding z-1 relative h-[331px]">
+      <div className="mainPadding z-1 relative min-h-[331px] flex py-[80px]">
         <Image
           src={Leaf2}
           width={56}
@@ -105,7 +105,7 @@ const WhyChooseUs = () => {
           className="z-[-1] w-full h-full absolute top-0 left-0 max-lg:object-cover"
           alt="Statics BG"
         />
-        <div className="grid lg:grid-cols-4 gap-6 flex justify-center items-center w-full h-full">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 flex-grow w-full ">
           {Statics.map((item, index) => (
             <StaticsCard
               key={index}
