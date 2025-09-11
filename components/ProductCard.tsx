@@ -7,7 +7,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import Link from 'next/link';
 
-const ProductCard = () => {
+interface ProductCardProps {
+  isOutOfStock?: boolean;
+}
+
+const ProductCard: React.FC<ProductCardProps> = ({ isOutOfStock = false }) => {
   const [isHoverd, setIsHoverd] = useState(false);
   const ProductData = {
     imgSrc: TempProduct,
@@ -30,10 +34,15 @@ const ProductCard = () => {
           alt={ProductData.imgAlt}
           className="w-full"
         />
+        {isOutOfStock && (
+          <div className="absolute top-0 left-0 space-y-[6px] m-4 py-2 px-4 bg-black text-body-small text-white rounded-[4px]">
+            Out of Stock
+          </div>
+        )}
         <div className="self-end flex justify-between items-center">
           <div className="space-y-2">
             <p className="text-gray-700 text-body-small">{ProductData.title}</p>
-            <p className="text-body-medium font-semibold">
+            <p className="text-body-medium font-semibold text-left">
               ${ProductData.price}
             </p>
             <div className="flex">
@@ -64,9 +73,12 @@ const ProductCard = () => {
               })}
             </div>
           </div>
-          <div className="size-[40px] bg-gray-50 rounded-full flex justify-center items-center">
+          <button
+            disabled={isOutOfStock}
+            className="disabled:cursor-not-allowed cursor-pointer size-[40px] bg-gray-50 rounded-full flex justify-center items-center"
+          >
             <Image src={Cart} width={20} height={20} alt="Add to Cart" />
-          </div>
+          </button>
         </div>
         <AnimatePresence>
           {isHoverd && (

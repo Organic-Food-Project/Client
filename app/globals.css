@@ -84,6 +84,10 @@
   --color-green-50: #edf2ee;
 }
 
+* {
+  @apply font-poppins;
+}
+
 .mainPadding {
   @apply px-[15px] xs:px-[30px] sm:px-[50px] lg:px-[80px] xl:px-[120px] 2xl:px-[180px] 3xl:px-[15.5vw];
 }

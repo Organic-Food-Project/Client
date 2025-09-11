@@ -18,13 +18,10 @@ const TopCategories = () => {
         className="absolute top-0 translate-y-[-50%] left-[10vw] rotate-[33deg]"
       />
       <div className="mainPadding flex justify-between items-center pb-[40px]">
-        <h2 className="text-4xl sm:text-heading-03 font-poppins font-bold">
+        <h2 className="text-4xl sm:text-heading-03  font-bold">
           Shop by Top Categories
         </h2>{' '}
-        <Link
-          href="/shop"
-          className="font-poppins text-primary pb-2 flex gap-2"
-        >
+        <Link href="/shop" className=" text-primary pb-2 flex gap-2">
           View All
           <ArrowRight />
         </Link>

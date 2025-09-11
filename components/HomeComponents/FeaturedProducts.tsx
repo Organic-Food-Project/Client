@@ -9,13 +9,10 @@ const FeaturedProducts = () => {
   return (
     <div className="mainPadding">
       <div className="flex justify-between items-center pb-[40px]">
-        <h2 className="text-4xl sm:text-heading-03 font-poppins font-bold">
+        <h2 className="text-4xl sm:text-heading-03  font-bold">
           Featured Products
         </h2>{' '}
-        <Link
-          href="/shop"
-          className="font-poppins text-primary pb-2 flex gap-2"
-        >
+        <Link href="/shop" className=" text-primary pb-2 flex gap-2">
           View All
           <ArrowRight />
         </Link>

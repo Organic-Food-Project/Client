@@ -55,10 +55,8 @@ const HeroSection = () => {
           <div className="xl:flex gap-[43px]">
             <Image src={Hero1} width={742} height={498} alt="Hero 1" />
             <div className="max-w-[596px] self-end">
-              <p className="font-poppins text-primary pb-2">
-                Welcome to shopery
-              </p>
-              <h1 className="text-4xl sm:text-display-03 md:text-display-01 font-poppins font-bold  pb-[28px]">
+              <p className=" text-primary pb-2">Welcome to shopery</p>
+              <h1 className="text-4xl sm:text-display-03 md:text-display-01  font-bold  pb-[28px]">
                 Fresh & Healthy Organic Food
               </h1>
               <h3 className="text-heading-05 text-black/400">

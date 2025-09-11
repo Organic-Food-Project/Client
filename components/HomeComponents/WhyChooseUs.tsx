@@ -42,7 +42,7 @@ const WhyChooseUs = () => {
       <div className="z-1 relative flex max-xl:flex-col justify-center items-center gap-10 mainPadding pt-[24px] pb-[80px]">
         <Image src={WhyUs} width={809} height={513} alt="Why choose us" />
         <div className="max-w-[540px] xl:self-end space-y-[26px]">
-          <h2 className="max-w-[389px] text-4xl sm:text-heading-03 font-poppins font-bold">
+          <h2 className="max-w-[389px] text-4xl sm:text-heading-03  font-bold">
             100% Trusted Organic Food Store
           </h2>
           <div className="space-y-[10px]">
