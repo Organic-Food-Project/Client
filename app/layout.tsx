@@ -3,6 +3,7 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BreadCrumbs from '@/components/BreadCrumbs';
+import ScrollToTop from '@/components/ScrollToTop';
 
 export const metadata: Metadata = {
   title: {
@@ -64,6 +65,7 @@ export default function RootLayout({
         <Navbar />
         <BreadCrumbs />
         {children}
+        <ScrollToTop />
         <Footer />
       </body>
     </html>

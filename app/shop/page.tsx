@@ -16,8 +16,8 @@ const Shop = () => {
   const products = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
   return (
     <>
-      <div className="grid grid-cols-5 gap-6 pt-6">
-        <div className="col-span-1">
+      <div className="flex max-lg:flex-col gap-6 pt-6">
+        <div className="min-w-[250px]">
           <FiltersSection />
         </div>
         <div className="flex flex-col col-span-4">
@@ -32,7 +32,7 @@ const Shop = () => {
                 Found
               </div>
             </div>
-            <div className="grid grid-cols-3 gap-6 flex-grow">
+            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 flex-grow">
               {products.map((el) => (
                 <ProductCard key={el} isOutOfStock={el === 3 ? true : false} />
               ))}
