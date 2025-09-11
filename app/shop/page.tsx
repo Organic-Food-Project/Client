@@ -20,10 +20,10 @@ const Shop = () => {
         <div className="min-w-[250px]">
           <FiltersSection />
         </div>
-        <div className="flex flex-col col-span-4">
+        <div className="flex flex-col flex-grow">
           <div className="flex flex-col flex-grow text-center">
-            <div className="h-[45px] mb-[24px] flex justify-between items-center">
-              <div className="text-bodu-small text-gray-500 flex items-center gap-2">
+            <div className="sm:h-[45px] mb-[24px] flex justify-between items-center flex-wrap gap-2">
+              <div className="text-bodu-small text-gray-500 flex items-center flex-wrap gap-2">
                 <span>Sort by:</span>
                 <SingleSelect className="w-[250px]" options={sortOptions} />
               </div>
@@ -32,7 +32,7 @@ const Shop = () => {
                 Found
               </div>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 flex-grow">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-6 flex-grow">
               {products.map((el) => (
                 <ProductCard key={el} isOutOfStock={el === 3 ? true : false} />
               ))}

@@ -18,12 +18,9 @@ const Pagination = () => {
       <div className="flex">
         <div className="flex justify-center items-center space-x-2 mx-3">
           <button
+            disabled={currentPage === 1}
             onClick={() => goToPage(1)}
-            className={`px-2 py-2 rounded-full cursor-pointer ${
-              currentPage === 1
-                ? 'text-gray-300 bg-gray-50'
-                : 'text-gray-900 bg-white border-[2px] border-gray-100'
-            }`}
+            className="cursor-pointer disabled:cursor-not-allowed px-2 py-2 rounded-full cursor-pointer disabled:text-gray-300 disabled:bg-gray-50 text-gray-900 bg-white border-[2px] border-gray-100"
           >
             <ChevronLeft />
           </button>
@@ -70,11 +67,7 @@ const Pagination = () => {
           )}
           <button
             onClick={() => goToPage(paginationData?.last_page)}
-            className={`px-2 py-2 rounded-full cursor-pointer ${
-              currentPage === paginationData?.last_page
-                ? 'text-gray-300 bg-gray-50'
-                : 'text-gray-900 bg-white border-[2px] border-gray-100'
-            }`}
+            className="cursor-pointer disabled:cursor-not-allowed px-2 py-2 rounded-full cursor-pointer disabled:text-gray-300 disabled:bg-gray-50 text-gray-900 bg-white border-[2px] border-gray-100"
           >
             <ChevronRight />
           </button>
