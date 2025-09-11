@@ -83,7 +83,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ isOutOfStock = false }) => {
         <AnimatePresence>
           {isHoverd && (
             <div className="absolute top-0 right-0 space-y-[6px] p-4">
-              <motion.div
+              <motion.button
                 initial={{
                   opacity: 0,
                   y: -20,
@@ -96,11 +96,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ isOutOfStock = false }) => {
                   opacity: 0,
                   y: -20,
                 }}
-                className="flex items-center justify-center size-[40px] bg-white border border-gray-50 rounded-full"
+                onClick={(e) => {
+                  e.preventDefault();
+                  console.log(1);
+                }}
+                className="cursor-pointer flex items-center justify-center size-[40px] bg-white border border-gray-50 rounded-full"
               >
                 <Heart size={20} />
-              </motion.div>
-              <motion.div
+              </motion.button>
+              <motion.button
                 initial={{
                   opacity: 0,
                   y: -20,
@@ -113,10 +117,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ isOutOfStock = false }) => {
                   opacity: 0,
                   y: -20,
                 }}
-                className="flex items-center justify-center size-[40px] bg-white border border-gray-50 rounded-full"
+                onClick={(e) => {
+                  e.preventDefault();
+                  console.log(1);
+                }}
+                className="cursor-pointer flex items-center justify-center size-[40px] bg-white border border-gray-50 rounded-full"
               >
                 <Eye size={20} />
-              </motion.div>
+              </motion.button>
             </div>
           )}
         </AnimatePresence>
