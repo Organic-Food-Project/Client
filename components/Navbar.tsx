@@ -1,7 +1,6 @@
 import Telephone from '@/assets/icons/Telephone.svg';
 import Search from '@/assets/icons/Search.svg';
 import User from '@/assets/icons/User.svg';
-import Cart from '@/assets/icons/Cart.svg';
 import Heart from '@/assets/icons/Heart.svg';
 
 import Logo from '@/assets/Logo.png';
@@ -9,9 +8,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Menu } from 'lucide-react';
 import ActiveLink from './ui/ActiveLink';
+import CartComponent from './CartComponent';
 
 export default function Navbar() {
-  const handleShowNav = () => {};
   const handleShowSearch = () => {};
 
   return (
@@ -52,8 +51,8 @@ export default function Navbar() {
             <Image src={Heart} alt="Heart" width={32} height={32} />
           </Link>
         </li>
-        <li className="max-sm:hidden ">
-          <Image src={Cart} alt="Cart" width={32} height={32} />
+        <li className="max-sm:hidden relative">
+          <CartComponent />
         </li>
         <li className="max-sm:hidden ">
           <Link href="/account">
