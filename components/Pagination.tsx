@@ -1,13 +1,15 @@
 'use client';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import React from 'react';
+import { MetaData } from '@/types/global';
 
-const Pagination = () => {
+interface PaginationProps {
+  metaData: MetaData;
+}
+
+const Pagination: React.FC<PaginationProps> = ({ metaData }) => {
   const currentPage: number = 1;
-  const paginationData = {
-    last_page: 10,
-    current_page: 1,
-  };
+  const lastPage: number = Math.ceil(metaData?.total / metaData?.limit) ?? 10;
 
   const goToPage = (number: number) => {
     console.log({ number });
@@ -38,7 +40,7 @@ const Pagination = () => {
 
           {Array.from({ length: 5 }, (_, i) => {
             const pageNumber = currentPage - 2 + i;
-            if (pageNumber > 0 && pageNumber <= paginationData?.last_page) {
+            if (pageNumber > 0 && pageNumber <= lastPage) {
               return (
                 <button
                   key={pageNumber}
@@ -54,19 +56,19 @@ const Pagination = () => {
             return null;
           })}
 
-          {currentPage < paginationData?.last_page - 2 && (
+          {currentPage < lastPage - 2 && (
             <>
-              {currentPage < paginationData?.last_page - 3 && <span>...</span>}
+              {currentPage < lastPage - 3 && <span>...</span>}
               <button
-                onClick={() => goToPage(paginationData?.last_page)}
+                onClick={() => goToPage(lastPage)}
                 className="px-3 py-2 text-gray-600 rounded-full duration-100 hover:text-white hover:bg-primary cursor-pointer"
               >
-                {paginationData?.last_page}
+                {lastPage}
               </button>
             </>
           )}
           <button
-            onClick={() => goToPage(paginationData?.last_page)}
+            onClick={() => goToPage(lastPage)}
             className="cursor-pointer disabled:cursor-not-allowed px-2 py-2 rounded-full cursor-pointer disabled:text-gray-300 disabled:bg-gray-50 text-gray-900 bg-white border-[2px] border-gray-100"
           >
             <ChevronRight />
