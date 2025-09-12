@@ -8,7 +8,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Menu } from 'lucide-react';
 import ActiveLink from './ui/ActiveLink';
-import CartComponent from './CartComponent';
+import CartComponent from './Cart';
 
 export default function Navbar() {
   const handleShowSearch = () => {};

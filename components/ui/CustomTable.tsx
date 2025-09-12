@@ -28,7 +28,7 @@ type ExtendedColumnDef<TData, TValue> = ColumnDef<TData, TValue> &
 interface DataTableProps<TData, TValue> {
   columns: ExtendedColumnDef<TData, TValue>[];
   data: TData[];
-  metaData: MetaData;
+  metaData?: MetaData;
   loading?: boolean;
 }
 
@@ -59,7 +59,7 @@ const CustomTable = <TData, TValue>({
           ))} */}
         </div>
       ) : (
-        <div className="w-full px-6">
+        <div className="w-full">
           <Table className={`border border-gray-100`}>
             {table.getRowModel().rows?.length ? (
               <TableHeader>
@@ -124,7 +124,7 @@ const CustomTable = <TData, TValue>({
             </TableBody>
           </Table>
           {/* Pagination */}
-          {table.getRowModel().rows?.length > 0 && (
+          {metaData && table.getRowModel().rows?.length > 0 && (
             <Pagination metaData={metaData} />
           )}
         </div>

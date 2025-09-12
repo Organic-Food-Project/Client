@@ -56,6 +56,7 @@ const CartComponent = () => {
                     Checkout
                   </button>
                   <Link
+                    onClick={handleShowNav}
                     href="/cart"
                     className="block w-full text-center text-body-medium font-semibold bg-[#56AC59]/10 text-primary rounded-full py-3"
                   >
