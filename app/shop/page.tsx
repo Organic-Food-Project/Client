@@ -14,6 +14,11 @@ const Shop = () => {
   ];
 
   const products = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+
+  const metaData = {
+    total: 100,
+    limit: 15,
+  };
   return (
     <>
       <div className="flex max-lg:flex-col gap-6 pt-6">
@@ -38,7 +43,7 @@ const Shop = () => {
               ))}
             </div>
           </div>
-          <Pagination />
+          <Pagination metaData={metaData} />
         </div>
       </div>
     </>
