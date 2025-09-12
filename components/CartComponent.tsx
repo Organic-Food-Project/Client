@@ -3,7 +3,7 @@ import TempProduct from '@/assets/TempProduct.png';
 import React, { useState } from 'react';
 import Cart from '@/assets/icons/Cart.svg';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { X } from 'lucide-react';
 import Link from 'next/link';
 
@@ -18,50 +18,55 @@ const CartComponent = () => {
         <div className="absolute top-[-5px] right-[-5px] text-white bg-hard-primary flex justify-center items-center rounded-full size-[20px] text-[10px]" />
         <Image src={Cart} alt="Cart" width={32} height={32} />
       </button>
-      {isOpen && (
-        <>
-          <div
-            onClick={handleShowNav}
-            className="z-[49] fixed top-0 right-0 w-full h-screen bg-black/80 flex flex-col justify-center items-center"
-          />
-          <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ duration: 0.2 }}
-            className="z-[50] fixed top-0 right-0 w-[456px] h-screen bg-white flex flex-col justify-between items-center"
-          >
-            <div className="space-y-[12px] px-[40px] pt-[40px] w-full flex items-center justify-between">
-              <p className="text-body-xl font-semibold ">Shopping Card (2)</p>
-              <button onClick={handleShowNav}>
-                <X />
-              </button>
-            </div>
-            <div className="space-y-[24px] px-[20px] w-full overflow-y-auto flex-grow">
-              {[1, 2].map((el, idx) => (
-                <ItemCard key={el} idx={idx} count={2} />
-              ))}
-            </div>
-            <div className="w-full px-[40px] py-[40px]">
-              <div className="flex items-center justify-between text-body-medium pb-[24px]">
-                <p>2 Product</p>
-                <p className="font-bold">$26.00</p>
-              </div>
-              <div className="space-y-[12px]">
-                <button className="cursor-pointer w-full text-center font-bold text-body-medium font-semibold bg-primary text-white rounded-full py-3">
-                  Checkout
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={handleShowNav}
+              className="z-[49] fixed top-0 right-0 w-full h-screen bg-black/80 flex flex-col justify-center items-center"
+            />
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ duration: 0.2 }}
+              className="z-[50] fixed top-0 right-0 w-[456px] h-screen bg-white flex flex-col justify-between items-center"
+            >
+              <div className="space-y-[12px] px-[40px] pt-[40px] w-full flex items-center justify-between">
+                <p className="text-body-xl font-semibold ">Shopping Card (2)</p>
+                <button onClick={handleShowNav}>
+                  <X />
                 </button>
-                <Link
-                  href="/cart"
-                  className="block w-full text-center font-bold text-body-medium font-semibold bg-[#56AC59]/10 text-primary rounded-full py-3"
-                >
-                  Go To Cart
-                </Link>
               </div>
-            </div>
-          </motion.div>
-        </>
-      )}
+              <div className="space-y-[24px] px-[20px] w-full overflow-y-auto flex-grow">
+                {[1, 2].map((el, idx) => (
+                  <ItemCard key={el} idx={idx} count={2} />
+                ))}
+              </div>
+              <div className="w-full px-[40px] py-[40px]">
+                <div className="flex items-center justify-between text-body-medium pb-[24px]">
+                  <p>2 Product</p>
+                  <p className="font-bold">$26.00</p>
+                </div>
+                <div className="space-y-[12px]">
+                  <button className="cursor-pointer w-full text-center text-body-medium font-semibold bg-primary text-white rounded-full py-3">
+                    Checkout
+                  </button>
+                  <Link
+                    href="/cart"
+                    className="block w-full text-center text-body-medium font-semibold bg-[#56AC59]/10 text-primary rounded-full py-3"
+                  >
+                    Go To Cart
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 };

@@ -4,6 +4,7 @@ import Twitter from '@/assets/icons/Twitter.svg';
 import Patreon from '@/assets/icons/Patreon.svg';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Button } from './ui/button';
 
 export default function NewsletterSubscribe() {
   return (
@@ -28,12 +29,13 @@ export default function NewsletterSubscribe() {
           placeholder="Your email address"
           className="flex-grow max-xs3:py-5 pl-6 pr-10 max-xs3:text-xs xs3:rounded-full outline-none"
         />
-        <button
+        <Button
           aria-label="Subscribe"
-          className="text-body-medium font-semibold bg-primary text-white xs3:rounded-full px-5 py-3 xs3:px-10 xs3:py-4 outline-none xs3:-ml-5"
+          variant="default"
+          className="rounded-[0px] xs3:rounded-full px-5 py-3 xs3:px-10 xs3:py-4 outline-none xs3:-ml-5"
         >
           Subscribe
-        </button>
+        </Button>
       </form>
       <div className="flex gap-4 flex-grow sm2:flex-grow-0 justify-center">
         <Link href="https://web.facebook.com/" target="_blank">
