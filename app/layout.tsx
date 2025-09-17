@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BreadCrumbs from '@/components/BreadCrumbs';
 import ScrollToTop from '@/components/ScrollToTop';
+import { Poppins } from 'next/font/google';
 
 export const metadata: Metadata = {
   title: {
@@ -54,6 +55,10 @@ export const metadata: Metadata = {
   },
 };
 
+const poppins = Poppins({
+  weight: ['400', '500', '600', '700', '800'],
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -61,7 +66,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={poppins.className}>
         <Navbar />
         <BreadCrumbs />
         {children}

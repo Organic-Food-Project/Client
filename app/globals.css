@@ -21,9 +21,6 @@
   --font-weight-700: 700;
   --font-weight-800: 800;
 
-  /* Fonts */
-  --font-poppins: 'Poppins', sans-serif;
-
   /* Font Sizes */
   --text-display-01: 72px;
 
@@ -82,10 +79,6 @@
   --color-green-200: #b4ccb4;
   --color-green-100: #dae5da;
   --color-green-50: #edf2ee;
-}
-
-* {
-  @apply font-poppins;
 }
 
 .mainPadding {
