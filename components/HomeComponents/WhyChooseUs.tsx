@@ -39,10 +39,10 @@ const WhyChooseUs = () => {
   };
   return (
     <>
-      <div className="z-1 relative flex max-2xl:flex-col justify-center items-center gap-10  mainPadding pt-[24px] pb-[80px]">
-        <Image src={WhyUs} alt="Why choose us" />
-        <div className="max-w-[540px] 2xl:self-end space-y-[26px]">
-          <h2 className="max-w-[389px] text-4xl sm:text-heading-03  font-bold">
+      <div className="z-1 relative flex max-xl:flex-col justify-center items-center gap-10  mainPadding pt-[24px] pb-[80px]">
+        <Image src={WhyUs} alt="Why choose us" className="xl:w-1/2" />
+        <div className="xl:w-1/2 xl:self-end space-y-[26px]">
+          <h2 className="max-w-[389px] text-3xl sm:text-heading-03  font-bold">
             100% Trusted Organic Food Store
           </h2>
           <div className="space-y-[10px]">
