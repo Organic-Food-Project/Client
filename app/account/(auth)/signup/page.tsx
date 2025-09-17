@@ -19,8 +19,20 @@ const SignUp = () => {
         Create Account
       </h3>
       <form action="">
-        <Input placeholder="Email" type="email" className="mb-3 h-[49px]" />
+        <label htmlFor="email" className="sr-only">
+          Email
+        </label>
         <Input
+          id="email"
+          placeholder="Email"
+          type="email"
+          className="mb-3 h-[49px]"
+        />
+        <label htmlFor="password" className="sr-only">
+          Password
+        </label>
+        <Input
+          id="password"
           placeholder="Password"
           type="password"
           className="mb-4 h-[49px]"

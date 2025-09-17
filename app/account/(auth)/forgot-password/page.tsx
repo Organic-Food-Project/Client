@@ -18,7 +18,15 @@ const ForgotPassword = () => {
         Reset password
       </h3>
       <form action="">
-        <Input placeholder="Email" type="email" className="mb-5 h-[49px]" />
+        <label htmlFor="email" className="sr-only">
+          Email
+        </label>
+        <Input
+          id="email"
+          placeholder="Email"
+          type="email"
+          className="mb-5 h-[49px]"
+        />
         <button
           type="submit"
           className="cursor-pointer bg-primary text-body-small font-bold text-white py-[14px] w-full rounded-full"
