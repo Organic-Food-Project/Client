@@ -11,7 +11,11 @@ export const metadata: Metadata = {
 };
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  return <main className="flex items-center justify-center">{children}</main>;
+  return (
+    <main className="flex items-center justify-center min-h-screen">
+      {children}
+    </main>
+  );
 };
 
 export default Layout;

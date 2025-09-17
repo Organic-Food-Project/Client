@@ -18,12 +18,16 @@ export default function NewsletterSubscribe() {
         </p>
       </div>
       <form className="xs3:rounded-full bg-white flex max-xs3:flex-col flex-grow xs3:max-h-[50px]">
-        <label htmlFor="email" id="newsletter-heading" className="sr-only">
+        <label
+          htmlFor="newsletter_email"
+          id="newsletter-heading"
+          className="sr-only"
+        >
           Subscribe to our Newsletter
         </label>
         <input
           type="email"
-          id="email"
+          id="newsletter_email"
           name="email"
           required
           placeholder="Your email address"

@@ -55,7 +55,7 @@ export default function Navbar() {
           <CartComponent />
         </li>
         <li className="max-sm:hidden ">
-          <Link href="/account">
+          <Link href="/account/dashboard">
             <Image src={User} alt="User" width={32} height={32} />
           </Link>
         </li>
