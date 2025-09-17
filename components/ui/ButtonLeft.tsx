@@ -9,6 +9,7 @@ interface ButtonLeftProps {
 const ButtonLeft: React.FC<ButtonLeftProps> = ({ className = '' }) => {
   return (
     <button
+      aria-label="Left slider button"
       className={cn(
         'group cursor-pointer hover:bg-primary duration-300 bg-white rounded-full border border-gray-200 p-3',
         className

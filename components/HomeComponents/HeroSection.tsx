@@ -60,10 +60,10 @@ const HeroSection = () => {
               <h1 className="text-4xl sm:text-display-03 md:text-display-01  font-bold  pb-[28px]">
                 Fresh & Healthy Organic Food
               </h1>
-              <h3 className="text-heading-05 text-black/400">
+              <h2 className="text-heading-05 text-black/400">
                 Sale up to{' '}
                 <span className="text-warning font-bold">30% OFF</span>
-              </h3>
+              </h2>
               <p className="pb-[32px] text-gray-500 text-body-small">
                 Free shipping on all your order. we deliver, you enjoy
               </p>
@@ -79,9 +79,18 @@ const HeroSection = () => {
           </div>
           <ButtonRight className="max-md:hidden" />
           <div className="absolute bottom-[24px] left-0 w-full flex items-center justify-center gap-2">
-            <button className="size-[12px] rounded-full bg-green-200" />
-            <button className="size-[12px] rounded-full bg-primary" />
-            <button className="size-[12px] rounded-full bg-green-200" />
+            <button
+              aria-label="Left navigator"
+              className="cuursor-pointer size-[16px] rounded-full bg-green-200"
+            />
+            <button
+              aria-label="Middle navigator"
+              className="cursor-pointer size-[16px] rounded-full bg-primary"
+            />
+            <button
+              aria-label="Right navigator"
+              className="cursor-pointer size-[16px] rounded-full bg-green-200"
+            />
           </div>
         </div>
         <Image
