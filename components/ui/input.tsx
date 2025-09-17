@@ -21,6 +21,7 @@ function Input({ className, type, ...props }: React.ComponentProps<'input'>) {
       />
       {type === 'password' && (
         <button
+          aria-label="View password"
           type="button"
           onClick={() =>
             setInputType(inputType === 'password' ? 'text' : 'password')

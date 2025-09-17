@@ -74,6 +74,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ isOutOfStock = false }) => {
             </div>
           </div>
           <button
+            aria-label="Add to Cart"
             disabled={isOutOfStock}
             className="disabled:cursor-not-allowed cursor-pointer size-[40px] bg-gray-50 rounded-full flex justify-center items-center"
           >

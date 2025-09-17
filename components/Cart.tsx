@@ -14,7 +14,7 @@ const CartComponent = () => {
   };
   return (
     <>
-      <button onClick={handleShowNav} className="cursor-pointer">
+      <button aria-label='Cart' onClick={handleShowNav} className="cursor-pointer">
         <div className="absolute top-[-5px] right-[-5px] text-white bg-hard-primary flex justify-center items-center rounded-full size-[20px] text-[10px]" />
         <Image src={Cart} alt="Cart" width={32} height={32} />
       </button>
@@ -37,7 +37,7 @@ const CartComponent = () => {
             >
               <div className="space-y-[12px] px-[40px] pt-[40px] w-full flex items-center justify-between">
                 <p className="text-body-xl font-semibold ">Shopping Card (2)</p>
-                <button onClick={handleShowNav}>
+                <button aria-label='Exit' onClick={handleShowNav}>
                   <X />
                 </button>
               </div>
@@ -99,7 +99,10 @@ const ItemCard: React.FC<{ idx: number; count: number }> = ({ idx, count }) => {
         </p>
       </div>
       <div>
-        <button className="cursor-pointer border border-gray-200 rounded-full p-2 hover:bg-danger group duration-100">
+        <button
+          aria-label="Delete"
+          className="cursor-pointer border border-gray-200 rounded-full p-2 hover:bg-danger group duration-100"
+        >
           <X className="group-hover:text-white duration-100" />
         </button>
       </div>

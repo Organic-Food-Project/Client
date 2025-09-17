@@ -60,7 +60,7 @@ export default function Navbar() {
           </Link>
         </li>
         <li className="lg3:hidden flex items-center">
-          <button>
+          <button aria-label="Menu">
             <Menu />
           </button>
         </li>

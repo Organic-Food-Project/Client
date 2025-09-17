@@ -20,6 +20,7 @@ const Pagination: React.FC<PaginationProps> = ({ metaData }) => {
       <div className="flex">
         <div className="flex justify-center items-center space-x-2 mx-3">
           <button
+            aria-label="Go to previous page"
             disabled={currentPage === 1}
             onClick={() => goToPage(1)}
             className="cursor-pointer disabled:cursor-not-allowed px-2 py-2 rounded-full cursor-pointer disabled:text-gray-300 disabled:bg-gray-50 text-gray-900 bg-white border-[2px] border-gray-100"
@@ -68,6 +69,7 @@ const Pagination: React.FC<PaginationProps> = ({ metaData }) => {
             </>
           )}
           <button
+            aria-label="Go to next page"
             onClick={() => goToPage(lastPage)}
             className="cursor-pointer disabled:cursor-not-allowed px-2 py-2 rounded-full cursor-pointer disabled:text-gray-300 disabled:bg-gray-50 text-gray-900 bg-white border-[2px] border-gray-100"
           >

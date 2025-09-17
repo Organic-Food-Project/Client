@@ -52,11 +52,17 @@ const CartTable: React.FC<CartTableProps> = ({ metaData }) => {
       header: 'Quantity',
       cell: ({ row }) => (
         <div className="text-body-medium font-semibold flex rounded-full border border-gray-100 w-fit px-2 h-[50px] items-center min-w-[124px]">
-          <button className="cursor-pointer bg-gray-50 rounded-full flex items-center justify-center size-[34px] text-black">
+          <button
+            aria-label="Minus"
+            className="cursor-pointer bg-gray-50 rounded-full flex items-center justify-center size-[34px] text-black"
+          >
             <Minus size={15} />
           </button>
           <span className="text-center flex-grow">{row.original.quantity}</span>
-          <button className="cursor-pointer bg-gray-50 rounded-full flex items-center justify-center size-[34px] text-black">
+          <button
+            aria-label="Plus"
+            className="cursor-pointer bg-gray-50 rounded-full flex items-center justify-center size-[34px] text-black"
+          >
             <Plus size={15} />
           </button>
         </div>
@@ -78,7 +84,10 @@ const CartTable: React.FC<CartTableProps> = ({ metaData }) => {
       header: '',
       cell: () => (
         <div className="w-full flex justify-end items-center">
-          <button className="cursor-pointer rounded-full border border-gray-20 size-[32px] flex justify-center items-center">
+          <button
+            aria-label="Delete"
+            className="cursor-pointer rounded-full border border-gray-20 size-[32px] flex justify-center items-center"
+          >
             <X size={18} />
           </button>
         </div>

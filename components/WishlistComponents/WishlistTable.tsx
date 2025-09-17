@@ -71,7 +71,10 @@ const WishlistTable: React.FC<WishlistTableProps> = ({ metaData }) => {
       cell: () => (
         <div className="w-full flex justify-end items-center gap-6">
           <Button className="px-[32px]">Add to Cart</Button>
-          <button className="cursor-pointer rounded-full border border-gray-20 size-[32px] flex justify-center items-center">
+          <button
+            aria-label="Delete"
+            className="cursor-pointer rounded-full border border-gray-20 size-[32px] flex justify-center items-center"
+          >
             <X size={18} />
           </button>
         </div>
