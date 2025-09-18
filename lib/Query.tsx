@@ -20,7 +20,7 @@ export const Query = async ({
       method: 'GET',
       headers,
       next: {
-        revalidate, // 0 = no cache, otherwise revalidate every N seconds
+        revalidate,
       },
     });
 
