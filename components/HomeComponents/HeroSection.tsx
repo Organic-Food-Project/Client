@@ -12,7 +12,6 @@ import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import ButtonLeft from '../ui/ButtonLeft';
 import ButtonRight from '../ui/ButtonRight';
-import { Button } from '../ui/button';
 
 const HeroSection = () => {
   const Cards = [

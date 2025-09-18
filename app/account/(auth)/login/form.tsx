@@ -65,7 +65,11 @@ const LoginForm = () => {
           'Login'
         )}
       </Button>
-      <p className="text-body-small my-2 text-danger">{state?.errors?.form}</p>
+      {!pending && (
+        <p className="text-body-small my-2 text-danger">
+          {state?.errors?.form}
+        </p>
+      )}
     </form>
   );
 };

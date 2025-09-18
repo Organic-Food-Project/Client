@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use server';
 import { z } from 'zod';
 import { cookies } from 'next/headers';
-import axios from 'axios';
+import Mutation from '@/lib/Mutation';
 
 const formSchema = z.object({
   email: z.string().email('Invalid email'),
@@ -32,26 +31,27 @@ export const LoginAction = async (
     return { errors };
   }
 
-  try {
-    const res = await axios.post(`${process.env.BE_BASE_URL}/v1/users/login`, {
+  const { data, error } = await Mutation({
+    api: 'v1/users/login',
+    method: 'POST',
+    body: {
       email: parsed.data.email,
       password: parsed.data.password,
-    });
-
+    },
+  });
+  if (error) {
+    return {
+      errors: { form: error ?? 'Something went wrong' },
+    };
+  } else {
     const days = parsed.data.remember_me ? 30 : 1;
-
     const cookieStore = await cookies();
-    console.log({ res });
-    cookieStore.set('token', res.data.token, {
+    console.log({ data });
+    cookieStore.set('token', data.token, {
       httpOnly: true,
       path: '/',
       maxAge: 60 * 60 * 24 * days,
     });
     return { success: true };
-  } catch (err: any) {
-    console.log({ err });
-    return {
-      errors: { form: err?.response?.data?.message ?? 'Invalid credentials' },
-    };
   }
 };
