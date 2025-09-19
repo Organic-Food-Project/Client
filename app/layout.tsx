@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     siteName: 'Organic Food Store',
     images: [
       {
-        url: 'https://organicfood-client.vercel.app/Logo.png',
+        url: 'https://organicfood-client.vercel.app/Logo.ico',
         width: 1200,
         height: 630,
         alt: 'Fresh Organic Food Banner',
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     title: 'Organic Food Store',
     description:
       'Shop fresh, healthy, and sustainable organic food online. Enjoy natural groceries, fruits, vegetables, and eco-friendly products.',
-    images: ['https://organicfood-client.vercel.app/Logo.png'],
+    images: ['https://organicfood-client.vercel.app/Logo.ico'],
   },
 
   alternates: {
