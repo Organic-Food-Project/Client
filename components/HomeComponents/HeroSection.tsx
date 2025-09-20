@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import HeroBG from '@/assets/HeroBG.png';
-import Hero1 from '@/assets/Hero1.svg';
+import Hero1 from '@/assets/Hero1.webp';
 import Leaf from '@/assets/icons/Leaf.svg';
 import IconFrame from '@/assets/icons/IconFrame.svg';
 import IconFrameSelected from '@/assets/icons/IconFrameSelected.svg';
