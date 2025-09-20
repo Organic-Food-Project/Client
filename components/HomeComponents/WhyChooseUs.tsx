@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import React from 'react';
-import WhyUs from '@/assets/WhyUS.svg';
+import WhyUs from '@/assets/WhyUS.webp';
 import Link from 'next/link';
 import { ArrowRight, Check } from 'lucide-react';
 import Leaf from '@/assets/icons/Leaf.svg';
 import Leaf2 from '@/assets/icons/Leaf2.svg';
 import StaticsBG from '@/assets/StaticsBG.webp';
-import VigBG from '@/assets/VigBG.png';
+import VigBG from '@/assets/VigBG.webp';
 import StaticsCard from '../StaticsCard';
 const WhyChooseUs = () => {
   const Statics = [

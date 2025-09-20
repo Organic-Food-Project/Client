@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import HeroBG from '@/assets/HeroBG.png';
+import HeroBG from '@/assets/HeroBG.webp';
 import Hero1 from '@/assets/Hero1.webp';
 import Leaf from '@/assets/icons/Leaf.svg';
 import IconFrame from '@/assets/icons/IconFrame.svg';

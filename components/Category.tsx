@@ -1,4 +1,4 @@
-import TempCategory from '@/assets/Vig2.svg';
+import TempCategory from '@/assets/Vig2.webp';
 import Image from 'next/image';
 import Link from 'next/link';
 

@@ -2,7 +2,7 @@ import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 import ProductCard from '../ProductCard';
-import Vig1 from '@/assets/Vig1.svg';
+import Vig1 from '@/assets/Vig1.webp';
 import Image from 'next/image';
 
 const FeaturedProducts = () => {

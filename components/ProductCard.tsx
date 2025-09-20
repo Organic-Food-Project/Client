@@ -1,5 +1,5 @@
 'use client';
-import TempProduct from '@/assets/TempProduct.png';
+import TempProduct from '@/assets/TempProduct.webp';
 import { Eye, Heart, Star } from 'lucide-react';
 import Image from 'next/image';
 import Cart from '@/assets/icons/Cart.svg';

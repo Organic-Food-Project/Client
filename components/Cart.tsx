@@ -1,5 +1,5 @@
 'use client';
-import TempProduct from '@/assets/TempProduct.png';
+import TempProduct from '@/assets/TempProduct.webp';
 import React, { useState } from 'react';
 import Cart from '@/assets/icons/Cart.svg';
 import Image from 'next/image';
@@ -14,7 +14,11 @@ const CartComponent = () => {
   };
   return (
     <>
-      <button aria-label='Cart' onClick={handleShowNav} className="cursor-pointer">
+      <button
+        aria-label="Cart"
+        onClick={handleShowNav}
+        className="cursor-pointer"
+      >
         <div className="absolute top-[-5px] right-[-5px] text-white bg-hard-primary flex justify-center items-center rounded-full size-[20px] text-[10px]" />
         <Image src={Cart} alt="Cart" width={32} height={32} />
       </button>
@@ -37,7 +41,7 @@ const CartComponent = () => {
             >
               <div className="space-y-[12px] px-[40px] pt-[40px] w-full flex items-center justify-between">
                 <p className="text-body-xl font-semibold ">Shopping Card (2)</p>
-                <button aria-label='Exit' onClick={handleShowNav}>
+                <button aria-label="Exit" onClick={handleShowNav}>
                   <X />
                 </button>
               </div>

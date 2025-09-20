@@ -1,6 +1,6 @@
 import NewsletterSubscribe from './NewsletterSubscribe';
 import Logo from '@/assets/LogoPlant.png';
-import Payments from '@/assets/Payments.png';
+import Payments from '@/assets/Payments.webp';
 import Image from 'next/image';
 import ActiveLink from './ui/ActiveLink';
 
