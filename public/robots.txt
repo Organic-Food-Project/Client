@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://organicfood-client.vercel.app
+
+# Sitemaps
+Sitemap: https://organicfood-client.vercel.app/sitemap.xml
