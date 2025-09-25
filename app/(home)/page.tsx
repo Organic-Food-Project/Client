@@ -1,7 +1,7 @@
-import FeaturedProducts from '@/components/HomeComponents/FeaturedProducts';
-import TopCategories from '@/components/HomeComponents/TopCategories';
-import HeroSection from '@/components/HomeComponents/HeroSection';
-import WhyChooseUs from '@/components/HomeComponents/WhyChooseUs';
+import FeaturedProducts from './components/FeaturedProducts';
+import TopCategories from './components/TopCategories';
+import HeroSection from './components/HeroSection';
+import WhyChooseUs from './components/WhyChooseUs';
 
 const Home = () => {
   return (

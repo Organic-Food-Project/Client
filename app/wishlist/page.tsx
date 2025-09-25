@@ -1,4 +1,4 @@
-import WishlistTable from '@/components/WishlistComponents/WishlistTable';
+import WishlistTable from '@/app/wishlist/components/WishlistTable';
 import React from 'react';
 
 const metaData = {

@@ -7,7 +7,7 @@ import Leaf from '@/assets/icons/Leaf.svg';
 import Leaf2 from '@/assets/icons/Leaf2.svg';
 import StaticsBG from '@/assets/StaticsBG.webp';
 import VigBG from '@/assets/VigBG.webp';
-import StaticsCard from '../StaticsCard';
+import StaticsCard from '@/app/components/StaticsCard';
 const WhyChooseUs = () => {
   const Statics = [
     {

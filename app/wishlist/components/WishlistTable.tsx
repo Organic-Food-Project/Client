@@ -1,27 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import TempProduct from '@/assets/TempProduct.webp';
-import CustomTable from '@/components/ui/CustomTable';
+import CustomTable from '@/app/components/ui/CustomTable';
 import type { ColumnDef } from '@tanstack/react-table';
 import React from 'react';
 import { MetaData } from '@/types/global';
 import Image from 'next/image';
 import { currencyFormated } from '@/lib/utils';
-import { Minus, Plus, X } from 'lucide-react';
+import { Button } from '@/app/components/ui/button';
+import { X } from 'lucide-react';
 
 interface List {
   id: number;
   img: any;
   name: string;
   price: number;
-  quantity: number;
+  inStock: boolean;
 }
 
-interface CartTableProps {
+interface WishlistTableProps {
   metaData: MetaData;
 }
 
-const CartTable: React.FC<CartTableProps> = ({ metaData }) => {
+const WishlistTable: React.FC<WishlistTableProps> = ({ metaData }) => {
   const columns: ColumnDef<List>[] = [
     {
       accessorKey: 'id',
@@ -48,34 +49,19 @@ const CartTable: React.FC<CartTableProps> = ({ metaData }) => {
       ),
     },
     {
-      accessorKey: 'quantity',
-      header: 'Quantity',
-      cell: ({ row }) => (
-        <div className="text-body-medium font-semibold flex rounded-full border border-gray-100 w-fit px-2 h-[50px] items-center min-w-[124px]">
-          <button
-            aria-label="Minus"
-            className="cursor-pointer bg-gray-50 rounded-full flex items-center justify-center size-[34px] text-black"
-          >
-            <Minus size={15} />
-          </button>
-          <span className="text-center flex-grow">{row.original.quantity}</span>
-          <button
-            aria-label="Plus"
-            className="cursor-pointer bg-gray-50 rounded-full flex items-center justify-center size-[34px] text-black"
-          >
-            <Plus size={15} />
-          </button>
-        </div>
-      ),
-    },
-    {
-      accessorKey: 'subtotal',
-      header: 'Subtotal',
+      accessorKey: 'inStock',
+      header: 'Stock Status',
       cell: ({ row }) => (
         <div>
-          <div className="text-body-medium font-semibold">
-            ${currencyFormated(row.original.price * row.original.quantity)}
-          </div>
+          {row.original.inStock ? (
+            <span className="text-body-medium text-hard-primary rounded-[4px] bg-[#20B526]/20 px-2 py-1">
+              In Stock
+            </span>
+          ) : (
+            <span className="text-body-medium text-danger rounded-[4px] bg-[#EA4B48]/20 px-2 py-1">
+              Out of Stock
+            </span>
+          )}
         </div>
       ),
     },
@@ -83,7 +69,8 @@ const CartTable: React.FC<CartTableProps> = ({ metaData }) => {
       accessorKey: 'actions',
       header: '',
       cell: () => (
-        <div className="w-full flex justify-end items-center">
+        <div className="w-full flex justify-end items-center gap-6">
+          <Button className="px-[32px]">Add to Cart</Button>
           <button
             aria-label="Delete"
             className="cursor-pointer rounded-full border border-gray-20 size-[32px] flex justify-center items-center"
@@ -104,25 +91,26 @@ const CartTable: React.FC<CartTableProps> = ({ metaData }) => {
           img: TempProduct,
           name: 'Chinese Cabbage',
           price: 45,
-          quantity: 5,
+          inStock: true,
         },
         {
           id: 1,
           img: TempProduct,
           name: 'Chinese Cabbage',
           price: 45,
-          quantity: 5,
+          inStock: true,
         },
         {
           id: 1,
           img: TempProduct,
           name: 'Chinese Cabbage',
           price: 45,
-          quantity: 5,
+          inStock: false,
         },
       ]}
+      metaData={metaData}
     />
   );
 };
 
-export default CartTable;
+export default WishlistTable;

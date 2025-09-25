@@ -14,7 +14,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
+} from '@/app/components/ui/table';
 import Pagination from '../Pagination';
 import { MetaData } from '@/types/global';
 

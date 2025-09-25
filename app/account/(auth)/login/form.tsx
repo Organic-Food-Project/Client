@@ -1,11 +1,11 @@
 'use client';
-import { Input } from '@/components/ui/input';
+import { Input } from '@/app/components/ui/input';
 import Link from 'next/link';
 import { LoginAction } from './actions';
 import React from 'react';
 import { useActionState } from 'react';
-import { Button } from '@/components/ui/button';
-import Loader from '@/components/ui/Loader';
+import { Button } from '@/app/components/ui/button';
+import Loader from '@/app/components/ui/Loader';
 import { useRouter } from 'next/navigation';
 
 const LoginForm = () => {

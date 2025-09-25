@@ -1,4 +1,4 @@
-import { Input } from '@/components/ui/input';
+import { Input } from '@/app/components/ui/input';
 import type { Metadata } from 'next';
 import React from 'react';
 

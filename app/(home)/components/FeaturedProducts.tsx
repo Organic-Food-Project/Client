@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
-import ProductCard from '../ProductCard';
+import ProductCard from '@/app/components/ProductCard';
 import Vig1 from '@/assets/Vig1.webp';
 import Image from 'next/image';
 

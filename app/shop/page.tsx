@@ -1,7 +1,7 @@
-import Pagination from '@/components/Pagination';
-import ProductCard from '@/components/ProductCard';
-import FiltersSection from '@/components/ShopComponents/FiltersSection';
-import SingleSelect from '@/components/ui/select';
+import Pagination from '@/app/components/Pagination';
+import ProductCard from '@/app/components/ProductCard';
+import FiltersSection from '@/app/shop/components/FiltersSection';
+import SingleSelect from '@/app/components/ui/select';
 import React from 'react';
 
 const Shop = () => {

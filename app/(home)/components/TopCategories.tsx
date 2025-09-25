@@ -1,11 +1,11 @@
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
-import Category from '../Category';
+import Category from '@/app/components/Category';
 import Leaf from '@/assets/icons/Leaf.svg';
 import Image from 'next/image';
-import ButtonLeft from '../ui/ButtonLeft';
-import ButtonRight from '../ui/ButtonRight';
+import ButtonLeft from '@/app/components/ui/ButtonLeft';
+import ButtonRight from '@/app/components/ui/ButtonRight';
 
 const TopCategories = () => {
   return (
