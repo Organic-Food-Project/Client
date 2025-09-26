@@ -54,7 +54,7 @@ const Product: React.FC<ProductProps> = ({
         )}
         <div className="self-end flex justify-between items-center mt-4">
           <div className="space-y-2 flex-grow">
-            <p className="text-gray-700 text-body-small line-clamp-1">
+            <p className="text-gray-700 text-body-small line-clamp-1 text-left">
               {ProductData.title}
             </p>
             <p className="text-body-medium font-semibold text-left">

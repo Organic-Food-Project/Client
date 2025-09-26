@@ -1,8 +1,10 @@
 import Pagination from '@/app/components/Pagination';
-import Product from '@/app/components/Product';
+import Product, { LoadingProduct } from '@/app/components/Product';
 import FiltersSection from '@/app/shop/components/FiltersSection';
 import SingleSelect from '@/app/components/ui/select';
-import React from 'react';
+import React, { Suspense } from 'react';
+import Query from '@/lib/Query';
+import FiltersSectionLoading from './components/FiltersSectionLoading';
 
 const Shop = () => {
   const sortOptions = [
@@ -13,8 +15,6 @@ const Shop = () => {
     { value: '-rating', label: 'Rating - (hight to low)' },
   ];
 
-  const products = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-
   const metaData = {
     total: 100,
     limit: 15,
@@ -23,7 +23,9 @@ const Shop = () => {
     <>
       <div className="flex max-lg:flex-col gap-6 pt-6">
         <div className="min-w-[250px]">
-          <FiltersSection />
+          <Suspense fallback={<FiltersSectionLoading />}>
+            <AllCategories />
+          </Suspense>
         </div>
         <div className="flex flex-col flex-grow">
           <div className="flex flex-col flex-grow text-center">
@@ -37,22 +39,69 @@ const Shop = () => {
                 Found
               </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-6 flex-grow">
-              {products.map((el) => (
-                <Product
-                  description={'product'}
-                  name={'Chanise Cabbage'}
-                  price={14.99}
-                  rate={3.5}
-                  quantity={el === 3 ? 0 : 100}
-                  key={el}
-                />
-              ))}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-6 ">
+              <Suspense fallback={<ProductsLoading />}>
+                <AllProducts />
+              </Suspense>
             </div>
           </div>
           <Pagination metaData={metaData} />
         </div>
       </div>
+    </>
+  );
+};
+
+const AllProducts = async () => {
+  const products = await Query({ api: 'v1/products' });
+  if (products.error) return products.error;
+  return (
+    <>
+      {products.data?.data.map(
+        (el: {
+          id: string;
+          description: string;
+          name: string;
+          price: number;
+          rate: number;
+          quantity: number;
+        }) => (
+          <Product
+            description={el.description}
+            name={el.name}
+            price={el.price}
+            rate={el.rate}
+            quantity={el.quantity}
+            key={el.id}
+          />
+        )
+      )}
+    </>
+  );
+};
+const AllCategories = async () => {
+  const categories = await Query({ api: 'v1/categories' });
+  if (categories.error) return categories.error;
+  return (
+    <FiltersSection
+      categories={categories.data?.data.map(
+        (el: { name: string; id: string; products: string[] }) => ({
+          name: el.name,
+          id: el.id,
+          count: el.products.length,
+        })
+      )}
+    />
+  );
+};
+
+const ProductsLoading = () => {
+  const products = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+  return (
+    <>
+      {products.map((el) => (
+        <LoadingProduct key={el} />
+      ))}
     </>
   );
 };

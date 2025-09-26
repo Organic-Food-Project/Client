@@ -6,11 +6,7 @@ import { Checkbox } from '@/app/components/ui/checkbox';
 import { Slider } from '@/app/components/ui/slider';
 import { currencyFormated } from '@/lib/utils';
 
-const FiltersSection = ({
-  categories,
-}: {
-  categories: { name: string; id: string; count: number }[];
-}) => {
+const FiltersSectionLoading = () => {
   const [expandedSections, setExpandedSections] = useState({
     categories: true,
     price: true,
@@ -74,33 +70,14 @@ const FiltersSection = ({
 
         {expandedSections.categories && (
           <div className="space-y-3">
-            {categories.map((category) => (
-              <div key={category.name} className="flex items-center space-x-3">
-                <Checkbox
-                  id={category.name}
-                  checked={selectedCategories.includes(category.name)}
-                  checkBoxType="circle"
-                  onCheckedChange={(checked) => {
-                    if (checked) {
-                      setSelectedCategories([
-                        ...selectedCategories,
-                        category.name,
-                      ]);
-                    } else {
-                      setSelectedCategories(
-                        selectedCategories.filter((c) => c !== category.name)
-                      );
-                    }
-                  }}
-                />
-                <label
-                  htmlFor={category.name}
-                  className=" text-body-small cursor-pointer flex-1"
-                >
-                  {category.name}{' '}
-                  <span className="text-gray-500">({category.count})</span>
-                </label>
-              </div>
+            {[0, 1, 2, 3, 4, 5].map((el) => (
+              <div
+                key={el}
+                style={{
+                  width: `${Math.random() * 50 + 50}%`,
+                }}
+                className="w-full h-[21px] bg-gray-100 animate-pulse"
+              />
             ))}
           </div>
         )}
@@ -122,21 +99,7 @@ const FiltersSection = ({
 
         {expandedSections.price && (
           <div className="space-y-4">
-            <Slider
-              value={priceRange}
-              onValueChange={setPriceRange}
-              max={1500}
-              min={50}
-              step={10}
-              className="w-full"
-            />
-            <div className="text-body-small text-gray-700">
-              Price:{' '}
-              <span className="text-gray-900 font-semibold">
-                {currencyFormated(priceRange[0])} —{' '}
-                {currencyFormated(priceRange[1])}
-              </span>
-            </div>
+            <div className="w-full h-[21px] bg-gray-100 animate-pulse" />
           </div>
         )}
       </div>
@@ -157,29 +120,14 @@ const FiltersSection = ({
 
         {expandedSections.rating && (
           <div className="space-y-3">
-            {ratings.map((rating, index) => (
-              <div key={rating.value} className="flex items-center space-x-3">
-                <Checkbox
-                  id={rating.value}
-                  checked={selectedRatings.includes(rating.value)}
-                  onCheckedChange={(checked) => {
-                    if (checked) {
-                      setSelectedRatings([...selectedRatings, rating.value]);
-                    } else {
-                      setSelectedRatings(
-                        selectedRatings.filter((r) => r !== rating.value)
-                      );
-                    }
-                  }}
-                />
-                <label
-                  htmlFor={rating.value}
-                  className="text-sm text-gray-700 cursor-pointer flex items-center space-x-2"
-                >
-                  <div className="flex">{renderStars(5 - index)}</div>
-                  <span>{rating.label}</span>
-                </label>
-              </div>
+            {[0, 1, 2, 3, 4].map((el) => (
+              <div
+                key={el}
+                style={{
+                  width: `${Math.random() * 50 + 50}%`,
+                }}
+                className="w-full h-[21px] bg-gray-100 animate-pulse"
+              />
             ))}
           </div>
         )}
@@ -188,4 +136,4 @@ const FiltersSection = ({
   );
 };
 
-export default FiltersSection;
+export default FiltersSectionLoading;

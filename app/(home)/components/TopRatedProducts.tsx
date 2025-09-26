@@ -53,7 +53,7 @@ const AllProducts = async () => {
             price={products.data?.data?.[i].price}
             rate={products.data?.data?.[i].rate}
             quantity={products.data?.data?.[i].quantity}
-            key={i}
+            key={products.data?.data?.[i]?.id ?? i}
           />
         ) : null
       )}
