@@ -4,7 +4,7 @@ import { cookies } from 'next/headers';
 import Mutation from '@/lib/Mutation';
 
 const formSchema = z.object({
-  email: z.string().email('Invalid email'),
+  email: z.email('Invalid email'),
   password: z.string().min(6, 'Password is required and at least 6 characters'),
   remember_me: z.union([z.string(), z.null()]).transform((val) => val === 'on'),
 });
@@ -18,6 +18,8 @@ export const LoginAction = async (
     password: formData.get('password'),
     remember_me: formData.get('remember_me'),
   };
+  console.log({ values });
+  
   const parsed = formSchema.safeParse(values);
 
   if (!parsed.success) {
@@ -46,7 +48,6 @@ export const LoginAction = async (
   } else {
     const days = parsed.data.remember_me ? 30 : 1;
     const cookieStore = await cookies();
-    console.log({ data });
     cookieStore.set('token', data.token, {
       httpOnly: true,
       path: '/',
