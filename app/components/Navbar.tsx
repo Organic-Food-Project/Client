@@ -11,8 +11,6 @@ import ActiveLink from './ui/ActiveLink';
 import CartComponent from './Cart';
 
 export default function Navbar() {
-  const handleShowSearch = () => {};
-
   return (
     <nav className="mainPadding py-6 flex justify-between bg-white font-500">
       <ul className="max-lg3:hidden flex items-center text-gray-500 text-body-medium gap-7">

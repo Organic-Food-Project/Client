@@ -121,6 +121,7 @@ const CartTable: React.FC<CartTableProps> = ({ metaData }) => {
           quantity: 5,
         },
       ]}
+      metaData={metaData}
     />
   );
 };
