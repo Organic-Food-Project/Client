@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
-import ProductCard, { LoadingProductCard } from '@/app/components/ProductCard';
+import Product, { LoadingProduct } from '@/app/components/Product';
 import Vig1 from '@/assets/Vig1.webp';
 import Image from 'next/image';
 import Query from '@/lib/Query';
@@ -41,13 +41,13 @@ const AllProducts = async () => {
   });
 
   if (products.error) {
-    return 'error';
+    return products.error;
   }
   return (
     <>
       {[0, 1, 2, 3].map((i) =>
         products.data?.data?.[i] ? (
-          <ProductCard
+          <Product
             description={products.data?.data?.[i].description}
             name={products.data?.data?.[i].name}
             price={products.data?.data?.[i].price}
@@ -64,10 +64,10 @@ const AllProducts = async () => {
 const ProductsLoading = () => {
   return (
     <>
-      <LoadingProductCard />
-      <LoadingProductCard />
-      <LoadingProductCard />
-      <LoadingProductCard />
+      <LoadingProduct />
+      <LoadingProduct />
+      <LoadingProduct />
+      <LoadingProduct />
     </>
   );
 };

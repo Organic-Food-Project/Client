@@ -1,5 +1,5 @@
 import Pagination from '@/app/components/Pagination';
-import ProductCard from '@/app/components/ProductCard';
+import Product from '@/app/components/Product';
 import FiltersSection from '@/app/shop/components/FiltersSection';
 import SingleSelect from '@/app/components/ui/select';
 import React from 'react';
@@ -39,7 +39,7 @@ const Shop = () => {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-6 flex-grow">
               {products.map((el) => (
-                <ProductCard
+                <Product
                   description={'product'}
                   name={'Chanise Cabbage'}
                   price={14.99}

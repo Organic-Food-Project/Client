@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import Link from 'next/link';
 
-interface ProductCardProps {
+interface ProductProps {
   img?: string;
   description: string;
   name: string;
@@ -16,7 +16,7 @@ interface ProductCardProps {
   quantity: number;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({
+const Product: React.FC<ProductProps> = ({
   img = TempProduct,
   description = 'product',
   name,
@@ -52,8 +52,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
             Out of Stock
           </div>
         )}
-        <div className="self-end flex justify-between items-center">
-          <div className="space-y-2">
+        <div className="self-end flex justify-between items-center mt-4">
+          <div className="space-y-2 flex-grow">
             <p className="text-gray-700 text-body-small line-clamp-1">
               {ProductData.title}
             </p>
@@ -149,7 +149,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   );
 };
 
-export const LoadingProductCard = () => {
+export const LoadingProduct = () => {
   return (
     <div className="relative group border rounded-[8px] border-gray-100 hover:border-hard-primary hover:shadow hover:shadow-soft-primary p-4 bg-white">
       <Link href="/shop">
@@ -171,4 +171,4 @@ export const LoadingProductCard = () => {
   );
 };
 
-export default ProductCard;
+export default Product;

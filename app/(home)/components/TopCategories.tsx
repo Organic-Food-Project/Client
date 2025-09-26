@@ -1,11 +1,13 @@
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
-import Category from '@/app/components/Category';
+import Category, { LoadingCategory } from '@/app/components/Category';
 import Leaf from '@/assets/icons/Leaf.svg';
 import Image from 'next/image';
 import ButtonLeft from '@/app/components/ui/ButtonLeft';
 import ButtonRight from '@/app/components/ui/ButtonRight';
+import { Suspense } from 'react';
+import Query from '@/lib/Query';
 
 const TopCategories = () => {
   return (
@@ -26,20 +28,51 @@ const TopCategories = () => {
           <ArrowRight />
         </Link>
       </div>
-      <div className="sliderPadding px-6 flex items-center gap-10">
-        <ButtonLeft />
-        <div className="grid grid-cols-6 gap-6 flex-grow">
-          <Category />
-          <Category />
-          <Category />
-          <Category />
-          <Category />
-          <Category />
-        </div>
-        <ButtonRight />
-      </div>
+      <Suspense fallback={<CategoriesLoading />}>
+        <AllCategories />
+      </Suspense>
     </div>
   );
 };
 
+const AllCategories = async () => {
+  const categories = await Query({
+    api: 'v1/categories/',
+  });
+
+  if (categories.error) {
+    return categories.error;
+  }
+
+  return (
+    <div className="sliderPadding px-6 flex items-center gap-10">
+      <ButtonLeft />
+      <div className="grid grid-cols-6 gap-6 flex-grow">
+        {categories.data?.data.map(
+          (el: { id: string; name: string; products: string[] }) => (
+            <Category key={el?.id} name={el?.name} products={el?.products} />
+          )
+        )}
+      </div>
+      <ButtonRight />
+    </div>
+  );
+};
+
+const CategoriesLoading = () => {
+  return (
+    <div className="sliderPadding px-6 flex items-center gap-10">
+      <ButtonLeft disabled={true} />
+      <div className="grid grid-cols-6 gap-6 flex-grow">
+        <LoadingCategory />
+        <LoadingCategory />
+        <LoadingCategory />
+        <LoadingCategory />
+        <LoadingCategory />
+        <LoadingCategory />
+      </div>
+      <ButtonRight disabled={true} />
+    </div>
+  );
+};
 export default TopCategories;
