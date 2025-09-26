@@ -39,7 +39,14 @@ const Shop = () => {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-6 flex-grow">
               {products.map((el) => (
-                <ProductCard key={el} quantity={el === 3 ? 0 : 100} />
+                <ProductCard
+                  description={'product'}
+                  name={'Chanise Cabbage'}
+                  price={14.99}
+                  rate={3.5}
+                  quantity={el === 3 ? 0 : 100}
+                  key={el}
+                />
               ))}
             </div>
           </div>
