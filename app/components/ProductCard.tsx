@@ -8,18 +8,31 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 interface ProductCardProps {
-  isOutOfStock?: boolean;
+  img?: string;
+  description: string;
+  name: string;
+  price: number;
+  rate: number;
+  quantity: number;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ isOutOfStock = false }) => {
+const ProductCard: React.FC<ProductCardProps> = ({
+  img = TempProduct,
+  description = 'product',
+  name,
+  price,
+  rate,
+  quantity = 0,
+}) => {
   const [isHoverd, setIsHoverd] = useState(false);
   const ProductData = {
-    imgSrc: TempProduct,
-    imgAlt: 'product',
-    title: 'Chanise Cabbage',
-    price: 14.99,
-    rating: 3.5,
+    imgSrc: img,
+    imgAlt: description,
+    title: name,
+    price: price,
+    rate: rate,
   };
+  const isOutOfStock = quantity === 0;
   return (
     <motion.div
       onMouseEnter={() => setIsHoverd(true)}
@@ -41,7 +54,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ isOutOfStock = false }) => {
         )}
         <div className="self-end flex justify-between items-center">
           <div className="space-y-2">
-            <p className="text-gray-700 text-body-small">{ProductData.title}</p>
+            <p className="text-gray-700 text-body-small line-clamp-1">
+              {ProductData.title}
+            </p>
             <p className="text-body-medium font-semibold text-left">
               ${ProductData.price}
             </p>
@@ -50,7 +65,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ isOutOfStock = false }) => {
                 const starValue = i + 1;
                 const normalizedRating = Math.max(
                   0,
-                  Math.min(ProductData.rating, 5)
+                  Math.min(ProductData.rate, 5)
                 );
 
                 if (normalizedRating >= starValue) {
@@ -131,6 +146,28 @@ const ProductCard: React.FC<ProductCardProps> = ({ isOutOfStock = false }) => {
         </AnimatePresence>
       </Link>
     </motion.div>
+  );
+};
+
+export const LoadingProductCard = () => {
+  return (
+    <div className="relative group border rounded-[8px] border-gray-100 hover:border-hard-primary hover:shadow hover:shadow-soft-primary p-4 bg-white">
+      <Link href="/shop">
+        <div className="w-full aspect-square bg-gray-100 animate-pulse rounded-[8px]" />
+        <div className="self-end flex justify-between items-center gap-2 mt-4">
+          <div className="space-y-2 flex-grow">
+            <span className="bg-gray-100 animate-pulse block w-2/3 h-[21px]" />
+            <span className="bg-gray-100 animate-pulse block w-1/3 h-[24px]" />
+            <span className="bg-gray-100 animate-pulse block w-1/2 h-[20px]" />
+          </div>
+          <button
+            aria-label="Add to Cart"
+            disabled={true}
+            className="disabled:cursor-not-allowed size-[40px] bg-gray-100 animate-pulse rounded-full flex justify-center items-center"
+          />
+        </div>
+      </Link>
+    </div>
   );
 };
 

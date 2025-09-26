@@ -1,4 +1,4 @@
-import FeaturedProducts from './components/FeaturedProducts';
+import TopRatedProducts from './components/TopRatedProducts';
 import TopCategories from './components/TopCategories';
 import HeroSection from './components/HeroSection';
 import WhyChooseUs from './components/WhyChooseUs';
@@ -8,7 +8,7 @@ const Home = () => {
     <main>
       <HeroSection />
       <section className="relative py-[80px]">
-        <FeaturedProducts />
+        <TopRatedProducts />
       </section>
       <section className="relative">
         <TopCategories />

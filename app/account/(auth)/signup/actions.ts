@@ -41,7 +41,7 @@ export const SignupAction = async (
 
   const { error } = await Mutation({
     method: 'POST',
-    api: '/v1/users/signup',
+    api: 'v1/users/signup',
     body: parsed.data,
   });
 

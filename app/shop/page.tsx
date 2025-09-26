@@ -39,7 +39,7 @@ const Shop = () => {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-6 flex-grow">
               {products.map((el) => (
-                <ProductCard key={el} isOutOfStock={el === 3 ? true : false} />
+                <ProductCard key={el} quantity={el === 3 ? 0 : 100} />
               ))}
             </div>
           </div>
