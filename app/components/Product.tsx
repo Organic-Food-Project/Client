@@ -25,13 +25,6 @@ const Product: React.FC<ProductProps> = ({
   quantity = 0,
 }) => {
   const [isHoverd, setIsHoverd] = useState(false);
-  const ProductData = {
-    imgSrc: img,
-    imgAlt: description,
-    title: name,
-    price: price,
-    rate: rate,
-  };
   const isOutOfStock = quantity === 0;
   return (
     <motion.div
@@ -39,12 +32,12 @@ const Product: React.FC<ProductProps> = ({
       onMouseLeave={() => setIsHoverd(false)}
       className="relative group border rounded-[8px] border-gray-100 hover:border-hard-primary hover:shadow hover:shadow-soft-primary p-4 bg-white"
     >
-      <Link href="/shop/1">
+      <Link href={`/shop/${name}`}>
         <Image
-          src={ProductData.imgSrc}
+          src={img}
           width={302}
           height={302}
-          alt={ProductData.imgAlt}
+          alt={description}
           className="w-full"
         />
         {isOutOfStock && (
@@ -55,18 +48,13 @@ const Product: React.FC<ProductProps> = ({
         <div className="self-end flex justify-between items-center mt-4">
           <div className="space-y-2 flex-grow">
             <p className="text-gray-700 text-body-small line-clamp-1 text-left">
-              {ProductData.title}
+              {name}
             </p>
-            <p className="text-body-medium font-semibold text-left">
-              ${ProductData.price}
-            </p>
+            <p className="text-body-medium font-semibold text-left">${price}</p>
             <div className="flex">
               {[...Array(5)].map((_, i) => {
                 const starValue = i + 1;
-                const normalizedRating = Math.max(
-                  0,
-                  Math.min(ProductData.rate, 5)
-                );
+                const normalizedRating = Math.max(0, Math.min(rate, 5));
 
                 if (normalizedRating >= starValue) {
                   return (

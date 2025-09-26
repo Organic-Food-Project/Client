@@ -1,10 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronDown, ChevronUp, SlidersHorizontal, Star } from 'lucide-react';
-import { Checkbox } from '@/app/components/ui/checkbox';
-import { Slider } from '@/app/components/ui/slider';
-import { currencyFormated } from '@/lib/utils';
+import { ChevronDown, ChevronUp, SlidersHorizontal } from 'lucide-react';
 
 const FiltersSectionLoading = () => {
   const [expandedSections, setExpandedSections] = useState({
@@ -13,37 +10,11 @@ const FiltersSectionLoading = () => {
     rating: true,
   });
 
-  const [priceRange, setPriceRange] = useState([50, 1500]);
-  const [selectedCategories, setSelectedCategories] = useState(['Vegetables']);
-  const [selectedRatings, setSelectedRatings] = useState(['4.0 & up']);
-
-  const ratings = [
-    { label: '5.0', value: '5.0' },
-    { label: '4.0 & up', value: '4.0 & up' },
-    { label: '3.0 & up', value: '3.0 & up' },
-    { label: '2.0 & up', value: '2.0 & up' },
-    { label: '1.0 & up', value: '1.0 & up' },
-  ];
-
   const toggleSection = (section: keyof typeof expandedSections) => {
     setExpandedSections((prev) => ({
       ...prev,
       [section]: !prev[section],
     }));
-  };
-
-  const renderStars = (rating: number) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <span key={i}>
-        <Star
-          className={`size-[14px] ${
-            i < rating
-              ? 'text-warning fill-warning'
-              : 'text-gray-200 fill-gray-200'
-          }`}
-        />
-      </span>
-    ));
   };
 
   return (

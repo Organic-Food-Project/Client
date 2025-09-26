@@ -37,7 +37,9 @@ const BreadCrumbs = () => {
           const href = generateHref(index);
           const isLast = index === pathArray.length - 1;
           const title = segment.replaceAll('-', ' ');
-          const label = title.charAt(0).toUpperCase() + title.slice(1);
+          const label = (
+            title.charAt(0).toUpperCase() + title.slice(1)
+          ).replace('%20', ' ');
 
           return (
             <li key={href} className="flex items-center gap-3">

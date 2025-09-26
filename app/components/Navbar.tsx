@@ -12,7 +12,7 @@ import CartComponent from './Cart';
 
 export default function Navbar() {
   return (
-    <nav className="mainPadding py-6 flex justify-between bg-white font-500">
+    <nav className="sticky top-0 mainPadding py-6 flex justify-between bg-white font-500 z-[100] shadow-md ">
       <ul className="max-lg3:hidden flex items-center text-gray-500 text-body-medium gap-7">
         <li className="flex items-center hover:text-gray-900">
           <ActiveLink href="/" exact>
