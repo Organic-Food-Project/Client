@@ -8,12 +8,12 @@ const metaData = {
 
 const Wishlist = () => {
   return (
-    <div>
+    <>
       <h1 className="text-heading-05 font-bold text-center pb-8">
         My Wishlist
       </h1>
       <WishlistTable metaData={metaData} />
-    </div>
+    </>
   );
 };
 

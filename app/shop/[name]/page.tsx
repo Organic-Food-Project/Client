@@ -2,6 +2,9 @@ import React from 'react';
 import type { Metadata } from 'next';
 import Query from '@/lib/Query';
 import { redirect } from 'next/navigation';
+import Header from './components/Header';
+import Middle from './components/Middle';
+import Footer from './components/Footer';
 
 interface ProductPageProps {
   params: {
@@ -12,7 +15,8 @@ interface ProductPageProps {
 export async function generateMetadata({
   params,
 }: ProductPageProps): Promise<Metadata> {
-  const productName = params.name.replace('%20', ' ');
+  const title = params.name.replace('-', ' ');
+  const productName = title.charAt(0).toUpperCase() + title.slice(1);
 
   return {
     title: productName,
@@ -21,7 +25,7 @@ export async function generateMetadata({
 }
 
 const ProductPage = async ({ params }: ProductPageProps) => {
-  const productName = params.name.replace('%20', ' ');
+  const productName = params.name.replace('-', ' ');
   const product = await Query({
     api: `v1/products/${productName}`,
   });
@@ -29,7 +33,16 @@ const ProductPage = async ({ params }: ProductPageProps) => {
   if (product.error) {
     redirect('/shop');
   }
-  return <div>{productName}</div>;
+
+  console.log({ data: product.data.data });
+
+  return (
+    <div>
+      <Header />
+      <Middle />
+      <Footer />
+    </div>
+  );
 };
 
 export default ProductPage;

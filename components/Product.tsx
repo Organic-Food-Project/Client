@@ -6,6 +6,7 @@ import Cart from '@/assets/icons/Cart.svg';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import Link from 'next/link';
+import { slugify } from '@/lib/utils';
 
 interface ProductProps {
   img?: string;
@@ -32,7 +33,7 @@ const Product: React.FC<ProductProps> = ({
       onMouseLeave={() => setIsHoverd(false)}
       className="relative group border rounded-[8px] border-gray-100 hover:border-hard-primary hover:shadow hover:shadow-soft-primary p-4 bg-white"
     >
-      <Link href={`/shop/${name}`}>
+      <Link href={`/shop/${slugify(name)}`}>
         <Image
           src={img}
           width={302}

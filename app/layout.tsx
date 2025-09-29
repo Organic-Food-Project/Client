@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import Navbar from '@/app/components/Navbar';
-import Footer from '@/app/components/Footer';
-import BreadCrumbs from '@/app/components/BreadCrumbs';
-import ScrollToTop from '@/app/components/ScrollToTop';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import BreadCrumbs from '@/components/BreadCrumbs';
+import ScrollToTop from '@/components/ScrollToTop';
 import { Poppins } from 'next/font/google';
 
 export const metadata: Metadata = {

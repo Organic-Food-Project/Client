@@ -35,6 +35,7 @@ export const Query = async ({
 
     return { data, error: null };
   } catch (err: any) {
+    console.log(err);
     return { data: null, error: err?.message || 'Network error' };
   }
 };

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import TempProduct from '@/assets/TempProduct.webp';
-import CustomTable from '@/app/components/ui/CustomTable';
+import CustomTable from '@/components/ui/CustomTable';
 import type { ColumnDef } from '@tanstack/react-table';
 import React from 'react';
 import { MetaData } from '@/types/global';

@@ -1,8 +1,8 @@
 'use client';
 import { useActionState, useState } from 'react';
-import { Input } from '@/app/components/ui/input';
+import { Input } from '@/components/ui/input';
 import { SignupAction } from './actions';
-import { Button } from '@/app/components/ui/button';
+import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 
 const Form = () => {

@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
-import Product, { LoadingProduct } from '@/app/components/Product';
+import Product, { LoadingProduct } from '@/components/Product';
 import Vig1 from '@/assets/Vig1.webp';
 import Image from 'next/image';
 import Query from '@/lib/Query';

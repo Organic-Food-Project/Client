@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import { ChevronDown, ChevronUp, SlidersHorizontal, Star } from 'lucide-react';
-import { Checkbox } from '@/app/components/ui/checkbox';
-import { Slider } from '@/app/components/ui/slider';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Slider } from '@/components/ui/slider';
 import { currencyFormated } from '@/lib/utils';
 
 const FiltersSection = ({

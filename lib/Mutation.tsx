@@ -36,6 +36,7 @@ const Mutation = async ({
 
     return { data: res.data, error: null };
   } catch (err: any) {
+    console.log(err);
     if (err.response) {
       return {
         data: null,

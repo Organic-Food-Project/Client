@@ -1,11 +1,11 @@
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
-import Category, { LoadingCategory } from '@/app/components/Category';
+import Category, { LoadingCategory } from '@/components/Category';
 import Leaf from '@/assets/icons/Leaf.svg';
 import Image from 'next/image';
-import ButtonLeft from '@/app/components/ui/ButtonLeft';
-import ButtonRight from '@/app/components/ui/ButtonRight';
+import ButtonLeft from '@/components/ui/ButtonLeft';
+import ButtonRight from '@/components/ui/ButtonRight';
 import { Suspense } from 'react';
 import Query from '@/lib/Query';
 
@@ -49,8 +49,15 @@ const AllCategories = async () => {
       <ButtonLeft />
       <div className="grid grid-cols-6 gap-6 flex-grow">
         {categories.data?.data.map(
-          (el: { id: string; name: string; products: string[] }) => (
-            <Category key={el?.id} name={el?.name} products={el?.products} />
+          (
+            el: { id: string; name: string; products: string[] },
+            idx: number
+          ) => (
+            <Category
+              key={el?.id ?? idx}
+              name={el?.name}
+              products={el?.products}
+            />
           )
         )}
       </div>
