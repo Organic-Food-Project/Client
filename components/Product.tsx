@@ -39,7 +39,7 @@ const Product: React.FC<ProductProps> = ({
           width={302}
           height={302}
           alt={description}
-          className="w-full"
+          className="w-full aspect-square"
         />
         {isOutOfStock && (
           <div className="absolute top-0 left-0 space-y-[6px] m-4 py-2 px-4 bg-black text-body-small text-white rounded-[4px]">

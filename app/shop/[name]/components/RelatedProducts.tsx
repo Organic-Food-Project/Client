@@ -5,6 +5,7 @@ import { Suspense } from 'react';
 
 interface RelatedProductsProps {
   productData: {
+    _id: string;
     category: {
       _id: string;
       name: string;
@@ -23,7 +24,10 @@ const RelatedProducts: React.FC<RelatedProductsProps> = async ({
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Suspense fallback={<ProductsLoading />}>
-          <AllProducts category={productData.category} />
+          <AllProducts
+            productId={productData._id}
+            category={productData.category}
+          />
         </Suspense>
       </div>
     </div>
@@ -31,8 +35,10 @@ const RelatedProducts: React.FC<RelatedProductsProps> = async ({
 };
 
 const AllProducts = async ({
+  productId,
   category,
 }: {
+  productId: string;
   category: {
     _id: string;
     name: string;
@@ -45,10 +51,13 @@ const AllProducts = async ({
   if (products.error) {
     return products.error;
   }
+
   return (
     <>
       {[0, 1, 2, 3].map((i) =>
-        products.data?.data?.[i] ? (
+        products.data?.data?.filter(
+          (el: { _id: string }) => el._id !== productId
+        )?.[i] ? (
           <Product
             img={products.data?.data?.[i]?.images?.[0]}
             description={products.data?.data?.[i].description}

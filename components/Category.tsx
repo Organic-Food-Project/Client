@@ -26,6 +26,7 @@ const Category = ({ name, id, products }: CategoryProps) => {
           width={80}
           height={80}
           alt={CategoryData.imgAlt}
+          className="aspect-square"
         />
         <div className="text-center space-y-[6px] pb-5">
           <p className="text-gray-700 text-body-small line-clamp-1">

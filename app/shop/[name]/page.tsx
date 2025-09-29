@@ -2,9 +2,9 @@ import React from 'react';
 import type { Metadata } from 'next';
 import Query from '@/lib/Query';
 import { redirect } from 'next/navigation';
-import Header from './components/Header';
 import Middle from './components/Middle';
 import RelatedProducts from './components/RelatedProducts';
+import ProductInfo from './components/ProductInfo';
 
 interface ProductPageProps {
   params: {
@@ -38,8 +38,8 @@ const ProductPage = async ({ params }: ProductPageProps) => {
 
   return (
     <div>
-      <Header />
-      <Middle />
+      <ProductInfo productData={product.data.data} />
+      <Middle productData={product.data.data} />
       <RelatedProducts productData={product.data.data} />
     </div>
   );

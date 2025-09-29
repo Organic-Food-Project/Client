@@ -27,11 +27,13 @@ function Button({
   variant,
   asChild = false,
   loading = false,
+  onlyLoadingIcon = false,
   ...props
 }: React.ComponentProps<'button'> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
     loading?: boolean;
+    onlyLoadingIcon?: boolean;
   }) {
   const Comp = asChild ? Slot : 'button';
 
@@ -43,7 +45,7 @@ function Button({
     >
       {loading ? (
         <>
-          loading
+          {!onlyLoadingIcon && 'loading'}
           <Loader />
         </>
       ) : (
