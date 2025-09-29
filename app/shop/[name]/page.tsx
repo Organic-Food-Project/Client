@@ -2,7 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import Query from '@/lib/Query';
 import { redirect } from 'next/navigation';
-import Middle from './components/Middle';
+import FeedBack from './components/FeedBack';
 import RelatedProducts from './components/RelatedProducts';
 import ProductInfo from './components/ProductInfo';
 
@@ -39,7 +39,7 @@ const ProductPage = async ({ params }: ProductPageProps) => {
   return (
     <div>
       <ProductInfo productData={product.data.data} />
-      <Middle productData={product.data.data} />
+      <FeedBack productData={product.data.data} />
       <RelatedProducts productData={product.data.data} />
     </div>
   );

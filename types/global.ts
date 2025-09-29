@@ -4,6 +4,20 @@ export type MetaData = {
   limit: number;
 };
 
+export type ProductData = {
+  _id: string;
+  name: string;
+  description: string;
+  category: {
+    _id: string;
+    name: string;
+  };
+  images: string[];
+  quantity: number;
+  rate: number;
+  feddBack: string[];
+};
+
 export interface MutationProps {
   method: 'POST' | 'GET' | 'PUT' | 'PATH' | 'DELETE';
   api: string;

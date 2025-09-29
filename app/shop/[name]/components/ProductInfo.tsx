@@ -12,20 +12,10 @@ import Twitter from '@/assets/icons/Twitter.svg';
 import Patreon from '@/assets/icons/Patreon.svg';
 import Brand from '@/assets/icons/Brand.svg';
 import Link from 'next/link';
+import { ProductData } from '@/types/global';
 
 interface ProductInfoProps {
-  productData: {
-    _id: string;
-    name: string;
-    description: string;
-    category: {
-      name: string;
-    };
-    images: string[];
-    quantity: number;
-    rate: number;
-    feddBack: string[];
-  };
+  productData: ProductData;
 }
 
 const ProductInfo: React.FC<ProductInfoProps> = ({ productData }) => {
@@ -48,8 +38,8 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ productData }) => {
     <div>
       <div className="grid lg:grid-cols-2 gap-8 lg:gap-[24px]">
         {/* Image Gallery */}
-        <div className="flex items-center gap-4">
-          <div className="flex flex-col gap-3">
+        <div className="flex max-md:flex-col-reverse items-center gap-4">
+          <div className="flex md:flex-col gap-3">
             {productData.images.map((image, index) => (
               <button
                 key={index}
@@ -75,7 +65,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ productData }) => {
             alt={productData.name}
             width={556}
             height={556}
-            className="aspect-square"
+            className="aspect-square flex-grow"
             priority
           />
         </div>

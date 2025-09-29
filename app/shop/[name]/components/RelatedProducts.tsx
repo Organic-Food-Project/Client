@@ -2,15 +2,10 @@ import React from 'react';
 import Product, { LoadingProduct } from '@/components/Product';
 import Query from '@/lib/Query';
 import { Suspense } from 'react';
+import { ProductData } from '@/types/global';
 
 interface RelatedProductsProps {
-  productData: {
-    _id: string;
-    category: {
-      _id: string;
-      name: string;
-    };
-  };
+  productData: ProductData;
 }
 const RelatedProducts: React.FC<RelatedProductsProps> = async ({
   productData,
