@@ -4,10 +4,11 @@ import Link from 'next/link';
 
 interface CategoryProps {
   name: string;
+  id: string;
   products: string[];
 }
 
-const Category = ({ name, products }: CategoryProps) => {
+const Category = ({ name, id, products }: CategoryProps) => {
   const CategoryData = {
     imgSrc: TempCategory,
     imgAlt: name,
@@ -17,7 +18,7 @@ const Category = ({ name, products }: CategoryProps) => {
   return (
     <div className="relative group border rounded-[8px] border-gray-100 hover:border-hard-primary hover:shadow hover:shadow-soft-primary p-4 bg-white">
       <Link
-        href={`/shop?category=${name}`}
+        href={`/shop?category=${id}`}
         className="flex flex-col items-center justify-center gap-5 pt-4"
       >
         <Image

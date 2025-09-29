@@ -1,43 +1,45 @@
-import { ArrowRight } from 'lucide-react';
-import Link from 'next/link';
 import React from 'react';
 import Product, { LoadingProduct } from '@/components/Product';
-import Vig1 from '@/assets/Vig1.webp';
-import Image from 'next/image';
 import Query from '@/lib/Query';
 import { Suspense } from 'react';
 
-const TopRatedProducts = async () => {
+interface RelatedProductsProps {
+  productData: {
+    category: {
+      _id: string;
+      name: string;
+    };
+  };
+}
+const RelatedProducts: React.FC<RelatedProductsProps> = async ({
+  productData,
+}) => {
   return (
-    <div className="mainPadding">
-      <div className="flex justify-between items-center pb-[40px]">
-        <h2 className="text-4xl sm:text-heading-03  font-bold">
-          Top Rated Products
-        </h2>{' '}
-        <Link href="/shop" className=" text-primary pb-2 flex gap-2">
-          View All
-          <ArrowRight />
-        </Link>
+    <div className="pt-[100px]">
+      <div className="flex justify-center items-center pb-[40px]">
+        <h2 className="text-4xl sm:text-heading-03 font-bold">
+          Related Products
+        </h2>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Suspense fallback={<ProductsLoading />}>
-          <AllProducts />
+          <AllProducts category={productData.category} />
         </Suspense>
       </div>
-      <Image
-        src={Vig1}
-        width={144}
-        height={434}
-        alt="Vig1"
-        className="absolute bottom-0 left-0 z-[-1]"
-      />
     </div>
   );
 };
 
-const AllProducts = async () => {
+const AllProducts = async ({
+  category,
+}: {
+  category: {
+    _id: string;
+    name: string;
+  };
+}) => {
   const products = await Query({
-    api: 'v1/products/',
+    api: `v1/products?category=${category._id}`,
   });
 
   if (products.error) {
@@ -73,4 +75,4 @@ const ProductsLoading = () => {
   );
 };
 
-export default TopRatedProducts;
+export default RelatedProducts;

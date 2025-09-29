@@ -49,24 +49,23 @@ const AllProducts = async () => {
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-6 ">
         {products.data?.data.map(
-          (
-            el: {
-              id: string;
-              description: string;
-              name: string;
-              price: number;
-              rate: number;
-              quantity: number;
-            },
-            idx: number
-          ) => (
+          (el: {
+            _id: string;
+            description: string;
+            name: string;
+            price: number;
+            rate: number;
+            quantity: number;
+            images: string[];
+          }) => (
             <Product
+              img={el?.images?.[0]}
               description={el.description}
               name={el.name}
               price={el.price}
               rate={el.rate}
               quantity={el.quantity}
-              key={el.id ?? idx}
+              key={el._id}
             />
           )
         )}
@@ -81,9 +80,9 @@ const AllCategories = async () => {
   return (
     <FiltersSection
       categories={categories.data?.data.map(
-        (el: { name: string; id: string; products: string[] }) => ({
+        (el: { name: string; _id: string; products: string[] }) => ({
           name: el.name,
-          id: el.id,
+          id: el._id,
           count: el.products.length,
         })
       )}

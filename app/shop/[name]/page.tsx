@@ -4,7 +4,7 @@ import Query from '@/lib/Query';
 import { redirect } from 'next/navigation';
 import Header from './components/Header';
 import Middle from './components/Middle';
-import Footer from './components/Footer';
+import RelatedProducts from './components/RelatedProducts';
 
 interface ProductPageProps {
   params: {
@@ -40,7 +40,7 @@ const ProductPage = async ({ params }: ProductPageProps) => {
     <div>
       <Header />
       <Middle />
-      <Footer />
+      <RelatedProducts productData={product.data.data} />
     </div>
   );
 };

@@ -43,19 +43,18 @@ const AllCategories = async () => {
   if (categories.error) {
     return categories.error;
   }
+  console.log({ categories });
 
   return (
     <div className="sliderPadding px-6 flex items-center gap-10">
       <ButtonLeft />
       <div className="grid grid-cols-6 gap-6 flex-grow">
         {categories.data?.data.map(
-          (
-            el: { id: string; name: string; products: string[] },
-            idx: number
-          ) => (
+          (el: { _id: string; name: string; products: string[] }) => (
             <Category
-              key={el?.id ?? idx}
+              key={el?._id}
               name={el?.name}
+              id={el?._id}
               products={el?.products}
             />
           )

@@ -17,7 +17,7 @@ const FiltersSection = ({
     rating: true,
   });
 
-  const [priceRange, setPriceRange] = useState([50, 1500]);
+  const [priceRange, setPriceRange] = useState([1, 1500]);
   const [selectedCategories, setSelectedCategories] = useState(['Vegetables']);
   const [selectedRatings, setSelectedRatings] = useState(['4.0 & up']);
 
@@ -126,7 +126,7 @@ const FiltersSection = ({
               value={priceRange}
               onValueChange={setPriceRange}
               max={1500}
-              min={50}
+              min={1}
               step={10}
               className="w-full"
             />
