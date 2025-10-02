@@ -13,6 +13,7 @@ import Patreon from '@/assets/icons/Patreon.svg';
 import Brand from '@/assets/icons/Brand.svg';
 import Link from 'next/link';
 import { ProductData } from '@/types/global';
+import Rating from '@/components/Rating';
 
 interface ProductInfoProps {
   productData: ProductData;
@@ -88,36 +89,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ productData }) => {
             {/* Rating */}
             <div className="flex items-center gap-4 text-body-small mb-4">
               <div className="flex items-center gap-1">
-                {[...Array(5)].map((_, i) => {
-                  const starValue = i + 1;
-                  const normalizedRating = Math.max(
-                    0,
-                    Math.min(productData.rate, 5)
-                  );
-
-                  if (normalizedRating >= starValue) {
-                    return (
-                      <Star
-                        key={i}
-                        className="w-5 h-5 text-warning fill-warning"
-                      />
-                    );
-                  } else if (normalizedRating >= starValue - 0.5) {
-                    return (
-                      <div key={i} className="relative w-5 h-5">
-                        <Star className="absolute w-5 h-5 text-gray-200 fill-gray-200" />
-                        <Star className="absolute w-5 h-5 text-warning fill-warning clip-half" />
-                      </div>
-                    );
-                  } else {
-                    return (
-                      <Star
-                        key={i}
-                        className="w-5 h-5 text-gray-200 fill-gray-200"
-                      />
-                    );
-                  }
-                })}
+                <Rating rate={productData.rate}/>
                 <span className="">
                   {productData.feddBack.length} Review
                   {productData.feddBack.length > 1 ? 's' : ''}

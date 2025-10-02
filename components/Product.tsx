@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import Link from 'next/link';
 import { slugify } from '@/lib/utils';
+import Rating from './Rating';
 
 interface ProductProps {
   img?: string;
@@ -53,28 +54,7 @@ const Product: React.FC<ProductProps> = ({
             </p>
             <p className="text-body-medium font-semibold text-left">${price}</p>
             <div className="flex">
-              {[...Array(5)].map((_, i) => {
-                const starValue = i + 1;
-                const normalizedRating = Math.max(0, Math.min(rate, 5));
-
-                if (normalizedRating >= starValue) {
-                  return (
-                    <Star
-                      key={i}
-                      className="w-5 h-5 text-warning fill-warning"
-                    />
-                  );
-                } else if (normalizedRating >= starValue - 0.5) {
-                  return (
-                    <div key={i} className="relative w-5 h-5">
-                      <Star className="absolute w-5 h-5 text-warning fill-warning clip-half" />
-                      <Star className="absolute w-5 h-5 text-gray-300" />
-                    </div>
-                  );
-                } else {
-                  return <Star key={i} className="w-5 h-5 text-gray-200" />;
-                }
-              })}
+              <Rating rate={rate} />
             </div>
           </div>
           <button

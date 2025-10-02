@@ -1,9 +1,7 @@
 import { NextResponse, NextRequest } from 'next/server';
-import { cookies } from 'next/headers';
 
 export async function middleware(request: NextRequest) {
-  const cookieStore = await cookies();
-  const token = cookieStore.get('token');
+  const token = request.cookies.get('token');
 
   if (token) {
     if (request.nextUrl.pathname === '/account')
