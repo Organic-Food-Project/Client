@@ -31,13 +31,13 @@ const ProductInfoSkeleton: React.FC = () => {
             {/* Rating Skeleton */}
             <div className="flex items-center gap-4 mb-4">
               <div className="flex items-center gap-1">
-                <div className="h-5 w-32 bg-gray-200 animate-pulse rounded" />
+                <div className="h-[21px] w-32 bg-gray-200 animate-pulse rounded" />
               </div>
             </div>
 
             {/* Price Skeleton */}
             <div className="border-b border-gray-100 pb-4">
-              <div className="h-8 w-24 bg-gray-200 animate-pulse rounded" />
+              <div className="h-9 w-24 bg-gray-200 animate-pulse rounded" />
             </div>
           </div>
 
@@ -46,13 +46,13 @@ const ProductInfoSkeleton: React.FC = () => {
             {/* Brand and Share Skeleton */}
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-3">
-                <div className="h-4 w-12 bg-gray-200 animate-pulse rounded" />
+                <div className="h-[21px] w-12 bg-gray-200 animate-pulse rounded" />
                 <div className="w-14 h-14 bg-gray-200 animate-pulse rounded" />
               </div>
 
               {/* Social Icons Skeleton */}
               <div className="flex gap-4 items-center">
-                <div className="h-4 w-20 bg-gray-200 animate-pulse rounded" />
+                <div className="h-[26px] w-20 bg-gray-200 animate-pulse rounded" />
                 {[...Array(4)].map((_, index) => (
                   <div
                     key={index}
