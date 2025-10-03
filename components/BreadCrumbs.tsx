@@ -18,7 +18,7 @@ const BreadCrumbs = () => {
   return (
     <nav
       aria-label="breadcrumb"
-      className="z-1 relative w-full h-[120px] mainPadding flex items-center"
+      className="z-1 relative w-full min-h-[120px] mainPadding flex items-center"
     >
       <Image
         src={BreadCrumbsBg}
@@ -26,7 +26,7 @@ const BreadCrumbs = () => {
         className="z-[-1] absolute top-0 left-0 w-full h-full object-cover select-none pointer-events-none"
       />
 
-      <ol className="flex gap-3 items-center text-4xl text-white">
+      <ol className="flex gap-3 items-center flex-wrap text-4xl text-white">
         <li>
           <Link href="/" aria-label="Home">
             <House className="text-gray-400" />

@@ -45,7 +45,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ productData }) => {
               <button
                 key={index}
                 onClick={() => setSelectedImage(index)}
-                className={`cursor-pointer relative w-20 h-20 rounded-lg overflow-hidden ${
+                className={`cursor-pointer relative size-15 sm:size-20 rounded-lg overflow-hidden ${
                   selectedImage === index
                     ? 'border-2 border-primary'
                     : 'hover:border-primary/50'
@@ -89,7 +89,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ productData }) => {
             {/* Rating */}
             <div className="flex items-center gap-4 text-body-small mb-4">
               <div className="flex items-center gap-1">
-                <Rating rate={productData.rate}/>
+                <Rating rate={productData.rate} />
                 <span className="">
                   {productData.feddBack.length} Review
                   {productData.feddBack.length > 1 ? 's' : ''}
@@ -104,7 +104,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ productData }) => {
           {/* Description */}
           <div className="space-y-4 border-b border-gray-100 pb-4">
             {/* Brand */}
-            <div className="flex justify-between items-center">
+            <div className="flex flex-wrap justify-between items-center">
               <div className="flex items-center gap-3 aligncenter">
                 <span className="text-body-small ">Brand:</span>
                 <Image

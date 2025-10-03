@@ -17,9 +17,15 @@ interface Review {
 
 interface CustomerFeedbackProps {
   reviews: Review[];
+  productData: {
+    _id: string;
+  };
 }
 
-export default function FeedBack({ reviews }: CustomerFeedbackProps) {
+export default function FeedBack({
+  reviews,
+  productData,
+}: CustomerFeedbackProps) {
   const [visibleReviews, setVisibleReviews] = useState(4);
 
   const loadMore = () => {

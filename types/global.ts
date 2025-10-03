@@ -15,6 +15,7 @@ export type ProductData = {
   images: string[];
   quantity: number;
   rate: number;
+  price: number;
   feddBack: string[];
 };
 

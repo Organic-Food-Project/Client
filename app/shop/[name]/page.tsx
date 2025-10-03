@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import type { Metadata } from 'next';
 import Query from '@/lib/Query';
 import { redirect } from 'next/navigation';
 import FeedBack from './components/FeedBack';
 import RelatedProducts from './components/RelatedProducts';
 import ProductInfo from './components/ProductInfo';
+import ProductInfoSkeleton from './components/Skeletons/ProductInfoSkeleton';
+import FeedBackSkeleton from './components/Skeletons/FeedBackSkeleton';
+import RelatedProductsSkeleton from './components/Skeletons/RelatedProductsSkeleton';
 
 interface ProductPageProps {
   params: {
@@ -26,15 +29,39 @@ export async function generateMetadata({
 
 const ProductPage = async ({ params }: ProductPageProps) => {
   const productName = params.name.replace('-', ' ');
+
+  return (
+    <div>
+      <Suspense
+        fallback={
+          <>
+            <ProductInfoSkeleton />
+            <FeedBackSkeleton />
+            <RelatedProductsSkeleton />
+          </>
+        }
+      >
+        <GetProduct productName={productName} />
+      </Suspense>
+    </div>
+  );
+};
+
+const GetProduct = async ({ productName }: { productName: string }) => {
   const product = await Query({
     api: `v1/products/${productName}`,
+  });
+  const relatedProducts = await Query({
+    api: `v1/products?category=${product.data?.data?.category._id}`,
+  });
+  console.log({
+    product: product.data.data,
+    relatedProducts: relatedProducts.data.data,
   });
 
   if (product.error) {
     redirect('/shop');
   }
-
-  console.log({ data: product.data.data });
 
   const reviews = [
     {
@@ -88,11 +115,14 @@ const ProductPage = async ({ params }: ProductPageProps) => {
   ];
 
   return (
-    <div>
+    <>
       <ProductInfo productData={product.data.data} />
-      <FeedBack reviews={reviews ?? product.data.data?.feedBack} />
-      <RelatedProducts productData={product.data.data} />
-    </div>
+      <FeedBack reviews={reviews} productData={product.data.data} />
+      <RelatedProducts
+        productData={relatedProducts.data.data}
+        productId={product.data?.data?._id}
+      />
+    </>
   );
 };
 
