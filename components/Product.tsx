@@ -122,7 +122,7 @@ const Product: React.FC<ProductProps> = ({
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 pt-[86px]"
+            className="fixed inset-0 flex lg:items-center justify-center bg-black/50 py-5 z-[101]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -132,7 +132,7 @@ const Product: React.FC<ProductProps> = ({
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="relative bg-white p-6 rounded-lg text-left w-[70vw] overflow-auto relative"
+              className=" bg-white p-6 rounded-lg text-left w-[90%] lg:w-[70vw] overflow-auto"
               onClick={(e) => e.stopPropagation()} // مايقفلش لو ضغطت جوه
             >
               <ProductInfo
@@ -150,7 +150,7 @@ const Product: React.FC<ProductProps> = ({
               />
               <button
                 onClick={() => setOpen(false)}
-                className="cursor-pointer m-5 p-1 text-hard-primary bg-white rounded-full aspect-square absolute top-0 left-0 border"
+                className="cursor-pointer m-5 p-2 text-hard-primary bg-white rounded-full aspect-square absolute top-[-70px] left-[-70px] border"
               >
                 <X />
               </button>

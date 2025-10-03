@@ -159,7 +159,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ productData }) => {
             </div>
 
             {/* Description */}
-            <p className="text-body-small leading-relaxed text-gray-500">
+            <p className="text-body-small leading-relaxed text-gray-500 overflow-y-auto max-h-[200px]">
               {productData.description}
             </p>
           </div>
