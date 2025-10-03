@@ -5,6 +5,7 @@ import SingleSelect from '@/components/ui/select';
 import React, { Suspense } from 'react';
 import Query from '@/lib/Query';
 import FiltersSectionLoading from './components/FiltersSectionLoading';
+import { ProductData } from '@/types/global';
 
 const Shop = () => {
   const sortOptions = [
@@ -48,27 +49,20 @@ const AllProducts = async () => {
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-6 ">
-        {products.data?.data.map(
-          (el: {
-            _id: string;
-            description: string;
-            name: string;
-            price: number;
-            rate: number;
-            quantity: number;
-            images: string[];
-          }) => (
-            <Product
-              img={el?.images?.[0]}
-              description={el.description}
-              name={el.name}
-              price={el.price}
-              rate={el.rate}
-              quantity={el.quantity}
-              key={el._id}
-            />
-          )
-        )}
+        {products.data?.data.map((el: ProductData) => (
+          <Product
+            _id={el?._id}
+            images={el?.images}
+            description={el.description}
+            name={el.name}
+            price={el.price}
+            rate={el.rate}
+            quantity={el.quantity}
+            key={el._id}
+            category={el.category}
+            feddBack={el.feddBack}
+          />
+        ))}
       </div>
       <Pagination metaData={products.data?.meta} />
     </>

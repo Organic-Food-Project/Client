@@ -4,7 +4,7 @@ import Query from '@/lib/Query';
 import { redirect } from 'next/navigation';
 import FeedBack from './components/FeedBack';
 import RelatedProducts from './components/RelatedProducts';
-import ProductInfo from './components/ProductInfo';
+import ProductInfo from '@/components/ProductInfo';
 import ProductInfoSkeleton from './components/Skeletons/ProductInfoSkeleton';
 import FeedBackSkeleton from './components/Skeletons/FeedBackSkeleton';
 import RelatedProductsSkeleton from './components/Skeletons/RelatedProductsSkeleton';

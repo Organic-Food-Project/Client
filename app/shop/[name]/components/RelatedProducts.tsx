@@ -23,7 +23,10 @@ const RelatedProducts: React.FC<RelatedProductsProps> = async ({
             i
           ] ? (
             <Product
-              img={productData?.[i]?.images?.[0]}
+              _id={productData?.[i]?._id}
+              images={productData?.[i]?.images}
+              category={productData?.[i]?.category}
+              feddBack={productData?.[i]?.feddBack}
               description={productData?.[i].description}
               name={productData?.[i].name}
               price={productData?.[i].price}

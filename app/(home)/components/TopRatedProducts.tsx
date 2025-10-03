@@ -48,7 +48,10 @@ const AllProducts = async () => {
       {[0, 1, 2, 3].map((i) =>
         products.data?.data?.[i] ? (
           <Product
-            img={products.data?.data?.[i]?.images?.[0]}
+            _id={products.data?.data?.[i]?._id}
+            images={products.data?.data?.[i]?.images}
+            category={products.data?.data?.[i]?.category}
+            feddBack={products.data?.data?.[i]?.feddBack}
             description={products.data?.data?.[i].description}
             name={products.data?.data?.[i].name}
             price={products.data?.data?.[i].price}

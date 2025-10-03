@@ -4,7 +4,7 @@ import type React from 'react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Star, Heart, Minus, Plus } from 'lucide-react';
+import { Heart, Minus, Plus } from 'lucide-react';
 import Image from 'next/image';
 import Facebook from '@/assets/icons/Facebook.svg';
 import Instagram from '@/assets/icons/Instagram.svg';
@@ -98,7 +98,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ productData }) => {
             </div>
             {/* Pricing */}
             <div className="text-body-xxl font-medium text-hard-primary border-b border-gray-100 pb-4">
-              ${productData.rate.toFixed(2)}
+              ${productData.price.toFixed(2)}
             </div>
           </div>
           {/* Description */}
