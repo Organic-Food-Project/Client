@@ -5,7 +5,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = async ({
   children,
 }) => {
   return (
-    <main className="mainPadding lg:flex gap-[24px] py-[32px]">
+    <main className="mainPadding flex lg:flex-row flex-col gap-[24px] py-[32px]">
       <aside className="lg:w-[312px] w-full">
         <Navigation />
       </aside>
