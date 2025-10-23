@@ -3,35 +3,49 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 import Select from 'react-select';
 
+interface OptionType {
+  label: string;
+  value: string;
+}
+
 interface SingleSelectProps {
-  options: { label: string; value: string }[];
+  options: OptionType[];
+  value?: string;
   defaultValue?: string;
   className?: string;
   loading?: boolean;
   disabled?: boolean;
+  onChange?: (value: string | null) => void;
 }
 
 const SingleSelect: React.FC<SingleSelectProps> = ({
   options,
-  // defaultValue = '',
+  value = '',
+  defaultValue = '',
   className = '',
   loading = false,
   disabled = false,
+  onChange,
 }) => {
+  const selectedOption = options.find((opt) => opt.value === value) || null;
+  const defaultOption =
+    options.find((opt) => opt.value === defaultValue) || null;
+
   return (
-    <>
-      <Select
-        className={cn('text-left', className)}
-        classNamePrefix="select"
-        // defaultValue={options[0]}
-        isDisabled={disabled}
-        isLoading={loading}
-        isClearable={true}
-        isSearchable={true}
-        options={options}
-      />
-    </>
+    <Select<OptionType>
+      className={cn('text-left', className)}
+      classNamePrefix="select"
+      value={selectedOption}
+      defaultValue={defaultOption}
+      isDisabled={disabled}
+      isLoading={loading}
+      isClearable
+      isSearchable
+      options={options}
+      onChange={(opt) => onChange?.(opt ? opt.value : null)}
+    />
   );
 };
 
 export default SingleSelect;
+
