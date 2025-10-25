@@ -2,10 +2,15 @@
 import { cookies } from 'next/headers';
 import { QueryProps } from '@/types/global';
 
+interface ExtendedQueryProps extends QueryProps {
+  filters?: Record<string, string | string[]>;
+}
+
 export const Query = async ({
   api,
   revalidate = 0,
-}: QueryProps): Promise<{ data: any | null; error: any | null }> => {
+  filters = {},
+}: ExtendedQueryProps): Promise<{ data: any | null; error: any | null }> => {
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get('token')?.value;
@@ -16,7 +21,21 @@ export const Query = async ({
       headers['Authorization'] = `Bearer ${token}`;
     }
 
-    const res = await fetch(`${process.env.BE_BASE_URL}/${api}`, {
+    const queryParams = new URLSearchParams();
+    for (const key in filters) {
+      const value = filters[key];
+      if (Array.isArray(value)) {
+        value.forEach((v) => queryParams.append(key, v));
+      } else if (value !== undefined && value !== null) {
+        queryParams.append(key, value);
+      }
+    }
+
+    const url = `${process.env.BE_BASE_URL}/${api}${
+      queryParams.toString() ? `?${queryParams.toString()}` : ''
+    }`;
+
+    const res = await fetch(url, {
       method: 'GET',
       headers,
       next: {

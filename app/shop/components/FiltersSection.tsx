@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { ChevronDown, ChevronUp, SlidersHorizontal, Star } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Slider } from '@/components/ui/slider';
@@ -22,7 +22,9 @@ const FiltersSection = ({
   });
   const [priceRange, setPriceRange] = useState([1, 1500]);
   const [selectedCategories, setSelectedCategories] = useState(['']);
-  const [selectedRating, setSelectedRating] = useState('');
+  const [selectedRating, setSelectedRating] = useState('1');
+
+  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const ratings = [
     { label: '5.0', value: '5' },
@@ -53,32 +55,60 @@ const FiltersSection = ({
     ));
   };
 
-  useEffect(() => {
-    let allFilters = '';
+  const updateFiltersInUrl = useCallback(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    const filterKeys = ['min_price', 'max_price', 'rate', 'category'];
+    filterKeys.forEach((key) => {
+      params.delete(`filter[${key}]`);
+    });
+
     [
       { key: 'min_price', value: priceRange[0] },
       { key: 'max_price', value: priceRange[1] },
       { key: 'rate', value: selectedRating },
-      ...[
-        ...selectedCategories.map((el: string) => ({
-          key: 'categories',
-          value: el,
-        })),
-      ],
+      ...selectedCategories.map((el: string) => ({
+        key: 'category',
+        value: el,
+      })),
     ].forEach((el: { key: string; value: string | number }) => {
-      if (el.value === '') return;
-      allFilters += `${allFilters ? '&' : ''}filter[${el.key}]=${el.value}`;
+      if (el.value !== '' && el.value !== null && el.value !== undefined) {
+        params.append(`filter[${el.key}]`, String(el.value));
+      }
     });
-    router.push(`${pathname}?${allFilters}`);
-  }, [router, pathname, priceRange, selectedCategories, selectedRating]);
+
+    router.replace(`${pathname}?${params.toString()}`);
+  }, [
+    priceRange,
+    selectedCategories,
+    selectedRating,
+    router,
+    pathname,
+    searchParams,
+  ]);
+
+  useEffect(() => {
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
+    }
+
+    debounceTimerRef.current = setTimeout(() => {
+      updateFiltersInUrl();
+    }, 300);
+
+    return () => {
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
+      }
+    };
+  }, [updateFiltersInUrl]);
 
   useEffect(() => {
     setPriceRange([
-      Number(searchParams.get('filter[min_price]')) ?? 1,
-      Number(searchParams.get('filter[max_price]')) ?? 1500,
+      Number(searchParams.get('filter[min_price]')) || 1,
+      Number(searchParams.get('filter[max_price]')) || 1500,
     ]);
-    setSelectedRating(searchParams.get('filter[rate]') ?? '');
-    setSelectedCategories(searchParams.getAll('filter[categories]') ?? ['']);
+    setSelectedRating(searchParams.get('filter[rate]') || '1');
+    setSelectedCategories(searchParams.getAll('filter[category]') || ['']);
   }, [searchParams]);
 
   return (

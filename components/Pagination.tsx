@@ -2,6 +2,7 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import React from 'react';
 import { MetaData } from '@/types/global';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 
 interface PaginationProps {
   metaData: MetaData;
@@ -10,9 +11,19 @@ interface PaginationProps {
 const Pagination: React.FC<PaginationProps> = ({ metaData }) => {
   const currentPage: number = 1;
   const lastPage: number = Math.ceil(metaData?.total / metaData?.limit) ?? 10;
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const goToPage = (number: number) => {
-    console.log({ number });
+    const params = new URLSearchParams(searchParams.toString());
+    console.log(number);
+    if (number) {
+      params.set('page', String(number));
+    } else {
+      params.delete('page');
+    }
+    // router.push(`${pathname}?${params.toString()}`);
   };
 
   return (
@@ -39,12 +50,13 @@ const Pagination: React.FC<PaginationProps> = ({ metaData }) => {
             </>
           )}
 
-          {Array.from({ length: 5 }, (_, i) => {
+          {/* {Array.from({ length: 5 }, (_, i) => {
             const pageNumber = currentPage - 2 + i;
             if (pageNumber > 0 && pageNumber <= lastPage) {
               return (
                 <button
                   key={pageNumber}
+                  disabled={currentPage === pageNumber}
                   onClick={() => goToPage(pageNumber)}
                   className={`px-4 py-2 text-gray-600 rounded-full duration-100 hover:text-white hover:bg-primary cursor-pointer ${
                     currentPage === pageNumber ? 'bg-primary text-white' : ''
@@ -55,7 +67,7 @@ const Pagination: React.FC<PaginationProps> = ({ metaData }) => {
               );
             }
             return null;
-          })}
+          })} */}
 
           {currentPage < lastPage - 2 && (
             <>
@@ -71,6 +83,7 @@ const Pagination: React.FC<PaginationProps> = ({ metaData }) => {
           <button
             aria-label="Go to next page"
             onClick={() => goToPage(lastPage)}
+            disabled={currentPage === lastPage}
             className="cursor-pointer disabled:cursor-not-allowed px-2 py-2 rounded-full cursor-pointer disabled:text-gray-300 disabled:bg-gray-50 text-gray-900 bg-white border-[2px] border-gray-100"
           >
             <ChevronRight />

@@ -15,7 +15,7 @@ interface SingleSelectProps {
   className?: string;
   loading?: boolean;
   disabled?: boolean;
-  onChange?: (value: string | null) => void;
+  onChange?: (value: string) => void;
 }
 
 const SingleSelect: React.FC<SingleSelectProps> = ({
@@ -42,10 +42,9 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
       isClearable
       isSearchable
       options={options}
-      onChange={(opt) => onChange?.(opt ? opt.value : null)}
+      onChange={(opt) => onChange?.(opt ? opt.value : '')}
     />
   );
 };
 
 export default SingleSelect;
-
