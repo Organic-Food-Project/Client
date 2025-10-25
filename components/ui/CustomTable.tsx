@@ -17,6 +17,7 @@ import {
 } from '@/components/ui/table';
 import Pagination from '../Pagination';
 import { MetaData } from '@/types/global';
+import { Suspense } from 'react';
 
 interface columnsExtraProps {
   accessorKey?: string;
@@ -125,7 +126,9 @@ const CustomTable = <TData, TValue>({
           </Table>
           {/* Pagination */}
           {metaData && table.getRowModel().rows?.length > 0 && (
-            <Pagination metaData={metaData} />
+            <Suspense fallback={<div>Loading Pagination...</div>}>
+              <Pagination metaData={metaData} />
+            </Suspense>
           )}
         </div>
       )}
