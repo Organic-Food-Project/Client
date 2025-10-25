@@ -1,32 +1,35 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ChevronDown, ChevronUp, SlidersHorizontal, Star } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Slider } from '@/components/ui/slider';
 import { currencyFormated } from '@/lib/utils';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 const FiltersSection = ({
   categories,
 }: {
   categories: { name: string; id: string; count: number }[];
 }) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [expandedSections, setExpandedSections] = useState({
     categories: true,
     price: true,
     rating: true,
   });
-
   const [priceRange, setPriceRange] = useState([1, 1500]);
-  const [selectedCategories, setSelectedCategories] = useState(['Vegetables']);
-  const [selectedRatings, setSelectedRatings] = useState(['4.0 & up']);
+  const [selectedCategories, setSelectedCategories] = useState(['']);
+  const [selectedRating, setSelectedRating] = useState('');
 
   const ratings = [
-    { label: '5.0', value: '5.0' },
-    { label: '4.0 & up', value: '4.0 & up' },
-    { label: '3.0 & up', value: '3.0 & up' },
-    { label: '2.0 & up', value: '2.0 & up' },
-    { label: '1.0 & up', value: '1.0 & up' },
+    { label: '5.0', value: '5' },
+    { label: '4.0 & up', value: '4' },
+    { label: '3.0 & up', value: '3' },
+    { label: '2.0 & up', value: '2' },
+    { label: '1.0 & up', value: '1' },
   ];
 
   const toggleSection = (section: keyof typeof expandedSections) => {
@@ -50,11 +53,39 @@ const FiltersSection = ({
     ));
   };
 
+  useEffect(() => {
+    let allFilters = '';
+    [
+      { key: 'min_price', value: priceRange[0] },
+      { key: 'max_price', value: priceRange[1] },
+      { key: 'rate', value: selectedRating },
+      ...[
+        ...selectedCategories.map((el: string) => ({
+          key: 'categories',
+          value: el,
+        })),
+      ],
+    ].forEach((el: { key: string; value: string | number }) => {
+      if (el.value === '') return;
+      allFilters += `${allFilters ? '&' : ''}filter[${el.key}]=${el.value}`;
+    });
+    router.push(`${pathname}?${allFilters}`);
+  }, [router, pathname, priceRange, selectedCategories, selectedRating]);
+
+  useEffect(() => {
+    setPriceRange([
+      Number(searchParams.get('filter[min_price]')) ?? 1,
+      Number(searchParams.get('filter[max_price]')) ?? 1500,
+    ]);
+    setSelectedRating(searchParams.get('filter[rate]') ?? '');
+    setSelectedCategories(searchParams.getAll('filter[categories]') ?? ['']);
+  }, [searchParams]);
+
   return (
     <div className="bg-white h-fit space-y-6">
       {/* Filter Button Section */}
-      <button className="w-fit flex items-center justify-center gap-4 font-bold text-body-medium font-semibold bg-primary text-white rounded-full px-7 h-[45px]">
-        Filter
+      <button className="cursor-pointer w-fit flex items-center justify-center gap-4 font-bold text-body-medium font-semibold bg-primary text-white rounded-full px-7 h-[45px]">
+        Filters
         <SlidersHorizontal size={24} />
       </button>
 
@@ -78,17 +109,17 @@ const FiltersSection = ({
               <div key={category.name} className="flex items-center space-x-3">
                 <Checkbox
                   id={category.name}
-                  checked={selectedCategories.includes(category.name)}
+                  checked={selectedCategories.includes(category.id)}
                   checkBoxType="circle"
                   onCheckedChange={(checked) => {
                     if (checked) {
                       setSelectedCategories([
                         ...selectedCategories,
-                        category.name,
+                        category.id,
                       ]);
                     } else {
                       setSelectedCategories(
-                        selectedCategories.filter((c) => c !== category.name)
+                        selectedCategories.filter((c) => c !== category.id)
                       );
                     }
                   }}
@@ -161,14 +192,12 @@ const FiltersSection = ({
               <div key={rating.value} className="flex items-center space-x-3">
                 <Checkbox
                   id={rating.value}
-                  checked={selectedRatings.includes(rating.value)}
+                  checked={selectedRating === rating.value}
                   onCheckedChange={(checked) => {
                     if (checked) {
-                      setSelectedRatings([...selectedRatings, rating.value]);
+                      setSelectedRating(rating.value);
                     } else {
-                      setSelectedRatings(
-                        selectedRatings.filter((r) => r !== rating.value)
-                      );
+                      setSelectedRating('');
                     }
                   }}
                 />
