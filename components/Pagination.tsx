@@ -2,7 +2,7 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import React from 'react';
 import { MetaData } from '@/types/global';
-import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 interface PaginationProps {
   metaData: MetaData;
@@ -11,8 +11,6 @@ interface PaginationProps {
 const Pagination: React.FC<PaginationProps> = ({ metaData }) => {
   const currentPage: number = 1;
   const lastPage: number = Math.ceil(metaData?.total / metaData?.limit) ?? 10;
-  const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const goToPage = (number: number) => {
