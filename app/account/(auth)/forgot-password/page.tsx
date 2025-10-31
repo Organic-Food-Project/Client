@@ -18,10 +18,9 @@ const ForgotPassword = () => {
         Reset password
       </h3>
       <form action="">
-        <label htmlFor="email" className="sr-only">
-          Email
-        </label>
         <Input
+          Label="Email"
+          labelClassName="sr-only"
           id="email"
           placeholder="Email"
           type="email"

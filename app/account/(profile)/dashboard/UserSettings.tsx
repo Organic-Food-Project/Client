@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -23,9 +22,9 @@ const UserSettings: React.FC<UserSettingsProps> = ({ customer }) => {
           height={120}
           src={customer.avatar}
           alt={customer.name}
-          className="rounded-full"
+          className="rounded-full min-h-[120px] min-w-[120px] max-w-[20px] min-h-[120px]"
         />
-        <h2 className="text-xl font-semibold text-foreground pt-4 line-clamp-1">
+        <h2 className="text-xl font-semibold text-foreground line-clamp-1">
           {customer.name}
         </h2>
         <p className="text-muted-foreground text-sm pt-2">Customer</p>

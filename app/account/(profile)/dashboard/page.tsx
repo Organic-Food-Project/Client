@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import UserSettings from './components/UserSettings';
-import OrderHistory from './components/OrderHistory';
+import UserSettings from './UserSettings';
+import OrderHistory from './OrderHistory';
 
 export const metadata: Metadata = {
   title: {
@@ -57,7 +57,7 @@ const Dashboard = () => {
     phone: '(671) 555-0110',
     address: '4140 Parker Rd. Allentown, New Mexico 31134',
     avatar:
-      'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-5J35eKauk2H3c0GO5f71q8vjzZRoyA.png',
+      'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/abstract-profile-y1cvdWbhSPrGNX7LKZoIaQKKM355F3.png',
   };
   return (
     <div className="flex flex-col gap-[24px]">

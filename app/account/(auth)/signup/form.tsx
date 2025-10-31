@@ -27,10 +27,9 @@ const Form = () => {
   }
   return (
     <form action={action}>
-      <label htmlFor="email" className="sr-only">
-        Email
-      </label>
       <Input
+        Label="Email"
+        labelClassName="sr-only"
         id="email"
         name="email"
         placeholder="Email"
@@ -40,10 +39,9 @@ const Form = () => {
         error={state?.errors?.email}
         className="mb-3 h-[49px]"
       />
-      <label htmlFor="password" className="sr-only">
-        Password
-      </label>
       <Input
+        Label="Email"
+        labelClassName="sr-only"
         id="password"
         name="password"
         placeholder="Password"
@@ -53,10 +51,9 @@ const Form = () => {
         error={state?.errors?.password}
         className="mb-4 h-[49px]"
       />
-      <label htmlFor="confirmPassword" className="sr-only">
-        Confirm Password
-      </label>
       <Input
+        Label="Email"
+        labelClassName="sr-only"
         id="confirmPassword"
         name="confirmPassword"
         placeholder="Confirm Password"

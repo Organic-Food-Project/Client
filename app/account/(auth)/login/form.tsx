@@ -30,10 +30,9 @@ const LoginForm = () => {
   }
   return (
     <form action={action}>
-      <label htmlFor="email" className="sr-only">
-        Email
-      </label>
       <Input
+        Label="Email"
+        labelClassName="sr-only"
         name="email"
         id="email"
         placeholder="Email"
@@ -43,10 +42,9 @@ const LoginForm = () => {
         error={state?.errors?.email}
         className="mb-3 h-[49px]"
       />
-      <label htmlFor="password" className="sr-only">
-        Password
-      </label>
       <Input
+        Label="Password"
+        labelClassName="sr-only"
         name="password"
         id="password"
         placeholder="Password"

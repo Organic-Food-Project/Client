@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
+import UserSettings from './UserSettings';
 
 export const metadata: Metadata = {
   title: {
@@ -11,7 +12,11 @@ export const metadata: Metadata = {
 };
 
 const Settings = () => {
-  return <div>Settings</div>;
+  return (
+    <div>
+      <UserSettings />
+    </div>
+  );
 };
 
 export default Settings;
