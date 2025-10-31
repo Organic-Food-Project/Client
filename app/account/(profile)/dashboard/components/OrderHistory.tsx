@@ -52,7 +52,7 @@ const OrderHistory: React.FC<OrderHistoryProps> = ({ orders }) => {
       cell: () => (
         <div className="w-full flex justify-end items-center">
           <Link
-            href="/account/order-history"
+            href="/account/order-history/1"
             className="ursor-pointer text-center font-medium text-body-medium text-primary"
           >
             View Details

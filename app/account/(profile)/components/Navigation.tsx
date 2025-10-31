@@ -53,7 +53,7 @@ export function Navigation() {
       <nav>
         {navItems.map((item) => {
           const Icon = item.icon;
-          const isActive = activePath === item.href;
+          const isActive = item.href ? activePath?.includes(item.href) : false;
 
           if (item.isFunction && item.onClick) {
             return (
