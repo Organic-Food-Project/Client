@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import OrderTable from './[order]/OrderTable';
+import OrderTable from './OrderTable';
 
 export const metadata: Metadata = {
   title: {
