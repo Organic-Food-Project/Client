@@ -46,7 +46,7 @@ export function Navigation() {
   ];
 
   return (
-    <div className="w-full rounded-xl border border-gray-100 bg-white">
+    <div className="lg:sticky top-[110] w-full rounded-xl border border-gray-100 bg-white">
       <h2 className="text-body-xl font-semibold text-foreground pb-4 pt-6 px-6">
         Navigation
       </h2>

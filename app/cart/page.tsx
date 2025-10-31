@@ -13,11 +13,11 @@ const Cart = () => {
       <h1 className="text-heading-05 font-bold text-center pb-[32px]">
         My Shopping Cart
       </h1>
-      <div className="grid grid-cols-6 gap-6">
+      <div className="flex flex-col-reverse lg:grid grid-cols-6 gap-6">
         <div className="col-span-4">
           <CartTable metaData={metaData} />
         </div>
-        <div className="col-span-2 border border-gray-100 p-6 h-fit">
+        <div className="lg:sticky top-[110] col-span-2 border border-gray-100 p-6 h-fit">
           <p className="text-body-xl font-semibold pb-[7px]">Cart Total</p>
           <div className="text-body-small text-gray-700 flex justify-between py-3 border-b border-gray-100">
             <p>Subtotal:</p>
