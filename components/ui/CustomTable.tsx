@@ -18,6 +18,7 @@ import {
 import Pagination from '../Pagination';
 import { MetaData } from '@/types/global';
 import { Suspense } from 'react';
+import { cn } from '@/lib/utils';
 
 interface columnsExtraProps {
   accessorKey?: string;
@@ -30,6 +31,7 @@ interface DataTableProps<TData, TValue> {
   columns: ExtendedColumnDef<TData, TValue>[];
   data: TData[];
   metaData?: MetaData;
+  headerClassName?: string;
   loading?: boolean;
 }
 
@@ -37,6 +39,7 @@ const CustomTable = <TData, TValue>({
   columns,
   data,
   metaData,
+  headerClassName,
   loading,
 }: DataTableProps<TData, TValue>) => {
   const table = useReactTable({
@@ -65,7 +68,10 @@ const CustomTable = <TData, TValue>({
             {table.getRowModel().rows?.length ? (
               <TableHeader>
                 {table.getHeaderGroups().map((headerGroup) => (
-                  <TableRow key={headerGroup.id} className="border-gray-100">
+                  <TableRow
+                    key={headerGroup.id}
+                    className={cn('border-gray-100', headerClassName)}
+                  >
                     {headerGroup.headers.map((header) => {
                       return (
                         <TableHead key={header.id}>

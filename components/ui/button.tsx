@@ -14,6 +14,7 @@ const buttonVariants = cva(
           'cursor-pointer text-center font-semibold text-body-medium bg-primary text-white rounded-full py-3',
         secondary:
           'cursor-pointer text-center font-semibold text-body-medium bg-[#56AC59]/10 text-primary rounded-full py-3',
+        link: 'cursor-pointer text-center font-semibold text-body-medium text-primary',
       },
     },
     defaultVariants: {
