@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { X } from 'lucide-react';
 
 interface List {
-  id: string;
+  _id: string;
   img: string;
   name: string;
   price: number;
@@ -18,7 +18,7 @@ interface List {
 
 interface WishlistTableProps {
   data: {
-    id: string;
+    _id: string;
     name: string;
     price: number;
     images: string[];
@@ -30,7 +30,7 @@ interface WishlistTableProps {
 const WishlistTable: React.FC<WishlistTableProps> = ({ data, metaData }) => {
   const columns: ColumnDef<List>[] = [
     {
-      accessorKey: 'id',
+      accessorKey: '_id',
       header: 'Product',
       cell: ({ row }) => (
         <div className="flex gap-[20px] items-center">
@@ -92,7 +92,7 @@ const WishlistTable: React.FC<WishlistTableProps> = ({ data, metaData }) => {
       columns={columns}
       data={
         data?.map((el) => ({
-          id: el?.id,
+          _id: el?._id,
           img: el.images?.[0],
           name: el.name,
           price: el.price,

@@ -11,7 +11,7 @@ interface CartComponentProps {
   cart: {
     data: {
       data: {
-        id: string;
+        _id: string;
         name: string;
         price: number;
         images: string[];
@@ -68,7 +68,7 @@ const CartComponent: React.FC<CartComponentProps> = ({ cart }) => {
               <div className="space-y-[24px] px-[20px] w-full overflow-y-auto flex-grow">
                 {cart?.data?.data?.map((el, idx) => (
                   <ItemCard
-                    key={el?.id}
+                    key={el?._id}
                     idx={idx}
                     data={el}
                     count={cart?.data?.data.length}
@@ -81,7 +81,7 @@ const CartComponent: React.FC<CartComponentProps> = ({ cart }) => {
                   <p className="font-bold">
                     {currencyFormated(
                       cart?.data?.data?.reduce(
-                        (acc, total) => acc + total?.price,
+                        (total, item) => total + item?.price,
                         0
                       )
                     )}
@@ -114,7 +114,7 @@ const ItemCard: React.FC<{
   data: CartComponentProps['cart']['data']['data'][number];
 }> = ({ idx, count, data }) => {
   const ProductData = {
-    id: data?.id,
+    id: data?._id,
     imgSrc: data?.images[0],
     imgAlt: data?.name,
     title: data?.name,

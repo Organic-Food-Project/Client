@@ -4,27 +4,32 @@ import TempProduct from '@/assets/TempProduct.webp';
 import CustomTable from '@/components/ui/CustomTable';
 import type { ColumnDef } from '@tanstack/react-table';
 import React from 'react';
-import { MetaData } from '@/types/global';
 import Image from 'next/image';
 import { currencyFormated } from '@/lib/utils';
 import { Minus, Plus, X } from 'lucide-react';
 
 interface List {
-  id: number;
-  img: any;
+  _id: string;
+  img: string;
   name: string;
   price: number;
   quantity: number;
 }
 
 interface CartTableProps {
-  metaData: MetaData;
+  data: {
+    _id: string;
+    name: string;
+    price: number;
+    images: string[];
+    quantity: number;
+  }[];
 }
 
-const CartTable: React.FC<CartTableProps> = ({ metaData }) => {
+const CartTable: React.FC<CartTableProps> = ({ data }) => {
   const columns: ColumnDef<List>[] = [
     {
-      accessorKey: 'id',
+      accessorKey: '_id',
       header: 'Product',
       cell: ({ row }) => (
         <div className="flex gap-[20px] items-center">
@@ -98,30 +103,15 @@ const CartTable: React.FC<CartTableProps> = ({ metaData }) => {
   return (
     <CustomTable
       columns={columns}
-      data={[
-        {
-          id: 1,
-          img: TempProduct,
-          name: 'Chinese Cabbage',
-          price: 45,
-          quantity: 5,
-        },
-        {
-          id: 1,
-          img: TempProduct,
-          name: 'Chinese Cabbage',
-          price: 45,
-          quantity: 5,
-        },
-        {
-          id: 1,
-          img: TempProduct,
-          name: 'Chinese Cabbage',
-          price: 45,
-          quantity: 5,
-        },
-      ]}
-      metaData={metaData}
+      data={
+        data?.map((el) => ({
+          _id: el?._id,
+          img: el.images?.[0],
+          name: el.name,
+          price: el.price,
+          quantity: el.quantity,
+        })) ?? []
+      }
     />
   );
 };

@@ -173,7 +173,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
                   </div>
                   <div className="flex justify-between py-3 border-b-1 border-gray-100">
                     <span className="text-gray-900">Discount</span>
-                    <span className="font-medium text-gray-900">20%</span>
+                    <span className="font-medium text-gray-900">0%</span>
                   </div>
                   <div className="flex justify-between py-3 border-b-1 border-gray-100">
                     <span className="text-gray-900">Shipping</span>
