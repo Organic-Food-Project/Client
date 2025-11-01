@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import BreadCrumbs from '@/components/BreadCrumbs';
 import ScrollToTop from '@/components/ScrollToTop';
 import { Poppins } from 'next/font/google';
+import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   title: {
@@ -66,6 +67,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Toaster />
       <body className={poppins.className}>
         <Navbar />
         <BreadCrumbs />

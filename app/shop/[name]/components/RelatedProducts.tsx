@@ -37,6 +37,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = async ({
               price={productData?.[i].price}
               rate={productData?.[i].rate}
               quantity={productData?.[i].quantity}
+              inWishlist={productData?.[i]?.inWishlist ?? false}
               key={productData?.[i]?._id}
             />
           ) : null

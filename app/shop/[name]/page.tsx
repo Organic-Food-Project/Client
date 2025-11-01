@@ -4,10 +4,10 @@ import Query from '@/lib/Query';
 import { redirect } from 'next/navigation';
 import FeedBack from './components/FeedBack';
 import RelatedProducts from './components/RelatedProducts';
-import ProductInfo from '@/components/ProductInfo';
 import ProductInfoSkeleton from './components/Skeletons/ProductInfoSkeleton';
 import FeedBackSkeleton from './components/Skeletons/FeedBackSkeleton';
 import RelatedProductsSkeleton from './components/Skeletons/RelatedProductsSkeleton';
+import Product from './components/Proudct';
 
 interface ProductPageProps {
   params: {
@@ -112,7 +112,7 @@ const GetProduct = async ({ productName }: { productName: string }) => {
 
   return (
     <>
-      <ProductInfo productData={product.data.data} />
+      <Product productData={product.data.data} />
       <FeedBack reviews={reviews} productData={product.data.data} />
       <RelatedProducts
         productData={relatedProducts.data.data}

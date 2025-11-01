@@ -17,6 +17,7 @@ export type ProductData = {
   rate: number;
   price: number;
   feddBack: string[];
+  inWishlist: boolean;
 };
 
 export interface MutationProps {

@@ -49,7 +49,7 @@ const Pagination: React.FC<PaginationProps> = ({ metaData }) => {
             </>
           )}
 
-          {/* {Array.from({ length: 5 }, (_, i) => {
+          {Array.from({ length: 5 }, (_, i) => {
             const pageNumber = currentPage - 2 + i;
             if (pageNumber > 0 && pageNumber <= lastPage) {
               return (
@@ -66,7 +66,7 @@ const Pagination: React.FC<PaginationProps> = ({ metaData }) => {
               );
             }
             return null;
-          })} */}
+          })}
 
           {currentPage < lastPage - 2 && (
             <>

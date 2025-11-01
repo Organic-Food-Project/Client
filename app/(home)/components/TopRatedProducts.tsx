@@ -57,6 +57,7 @@ const AllProducts = async () => {
             price={products.data?.data?.[i].price}
             rate={products.data?.data?.[i].rate}
             quantity={products.data?.data?.[i].quantity}
+            inWishlist={products.data?.data?.[i].inWishlist ?? false}
             key={products.data?.data?.[i]?._id}
           />
         ) : null

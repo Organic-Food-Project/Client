@@ -1,13 +1,21 @@
 'use client';
-import { Eye, Heart, X } from 'lucide-react';
+import { Eye, Heart, X, Loader2 } from 'lucide-react';
+import type React from 'react';
 import Image from 'next/image';
 import Cart from '@/assets/icons/Cart.svg';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import Link from 'next/link';
 import { slugify } from '@/lib/utils';
+import Toast from './ui/Toast';
 import Rating from './Rating';
 import ProductInfo from './ProductInfo';
+import { addToCartAction } from '@/app/actions/Cart';
+import {
+  addToWishlistAction,
+  deleteFromWishlistAction,
+} from '@/app/actions/Wishlist';
+import { useRouter } from 'next/navigation';
 
 interface ProductProps {
   _id: string;
@@ -22,6 +30,7 @@ interface ProductProps {
     _id: string;
   };
   feddBack: string[];
+  inWishlist: boolean;
 }
 
 const Product: React.FC<ProductProps> = ({
@@ -32,12 +41,92 @@ const Product: React.FC<ProductProps> = ({
   price,
   rate,
   quantity = 0,
+  inWishlist = false,
   category,
   feddBack,
 }) => {
+  const [isPendingAddToCart, startAddToCart] = useTransition();
+  const [isPendingAddToWishlist, startAddToWishlist] = useTransition();
+  const [isWishlisted, setIsWishlisted] = useState<boolean>(inWishlist);
   const [isHoverd, setIsHoverd] = useState(false);
-  const [open, setOpen] = useState(false); // modal state
+  const [open, setOpen] = useState(false);
   const isOutOfStock = quantity === 0;
+  const router = useRouter();
+
+  const handleError = (
+    errors: { form?: string } | null,
+    actionName: string
+  ) => {
+    const errorMessage = errors?.form || `Failed to ${actionName}`;
+
+    Toast({
+      Message: errorMessage,
+      type: 'error',
+    });
+  };
+
+  const handleAddToWishlist = async (id: string) => {
+    startAddToWishlist(async () => {
+      try {
+        const res: {
+          errors: { form: string } | null;
+          success: boolean;
+          status: number;
+        } = !isWishlisted
+          ? await addToWishlistAction({ _id: id })
+          : await deleteFromWishlistAction({ _id: id });
+        if (res.status === 401) {
+          router.push('/account/login');
+        }
+        if (res.success) {
+          Toast({
+            Message: !isWishlisted
+              ? 'Added to wishlist!'
+              : 'Removed from wishlist!',
+            type: 'success',
+          });
+          setIsWishlisted((prev) => !prev);
+        } else {
+          handleError(
+            res.errors,
+            !isWishlisted ? 'add to wishlist' : 'remove from wishlist'
+          );
+        }
+      } catch (error) {
+        handleError(
+          { form: 'An unexpected error occurred' },
+          !isWishlisted ? 'add to wishlist' : 'remove from wishlist'
+        );
+        console.error('Wishlist error:', error);
+      }
+    });
+  };
+
+  const handleAddToCart = async (_id: string, quantity: number) => {
+    startAddToCart(async () => {
+      try {
+        const res: {
+          errors: { form: string } | null;
+          success: boolean;
+          status: number;
+        } = await addToCartAction({ _id, quantity });
+        if (res.status === 401) {
+          router.push('/account/login');
+        }
+        if (res.success) {
+          Toast({
+            Message: `Added ${quantity} item(s) to cart!`,
+            type: 'success',
+          });
+        } else {
+          handleError(res.errors, 'add to cart');
+        }
+      } catch (error) {
+        handleError({ form: 'An unexpected error occurred' }, 'add to cart');
+        console.error('Cart error:', error);
+      }
+    });
+  };
 
   return (
     <motion.div
@@ -45,10 +134,9 @@ const Product: React.FC<ProductProps> = ({
       onMouseLeave={() => setIsHoverd(false)}
       className="relative group border rounded-[8px] border-gray-100 hover:border-hard-primary hover:shadow hover:shadow-soft-primary p-4 bg-white"
     >
-      {/* الصورة + اللينك */}
       <Link href={`/shop/${slugify(name)}`}>
         <Image
-          src={images[0]}
+          src={images[0] || '/placeholder.svg'}
           width={302}
           height={302}
           alt={description}
@@ -56,14 +144,12 @@ const Product: React.FC<ProductProps> = ({
         />
       </Link>
 
-      {/* لو المنتج خلص */}
       {isOutOfStock && (
         <div className="absolute top-0 left-0 space-y-[6px] m-4 py-2 px-4 bg-black text-body-small text-white rounded-[4px]">
           Out of Stock
         </div>
       )}
 
-      {/* الاسم + السعر + الريتنغ */}
       <div className="self-end flex justify-between items-center mt-4">
         <div className="space-y-2 flex-grow">
           <p className="text-gray-700 text-body-small line-clamp-1 text-left">
@@ -75,11 +161,23 @@ const Product: React.FC<ProductProps> = ({
           </div>
         </div>
         <button
+          onClick={() => {
+            handleAddToCart(_id, 1);
+          }}
           aria-label="Add to Cart"
-          disabled={isOutOfStock}
-          className="disabled:cursor-not-allowed cursor-pointer size-[40px] bg-gray-50 rounded-full flex justify-center items-center"
+          disabled={isOutOfStock || isPendingAddToCart}
+          className="disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer size-[40px] bg-gray-50 rounded-full flex justify-center items-center transition-opacity"
         >
-          <Image src={Cart} width={20} height={20} alt="Add to Cart" />
+          {isPendingAddToCart ? (
+            <Loader2 width={20} height={20} className="animate-spin" />
+          ) : (
+            <Image
+              src={Cart || '/placeholder.svg'}
+              width={20}
+              height={20}
+              alt="Add to Cart"
+            />
+          )}
         </button>
       </div>
 
@@ -94,11 +192,24 @@ const Product: React.FC<ProductProps> = ({
               exit={{ opacity: 0, y: -20 }}
               onClick={(e) => {
                 e.preventDefault();
-                console.log('❤️ clicked');
+                handleAddToWishlist(_id);
               }}
-              className="cursor-pointer flex items-center justify-center size-[40px] bg-white border border-gray-50 rounded-full"
+              disabled={isPendingAddToWishlist}
+              className={`cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center size-[40px] border border-gray-50 rounded-full transition-opacity ${
+                isWishlisted ? 'bg-red-50 border-red-200' : 'bg-white'
+              } ${
+                isPendingAddToWishlist ? 'opacity-50 cursor-not-allowed' : ''
+              }`}
             >
-              <Heart size={20} />
+              {isPendingAddToWishlist ? (
+                <Loader2 size={20} className="animate-spin" />
+              ) : (
+                <Heart
+                  className={`w-5 h-5 ${
+                    isWishlisted ? 'fill-red-500 text-red-500' : ''
+                  }`}
+                />
+              )}
             </motion.button>
 
             {/* زرار العين يفتح المودال */}
@@ -126,16 +237,21 @@ const Product: React.FC<ProductProps> = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setOpen(false)} // يقفل عند الكليك بره
+            onClick={() => setOpen(false)}
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               className=" bg-white p-6 rounded-lg text-left w-[90%] lg:w-[70vw] overflow-auto"
-              onClick={(e) => e.stopPropagation()} // مايقفلش لو ضغطت جوه
+              onClick={(e) => e.stopPropagation()}
             >
               <ProductInfo
+                isWishlisted={isWishlisted}
+                handleAddToCart={handleAddToCart}
+                handleAddToWishlist={handleAddToWishlist}
+                isPendingAddToCart={isPendingAddToCart}
+                isPendingAddToWishlist={isPendingAddToWishlist}
                 productData={{
                   _id,
                   images,
@@ -146,6 +262,7 @@ const Product: React.FC<ProductProps> = ({
                   quantity,
                   category,
                   feddBack,
+                  inWishlist,
                 }}
               />
               <button

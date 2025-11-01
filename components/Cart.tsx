@@ -59,9 +59,13 @@ const CartComponent: React.FC<CartComponentProps> = ({ cart }) => {
             >
               <div className="space-y-[12px] px-[40px] pt-[40px] w-full flex items-center justify-between">
                 <p className="text-body-xl font-semibold ">
-                  Shopping Card ({cart?.data?.data.length})
+                  Shopping Card ({cart?.data?.data?.length})
                 </p>
-                <button aria-label="Exit" onClick={handleShowNav}>
+                <button
+                  className="cursor-pointer"
+                  aria-label="Exit"
+                  onClick={handleShowNav}
+                >
                   <X />
                 </button>
               </div>
@@ -71,13 +75,13 @@ const CartComponent: React.FC<CartComponentProps> = ({ cart }) => {
                     key={el?._id}
                     idx={idx}
                     data={el}
-                    count={cart?.data?.data.length}
+                    count={cart?.data?.data?.length}
                   />
                 ))}
               </div>
               <div className="w-full px-[40px] py-[40px]">
                 <div className="flex items-center justify-between text-body-medium pb-[24px]">
-                  <p>{cart?.data?.data.length} Product</p>
+                  <p>{cart?.data?.data?.length} Product</p>
                   <p className="font-bold">
                     {currencyFormated(
                       cart?.data?.data?.reduce(

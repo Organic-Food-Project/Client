@@ -17,7 +17,7 @@ export default async function Navbar() {
   const token = cookieStore.get('token')?.value;
   const cart = token
     ? await Query({ api: 'v1/cart' })
-    : { data: [], error: null };
+    : { data: { data: [] }, error: null };
 
   return (
     <nav className="sticky top-0 mainPadding py-6 flex justify-between bg-white font-500 z-[100] shadow-md ">

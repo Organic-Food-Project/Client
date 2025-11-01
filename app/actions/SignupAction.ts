@@ -46,7 +46,7 @@ export const SignupAction = async (
   });
 
   if (error) {
-    return { errors: { form: error } };
+    return { errors: { form: error?.data ?? error ?? 'Something went wrong' } };
   }
 
   return { success: true };

@@ -7,7 +7,11 @@ const Mutation = async ({
   method,
   api,
   body,
-}: MutationProps): Promise<{ data: any | null; error: any | null }> => {
+}: MutationProps): Promise<{
+  data: any | null;
+  error: any | null;
+  status: number;
+}> => {
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get('token')?.value;
@@ -34,19 +38,26 @@ const Mutation = async ({
 
     const res = await axios.request(config);
 
-    return { data: res.data, error: null };
+    return { data: res.data, error: null, status: res.status };
   } catch (err: any) {
-    console.log(err);
+    if (err.response.status === 401) {
+      cookieStore.delete('token');
+    }
     if (err.response) {
       return {
         data: null,
         error:
           err.response.data?.message || err.response.data || 'Unknown error',
+        status: err.response.status,
       };
     }
 
-    return { data: null, error: err?.message || 'Network error' };
+    return {
+      data: null,
+      error: err?.message || 'Network error',
+      status: 400,
+    };
   }
 };
-  
+
 export default Mutation;

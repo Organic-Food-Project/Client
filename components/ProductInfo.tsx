@@ -4,7 +4,7 @@ import type React from 'react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Heart, Minus, Plus } from 'lucide-react';
+import { Heart, Minus, Plus, Loader2 } from 'lucide-react';
 import Image from 'next/image';
 import Facebook from '@/assets/icons/Facebook.svg';
 import Instagram from '@/assets/icons/Instagram.svg';
@@ -12,17 +12,28 @@ import Twitter from '@/assets/icons/Twitter.svg';
 import Patreon from '@/assets/icons/Patreon.svg';
 import Brand from '@/assets/icons/Brand.svg';
 import Link from 'next/link';
-import { ProductData } from '@/types/global';
+import type { ProductData } from '@/types/global';
 import Rating from '@/components/Rating';
 
 interface ProductInfoProps {
+  isWishlisted: boolean;
+  handleAddToCart: (_id: string, quantity: number) => void;
+  isPendingAddToCart: boolean;
+  isPendingAddToWishlist: boolean;
+  handleAddToWishlist: (_id: string) => void;
   productData: ProductData;
 }
 
-const ProductInfo: React.FC<ProductInfoProps> = ({ productData }) => {
+const ProductInfo: React.FC<ProductInfoProps> = ({
+  isWishlisted,
+  isPendingAddToCart,
+  isPendingAddToWishlist,
+  handleAddToWishlist,
+  handleAddToCart,
+  productData,
+}) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  const [isWishlisted, setIsWishlisted] = useState(false);
   const inStock = productData.quantity !== 0;
 
   const decreaseQuantity = () => {
@@ -168,9 +179,11 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ productData }) => {
             <div className="flex items-center border border-gray-100 px-2 rounded-full min-w-[140px]">
               <Button
                 onClick={decreaseQuantity}
-                disabled={quantity === 1}
+                disabled={quantity === 1 || isPendingAddToCart}
                 className={`rounded-full size-[34px] bg-gray-50 text-black transition-opacity ${
-                  quantity === 1 ? 'opacity-30 cursor-not-allowed' : ''
+                  quantity === 1 || isPendingAddToCart
+                    ? 'opacity-30 cursor-not-allowed'
+                    : ''
                 }`}
               >
                 <Minus className="size-[16px]" />
@@ -180,9 +193,11 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ productData }) => {
               </span>
               <Button
                 onClick={increaseQuantity}
-                disabled={quantity >= productData.quantity}
+                disabled={
+                  quantity >= productData.quantity || isPendingAddToCart
+                }
                 className={`rounded-full size-[34px] bg-gray-50 text-black transition-opacity ${
-                  quantity >= productData.quantity
+                  quantity >= productData.quantity || isPendingAddToCart
                     ? 'opacity-30 cursor-not-allowed'
                     : ''
                 }`}
@@ -192,23 +207,40 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ productData }) => {
             </div>
 
             <Button
-              disabled={!inStock}
-              className="flex-1 h-12 bg-primary  font-semibold"
+              disabled={!inStock || isPendingAddToCart}
+              onClick={() => handleAddToCart(productData._id, quantity)}
+              className="flex-1 h-12 bg-primary font-semibold"
             >
-              Add to Cart
+              {isPendingAddToCart ? (
+                <div className="flex items-center gap-2">
+                  <Loader2 className="size-4 animate-spin" />
+                  <span>Adding...</span>
+                </div>
+              ) : (
+                'Add to Cart'
+              )}
             </Button>
 
             <Button
-              onClick={() => setIsWishlisted(!isWishlisted)}
-              className={`rounded-full bg-hard-primary/10 text-hard-primary h-12 w-12 ${
+              onClick={() => {
+                handleAddToWishlist(productData._id);
+              }}
+              disabled={isPendingAddToWishlist}
+              className={`rounded-full bg-hard-primary/10 text-hard-primary h-12 w-12 transition-opacity ${
                 isWishlisted ? 'bg-red-50 border-red-200' : ''
+              } ${
+                isPendingAddToWishlist ? 'opacity-50 cursor-not-allowed' : ''
               }`}
             >
-              <Heart
-                className={`w-5 h-5 ${
-                  isWishlisted ? 'fill-red-500 text-red-500' : ''
-                }`}
-              />
+              {isPendingAddToWishlist ? (
+                <Loader2 className="w-5 h-5 animate-spin" />
+              ) : (
+                <Heart
+                  className={`w-5 h-5 ${
+                    isWishlisted ? 'fill-red-500 text-red-500' : ''
+                  }`}
+                />
+              )}
             </Button>
           </div>
 

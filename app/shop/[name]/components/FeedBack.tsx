@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Rating from '@/components/Rating';
@@ -33,7 +32,7 @@ export default function FeedBack({
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full pt-8">
       {/* Tabs */}
       <div className="flex justify-center gap-8 border-b border-gray-200 mb-8">
         <div

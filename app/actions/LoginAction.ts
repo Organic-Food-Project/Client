@@ -18,7 +18,7 @@ export const LoginAction = async (
     password: formData.get('password'),
     remember_me: formData.get('remember_me'),
   };
-  
+
   const parsed = formSchema.safeParse(values);
 
   if (!parsed.success) {
@@ -42,7 +42,7 @@ export const LoginAction = async (
   });
   if (error) {
     return {
-      errors: { form: error ?? 'Something went wrong' },
+      errors: { form: error?.data ?? error ?? 'Something went wrong' },
     };
   } else {
     const days = parsed.data.remember_me ? 30 : 1;

@@ -54,6 +54,7 @@ const AllProducts = async ({
               key={el._id}
               category={el.category}
               feddBack={el.feddBack}
+              inWishlist={el.inWishlist ?? false}
             />
           ))
         ) : (
