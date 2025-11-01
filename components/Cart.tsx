@@ -1,11 +1,13 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useTransition } from 'react';
 import Cart from '@/assets/icons/Cart.svg';
 import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
 import { X } from 'lucide-react';
 import Link from 'next/link';
 import { currencyFormated } from '@/lib/utils';
+import { deleteFromCartAction } from '@/app/actions/Cart';
+import Toast from './ui/Toast';
 
 interface CartComponentProps {
   cart: {
@@ -23,11 +25,52 @@ interface CartComponentProps {
 }
 
 const CartComponent: React.FC<CartComponentProps> = ({ cart }) => {
+  const [data, setData] = useState(cart?.data?.data ?? []);
+  const [isPendingDelete, startDelete] = useTransition();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const handleShowNav = () => {
     setIsOpen((prev) => !prev);
   };
-  console.log({ cart });
+
+  const handleError = (
+    errors: { form?: string } | null,
+    actionName: string
+  ) => {
+    const errorMessage = errors?.form || `Failed to ${actionName}`;
+
+    Toast({
+      Message: errorMessage,
+      type: 'error',
+    });
+  };
+
+  const handleDeleteFromCart = (_id: string) => {
+    startDelete(async () => {
+      try {
+        const res: {
+          errors: { form: string } | null;
+          success: boolean;
+          status: number;
+        } = await deleteFromCartAction({ _id });
+        if (res.success) {
+          Toast({
+            Message: `Removed from cart successfully!`,
+            type: 'success',
+          });
+          setData((prevData) => prevData.filter((item) => item._id !== _id));
+        } else {
+          handleError(res.errors, 'removed from cart');
+        }
+      } catch (error) {
+        handleError(
+          { form: 'An unexpected error occurred' },
+          'removed from cart'
+        );
+        console.error('Cart error:', error);
+      }
+    });
+  };
+
   return (
     <>
       <button
@@ -35,7 +78,7 @@ const CartComponent: React.FC<CartComponentProps> = ({ cart }) => {
         onClick={handleShowNav}
         className="cursor-pointer"
       >
-        {cart?.data?.data?.length > 0 && (
+        {data?.length > 0 && (
           <div className="absolute top-[-5px] right-[-5px] text-white bg-hard-primary flex justify-center items-center rounded-full size-[20px] text-[10px]" />
         )}
         <Image src={Cart} alt="Cart" width={32} height={32} />
@@ -59,7 +102,7 @@ const CartComponent: React.FC<CartComponentProps> = ({ cart }) => {
             >
               <div className="space-y-[12px] px-[40px] pt-[40px] w-full flex items-center justify-between">
                 <p className="text-body-xl font-semibold ">
-                  Shopping Card ({cart?.data?.data?.length})
+                  Shopping Card ({data?.length})
                 </p>
                 <button
                   className="cursor-pointer"
@@ -70,24 +113,23 @@ const CartComponent: React.FC<CartComponentProps> = ({ cart }) => {
                 </button>
               </div>
               <div className="space-y-[24px] px-[20px] w-full overflow-y-auto flex-grow">
-                {cart?.data?.data?.map((el, idx) => (
+                {data?.map((el, idx) => (
                   <ItemCard
                     key={el?._id}
                     idx={idx}
                     data={el}
-                    count={cart?.data?.data?.length}
+                    count={data?.length}
+                    handleDelete={handleDeleteFromCart}
+                    isPendingDelete={isPendingDelete}
                   />
                 ))}
               </div>
               <div className="w-full px-[40px] py-[40px]">
                 <div className="flex items-center justify-between text-body-medium pb-[24px]">
-                  <p>{cart?.data?.data?.length} Product</p>
+                  <p>{data?.length} Product</p>
                   <p className="font-bold">
                     {currencyFormated(
-                      cart?.data?.data?.reduce(
-                        (total, item) => total + item?.price,
-                        0
-                      )
+                      data?.reduce((total, item) => total + item?.price, 0)
                     )}
                   </p>
                 </div>
@@ -115,8 +157,10 @@ const CartComponent: React.FC<CartComponentProps> = ({ cart }) => {
 const ItemCard: React.FC<{
   idx: number;
   count: number;
+  handleDelete: (_id: string) => void;
+  isPendingDelete: boolean;
   data: CartComponentProps['cart']['data']['data'][number];
-}> = ({ idx, count, data }) => {
+}> = ({ idx, count, handleDelete, isPendingDelete, data }) => {
   const ProductData = {
     id: data?._id,
     imgSrc: data?.images[0],
@@ -148,8 +192,10 @@ const ItemCard: React.FC<{
       </div>
       <div>
         <button
+          onClick={() => handleDelete(ProductData?.id)}
+          disabled={isPendingDelete}
           aria-label="Delete"
-          className="cursor-pointer border border-gray-200 rounded-full p-2 hover:bg-danger group duration-100"
+          className="cursor-pointer rounded-full border border-gray-20 size-[32px] flex justify-center items-center disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <X className="group-hover:text-white duration-100" />
         </button>

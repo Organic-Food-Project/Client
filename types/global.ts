@@ -21,7 +21,7 @@ export type ProductData = {
 };
 
 export interface MutationProps {
-  method: 'POST' | 'GET' | 'PUT' | 'PATH' | 'DELETE';
+  method: 'POST' | 'GET' | 'PUT' | 'PATCH' | 'DELETE';
   api: string;
   body?: any;
 }
