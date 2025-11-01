@@ -58,9 +58,38 @@ const CustomTable = <TData, TValue>({
     <>
       {loading ? (
         <div className="flex gap-5 flex-col w-full mt-2">
-          {/* {Array.from({ length: 20 }).map((_, index) => (
-            <Skeleton className="h-4 w-full mt-2" key={index} />
-          ))} */}
+          <Table className={`border border-gray-100`}>
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow
+                  key={headerGroup.id}
+                  className={cn('border-gray-100', headerClassName)}
+                >
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <TableHead key={header.id}>
+                        <div className="px-[24px] text-gray-500 uppercase text-[14px] font-semibold">
+                          {flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                        </div>
+                      </TableHead>
+                    );
+                  })}
+                </TableRow>
+              ))}
+            </TableHeader>
+          </Table>
+
+          <TableBody className="space-y-3">
+            {Array.from({ length: 8 }).map((_, index) => (
+              <div
+                key={index}
+                className="w-full h-[30px] bg-gray-100 animate-pulse"
+              />
+            ))}
+          </TableBody>
         </div>
       ) : (
         <div className="w-full">

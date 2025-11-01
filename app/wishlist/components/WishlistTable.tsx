@@ -21,6 +21,7 @@ interface List {
 }
 
 interface WishlistTableProps {
+  loading?: boolean;
   data: {
     _id: string;
     name: string;
@@ -28,10 +29,14 @@ interface WishlistTableProps {
     images: string[];
     quantity: number;
   }[];
-  metaData: MetaData;
+  metaData?: MetaData;
 }
 
-const WishlistTable: React.FC<WishlistTableProps> = ({ data, metaData }) => {
+const WishlistTable: React.FC<WishlistTableProps> = ({
+  loading = false,
+  data,
+  metaData,
+}) => {
   const [wishlistData, setWishlistData] = useState(data ?? []);
   const [isPendingAddToCart, startAddToCart] = useTransition();
   const [isPendingAddToWishlist, startAddToWishlist] = useTransition();
@@ -170,6 +175,7 @@ const WishlistTable: React.FC<WishlistTableProps> = ({ data, metaData }) => {
   return (
     <CustomTable
       columns={columns}
+      loading={loading}
       data={
         wishlistData?.map((el) => ({
           _id: el?._id,
