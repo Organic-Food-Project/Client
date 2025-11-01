@@ -9,7 +9,6 @@ interface ExtendedQueryProps extends QueryProps {
 
 export const Query = async ({
   api,
-  revalidate = 0,
   filters = {},
 }: ExtendedQueryProps): Promise<{ data: any | null; error: any | null }> => {
   try {
