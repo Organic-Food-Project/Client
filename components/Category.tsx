@@ -18,7 +18,7 @@ const Category = ({ name, id, products }: CategoryProps) => {
   return (
     <div className="relative group border rounded-[8px] border-gray-100 hover:border-hard-primary hover:shadow hover:shadow-soft-primary p-4 bg-white">
       <Link
-        href={`/shop?category=${id}`}
+        href={`/shop?filter[category]=${id}`}
         className="flex flex-col items-center justify-center gap-5 pt-4"
       >
         <Image
