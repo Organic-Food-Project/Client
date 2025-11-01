@@ -43,7 +43,6 @@ const AllCategories = async () => {
   if (categories.error) {
     return categories.error;
   }
-  console.log({ categories });
 
   return (
     <div className="sliderPadding px-6 flex items-center gap-10">

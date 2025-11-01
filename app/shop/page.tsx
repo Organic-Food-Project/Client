@@ -36,28 +36,36 @@ const AllProducts = async ({
   const filters = await searchParams;
   const products = await Query({ api: 'v1/products', filters });
   if (products.error) return products.error;
-  console.log({ products });
-  
+
   return (
     <div className="flex flex-col flex-grow text-center">
       <SortSection meta={products?.data?.meta} />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-6 ">
-        {products.data?.data.map((el: ProductData) => (
-          <Product
-            _id={el?._id}
-            images={el?.images}
-            description={el.description}
-            name={el.name}
-            price={el.price}
-            rate={el.rate}
-            quantity={el.quantity}
-            key={el._id}
-            category={el.category}
-            feddBack={el.feddBack}
-          />
-        ))}
+        {products.data?.data?.length > 0 ? (
+          products.data?.data.map((el: ProductData) => (
+            <Product
+              _id={el?._id}
+              images={el?.images}
+              description={el.description}
+              name={el.name}
+              price={el.price}
+              rate={el.rate}
+              quantity={el.quantity}
+              key={el._id}
+              category={el.category}
+              feddBack={el.feddBack}
+            />
+          ))
+        ) : (
+          <div className="col-span-3 flex items-center justify-center flex-col bg-white w-full h-[300px] text-center text-body-large">
+            <div>👀</div>
+            No Products to display
+          </div>
+        )}
       </div>
-      <Pagination metaData={products.data?.meta} />
+      {products.data?.data?.length > 0 && (
+        <Pagination metaData={products.data?.meta} />
+      )}
     </div>
   );
 };

@@ -17,7 +17,6 @@ const Pagination: React.FC<PaginationProps> = ({ metaData }) => {
 
   const goToPage = (number: number) => {
     const params = new URLSearchParams(searchParams.toString());
-    console.log(number);
     if (number) {
       params.set('page', String(number));
     } else {

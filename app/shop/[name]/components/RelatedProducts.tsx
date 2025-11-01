@@ -10,6 +10,11 @@ const RelatedProducts: React.FC<RelatedProductsProps> = async ({
   productData,
   productId,
 }) => {
+  if (
+    productData?.filter((el: { _id: string }) => el._id !== productId)
+      ?.length === 0
+  )
+    return null;
   return (
     <div className="pt-[100px]">
       <div className="flex justify-center items-center pb-[40px]">

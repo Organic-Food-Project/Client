@@ -74,14 +74,14 @@ const LoginForm = () => {
         <Link href="/account/forgot-password">Forget Password?</Link>
       </div>
       <Button
-        loading={loading}
-        disabled={loading}
+        loading={loading || state.success}
+        disabled={loading || state.success}
         type="submit"
         className="w-full"
       >
         Login
       </Button>
-      {!loading && (
+      {(!loading || !state.success) && (
         <p className="text-body-small my-2 text-danger">
           {state?.errors?.form}
         </p>

@@ -18,7 +18,6 @@ export const LoginAction = async (
     password: formData.get('password'),
     remember_me: formData.get('remember_me'),
   };
-  console.log({ values });
   
   const parsed = formSchema.safeParse(values);
 

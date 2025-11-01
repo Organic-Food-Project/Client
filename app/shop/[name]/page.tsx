@@ -54,10 +54,6 @@ const GetProduct = async ({ productName }: { productName: string }) => {
   const relatedProducts = await Query({
     api: `v1/products?category=${product.data?.data?.category._id}`,
   });
-  console.log({
-    product: product.data.data,
-    relatedProducts: relatedProducts.data.data,
-  });
 
   if (product.error) {
     redirect('/shop');
