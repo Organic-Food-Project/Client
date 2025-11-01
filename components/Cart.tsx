@@ -1,17 +1,33 @@
 'use client';
-import TempProduct from '@/assets/TempProduct.webp';
 import React, { useState } from 'react';
 import Cart from '@/assets/icons/Cart.svg';
 import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
 import { X } from 'lucide-react';
 import Link from 'next/link';
+import { currencyFormated } from '@/lib/utils';
 
-const CartComponent = () => {
+interface CartComponentProps {
+  cart: {
+    data: {
+      data: {
+        id: string;
+        name: string;
+        price: number;
+        images: string[];
+        quantity: number;
+      }[];
+    };
+    error: string | null;
+  };
+}
+
+const CartComponent: React.FC<CartComponentProps> = ({ cart }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const handleShowNav = () => {
     setIsOpen((prev) => !prev);
   };
+  console.log({ cart });
   return (
     <>
       <button
@@ -19,7 +35,9 @@ const CartComponent = () => {
         onClick={handleShowNav}
         className="cursor-pointer"
       >
-        <div className="absolute top-[-5px] right-[-5px] text-white bg-hard-primary flex justify-center items-center rounded-full size-[20px] text-[10px]" />
+        {cart?.data?.data?.length > 0 && (
+          <div className="absolute top-[-5px] right-[-5px] text-white bg-hard-primary flex justify-center items-center rounded-full size-[20px] text-[10px]" />
+        )}
         <Image src={Cart} alt="Cart" width={32} height={32} />
       </button>
       <AnimatePresence>
@@ -40,20 +58,34 @@ const CartComponent = () => {
               className="z-[50] fixed top-0 right-0 w-[456px] h-screen bg-white flex flex-col justify-between items-center"
             >
               <div className="space-y-[12px] px-[40px] pt-[40px] w-full flex items-center justify-between">
-                <p className="text-body-xl font-semibold ">Shopping Card (2)</p>
+                <p className="text-body-xl font-semibold ">
+                  Shopping Card ({cart?.data?.data.length})
+                </p>
                 <button aria-label="Exit" onClick={handleShowNav}>
                   <X />
                 </button>
               </div>
               <div className="space-y-[24px] px-[20px] w-full overflow-y-auto flex-grow">
-                {[1, 2].map((el, idx) => (
-                  <ItemCard key={el} idx={idx} count={2} />
+                {cart?.data?.data?.map((el, idx) => (
+                  <ItemCard
+                    key={el?.id}
+                    idx={idx}
+                    data={el}
+                    count={cart?.data?.data.length}
+                  />
                 ))}
               </div>
               <div className="w-full px-[40px] py-[40px]">
                 <div className="flex items-center justify-between text-body-medium pb-[24px]">
-                  <p>2 Product</p>
-                  <p className="font-bold">$26.00</p>
+                  <p>{cart?.data?.data.length} Product</p>
+                  <p className="font-bold">
+                    {currencyFormated(
+                      cart?.data?.data?.reduce(
+                        (acc, total) => acc + total?.price,
+                        0
+                      )
+                    )}
+                  </p>
                 </div>
                 <div className="space-y-[12px]">
                   <button className="cursor-pointer w-full text-center text-body-medium font-semibold bg-primary text-white rounded-full py-3">
@@ -76,13 +108,18 @@ const CartComponent = () => {
   );
 };
 
-const ItemCard: React.FC<{ idx: number; count: number }> = ({ idx, count }) => {
+const ItemCard: React.FC<{
+  idx: number;
+  count: number;
+  data: CartComponentProps['cart']['data']['data'][number];
+}> = ({ idx, count, data }) => {
   const ProductData = {
-    imgSrc: TempProduct,
-    imgAlt: 'product',
-    title: 'Chanise Cabbage',
-    price: 14.99,
-    rating: 3.5,
+    id: data?.id,
+    imgSrc: data?.images[0],
+    imgAlt: data?.name,
+    title: data?.name,
+    price: data?.price,
+    quantity: data?.quantity,
   };
   return (
     <div
@@ -97,9 +134,12 @@ const ItemCard: React.FC<{ idx: number; count: number }> = ({ idx, count }) => {
         alt={ProductData.imgAlt}
       />
       <div className="flex-grow text-body-small">
-        <p>Fresh Indian Orange</p>
+        <p>{ProductData?.title}</p>
         <p>
-          1 kg x <span className="font-bold">12.00</span>
+          {ProductData?.quantity} x{' '}
+          <span className="font-bold">
+            {currencyFormated(ProductData?.price)}
+          </span>
         </p>
       </div>
       <div>

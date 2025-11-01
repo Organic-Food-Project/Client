@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import axios from 'axios';
 import { cookies } from 'next/headers';
 import { QueryProps } from '@/types/global';
 
@@ -35,27 +36,21 @@ export const Query = async ({
       queryParams.toString() ? `?${queryParams.toString()}` : ''
     }`;
 
-    const res = await fetch(url, {
-      method: 'GET',
+    const response = await axios.get(url, {
       headers,
-      next: {
-        revalidate,
-      },
     });
+    console.log({ url, response });
 
-    const data = await res.json().catch(() => null);
-
-    if (!res.ok) {
-      return {
-        data: null,
-        error: data?.message || data || 'Unknown error',
-      };
-    }
-
-    return { data, error: null };
+    return { data: response.data, error: null };
   } catch (err: any) {
     console.log(err);
-    return { data: null, error: err?.message || 'Network error' };
+    const errorMsg =
+      err?.response?.data?.message ||
+      err?.response?.data ||
+      err?.message ||
+      'Network error';
+
+    return { data: null, error: errorMsg };
   }
 };
 

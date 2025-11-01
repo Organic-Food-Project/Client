@@ -48,7 +48,7 @@ const AllCategories = async () => {
     <div className="sliderPadding px-6 flex items-center gap-10">
       <ButtonLeft />
       <div className="grid grid-cols-6 gap-6 flex-grow">
-        {categories.data?.data.map(
+        {categories.data?.data?.map(
           (el: { _id: string; name: string; products: string[] }) => (
             <Category
               key={el?._id}

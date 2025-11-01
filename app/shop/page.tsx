@@ -42,7 +42,7 @@ const AllProducts = async ({
       <SortSection meta={products?.data?.meta} />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-6 ">
         {products.data?.data?.length > 0 ? (
-          products.data?.data.map((el: ProductData) => (
+          products.data?.data?.map((el: ProductData) => (
             <Product
               _id={el?._id}
               images={el?.images}
@@ -76,7 +76,7 @@ const AllCategories = async () => {
 
   return (
     <FiltersSection
-      categories={categories.data?.data.map(
+      categories={categories.data?.data?.map(
         (el: { name: string; _id: string; products: string[] }) => ({
           name: el.name,
           id: el._id,

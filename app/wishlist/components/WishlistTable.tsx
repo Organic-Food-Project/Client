@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-import TempProduct from '@/assets/TempProduct.webp';
 import CustomTable from '@/components/ui/CustomTable';
 import type { ColumnDef } from '@tanstack/react-table';
 import React from 'react';
@@ -11,18 +9,25 @@ import { Button } from '@/components/ui/button';
 import { X } from 'lucide-react';
 
 interface List {
-  id: number;
-  img: any;
+  id: string;
+  img: string;
   name: string;
   price: number;
   inStock: boolean;
 }
 
 interface WishlistTableProps {
+  data: {
+    id: string;
+    name: string;
+    price: number;
+    images: string[];
+    quantity: number;
+  }[];
   metaData: MetaData;
 }
 
-const WishlistTable: React.FC<WishlistTableProps> = ({ metaData }) => {
+const WishlistTable: React.FC<WishlistTableProps> = ({ data, metaData }) => {
   const columns: ColumnDef<List>[] = [
     {
       accessorKey: 'id',
@@ -85,29 +90,15 @@ const WishlistTable: React.FC<WishlistTableProps> = ({ metaData }) => {
   return (
     <CustomTable
       columns={columns}
-      data={[
-        {
-          id: 1,
-          img: TempProduct,
-          name: 'Chinese Cabbage',
-          price: 45,
-          inStock: true,
-        },
-        {
-          id: 1,
-          img: TempProduct,
-          name: 'Chinese Cabbage',
-          price: 45,
-          inStock: true,
-        },
-        {
-          id: 1,
-          img: TempProduct,
-          name: 'Chinese Cabbage',
-          price: 45,
-          inStock: false,
-        },
-      ]}
+      data={
+        data?.map((el) => ({
+          id: el?.id,
+          img: el.images?.[0],
+          name: el.name,
+          price: el.price,
+          inStock: el.quantity > 0,
+        })) ?? []
+      }
       metaData={metaData}
     />
   );

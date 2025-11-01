@@ -9,8 +9,16 @@ import Image from 'next/image';
 import { Menu } from 'lucide-react';
 import ActiveLink from './ui/ActiveLink';
 import CartComponent from './Cart';
+import Query from '@/lib/Query';
+import { cookies } from 'next/headers';
 
-export default function Navbar() {
+export default async function Navbar() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get('token')?.value;
+  const cart = token
+    ? await Query({ api: 'v1/cart' })
+    : { data: [], error: null };
+
   return (
     <nav className="sticky top-0 mainPadding py-6 flex justify-between bg-white font-500 z-[100] shadow-md ">
       <ul className="max-lg3:hidden flex items-center text-gray-500 text-body-medium gap-7">
@@ -49,9 +57,11 @@ export default function Navbar() {
             <Image src={Heart} alt="Heart" width={32} height={32} />
           </Link>
         </li>
-        <li className="max-sm:hidden relative">
-          <CartComponent />
-        </li>
+        {!cart.error && (
+          <li className="max-sm:hidden relative">
+            <CartComponent cart={cart} />
+          </li>
+        )}
         <li className="max-sm:hidden ">
           <Link href="/account/dashboard">
             <Image src={User} alt="User" width={32} height={32} />
