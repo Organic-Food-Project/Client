@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
+img {
+  user-select: none !important;
+}
+
 @theme {
   /* Screens */
   --breakpoint-xs: 375px;
