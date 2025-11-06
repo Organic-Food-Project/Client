@@ -10,6 +10,7 @@ import { Menu } from 'lucide-react';
 import ActiveLink from './ui/ActiveLink';
 import CartComponent from './Cart';
 import Cart from '@/assets/icons/Cart.svg';
+import SearchComponent from './SearchComponent';
 // import Query from '@/lib/Query';
 // import { cookies } from 'next/headers';
 
@@ -51,7 +52,7 @@ export default async function Navbar() {
           (123) 456-7890
         </li>
         <li className="max-sm:hidden flex items-center">
-          <Image src={Search} alt="Search" width={32} height={32} />
+          <SearchComponent />
         </li>
         <li className="max-sm:hidden ">
           <Link href="/wishlist">

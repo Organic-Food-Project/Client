@@ -22,7 +22,7 @@ function Input({
 }: InputProps) {
   const [inputType, setInputType] = useState(type);
   return (
-    <div>
+    <div className="w-full">
       {Label && (
         <>
           <label htmlFor={props.id} className={cn('', labelClassName)}>
