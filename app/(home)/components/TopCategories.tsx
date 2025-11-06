@@ -8,6 +8,7 @@ import ButtonLeft from '@/components/ui/ButtonLeft';
 import ButtonRight from '@/components/ui/ButtonRight';
 import { Suspense } from 'react';
 import Query from '@/lib/Query';
+import CategoriesSlider from './CategoriesSlider';
 
 const TopCategories = () => {
   return (
@@ -44,24 +45,7 @@ const AllCategories = async () => {
     return categories.error;
   }
 
-  return (
-    <div className="sliderPadding px-6 flex items-center gap-10">
-      <ButtonLeft />
-      <div className="grid grid-cols-6 gap-6 flex-grow">
-        {categories.data?.data?.map(
-          (el: { _id: string; name: string; products: string[] }) => (
-            <Category
-              key={el?._id}
-              name={el?.name}
-              id={el?._id}
-              products={el?.products}
-            />
-          )
-        )}
-      </div>
-      <ButtonRight />
-    </div>
-  );
+  return <CategoriesSlider categories={categories.data?.data} />;
 };
 
 const CategoriesLoading = () => {

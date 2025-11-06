@@ -37,7 +37,7 @@ const TopRatedProducts = async () => {
 
 const AllProducts = async () => {
   const products = await Query({
-    api: 'v1/products/',
+    api: 'v1/products?sort=-rate&limit=4',
   });
 
   if (products.error) {
@@ -45,22 +45,36 @@ const AllProducts = async () => {
   }
   return (
     <>
-      {[0, 1, 2, 3].map((i) =>
-        products.data?.data?.[i] ? (
+      {products.data?.data.map(
+        (el: {
+          _id: string;
+          images?: string[];
+          description: string;
+          name: string;
+          price: number;
+          rate: number;
+          quantity: number;
+          category: {
+            name: string;
+            _id: string;
+          };
+          feddBack: string[];
+          inWishlist: boolean;
+        }) => (
           <Product
-            _id={products.data?.data?.[i]?._id}
-            images={products.data?.data?.[i]?.images}
-            category={products.data?.data?.[i]?.category}
-            feddBack={products.data?.data?.[i]?.feddBack}
-            description={products.data?.data?.[i].description}
-            name={products.data?.data?.[i].name}
-            price={products.data?.data?.[i].price}
-            rate={products.data?.data?.[i].rate}
-            quantity={products.data?.data?.[i].quantity}
-            inWishlist={products.data?.data?.[i].inWishlist ?? false}
-            key={products.data?.data?.[i]?._id}
+            _id={el?._id}
+            images={el?.images}
+            category={el?.category}
+            feddBack={el?.feddBack}
+            description={el?.description}
+            name={el?.name}
+            price={el?.price}
+            rate={el?.rate}
+            quantity={el?.quantity}
+            inWishlist={el?.inWishlist ?? false}
+            key={el?._id}
           />
-        ) : null
+        )
       )}
     </>
   );

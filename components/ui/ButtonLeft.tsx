@@ -1,3 +1,4 @@
+'use client';
 import { ArrowLeft } from 'lucide-react';
 import React from 'react';
 import { cn } from '@/lib/utils';
@@ -5,14 +6,17 @@ import { cn } from '@/lib/utils';
 interface ButtonLeftProps {
   disabled?: boolean;
   className?: string;
+  onClick?: () => void;
 }
 
 const ButtonLeft: React.FC<ButtonLeftProps> = ({
   disabled = false,
   className = '',
+  onClick = () => {},
 }) => {
   return (
     <button
+      onClick={onClick}
       disabled={disabled}
       aria-label="Left slider button"
       className={cn(

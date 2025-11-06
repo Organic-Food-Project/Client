@@ -51,7 +51,6 @@ const HeroSection = () => {
           className="absolute top-0 left-0 w-full h-full z-[-1] object-cover"
         />
         <div className="w-full h-full flex justify-center items-center py-[70px] px-6 gap-5">
-          <ButtonLeft className="max-md:hidden" />
           <div className="xl:flex gap-[43px]">
             <Image src={Hero1} width={742} height={498} alt="Hero 1" />
             <div className="max-w-[596px] self-end">
@@ -75,21 +74,6 @@ const HeroSection = () => {
                 <ArrowRight />
               </Link>
             </div>
-          </div>
-          <ButtonRight className="max-md:hidden" />
-          <div className="absolute bottom-[24px] left-0 w-full flex items-center justify-center gap-2">
-            <button
-              aria-label="Left navigator"
-              className="cuursor-pointer size-[16px] rounded-full bg-green-200"
-            />
-            <button
-              aria-label="Middle navigator"
-              className="cursor-pointer size-[16px] rounded-full bg-primary"
-            />
-            <button
-              aria-label="Right navigator"
-              className="cursor-pointer size-[16px] rounded-full bg-green-200"
-            />
           </div>
         </div>
         <Image
