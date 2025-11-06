@@ -118,6 +118,7 @@ const Product: React.FC<ProductProps> = ({
             Message: `Added ${quantity} item(s) to cart!`,
             type: 'success',
           });
+          router.push('/cart');
         } else {
           handleError(res.errors, 'add to cart');
         }

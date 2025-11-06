@@ -11,6 +11,7 @@ import { useState, useTransition } from 'react';
 import Toast from '@/components/ui/Toast';
 import { addToCartAction } from '@/app/actions/Cart';
 import { deleteFromWishlistAction } from '@/app/actions/Wishlist';
+import { useRouter } from 'next/navigation';
 
 interface List {
   _id: string;
@@ -40,6 +41,7 @@ const WishlistTable: React.FC<WishlistTableProps> = ({
   const [wishlistData, setWishlistData] = useState(data ?? []);
   const [isPendingAddToCart, startAddToCart] = useTransition();
   const [isPendingAddToWishlist, startAddToWishlist] = useTransition();
+  const router = useRouter();
 
   const columns: ColumnDef<List>[] = [
     {
@@ -162,6 +164,7 @@ const WishlistTable: React.FC<WishlistTableProps> = ({
             Message: `Added ${quantity} item(s) to cart!`,
             type: 'success',
           });
+          router.push('/cart');
         } else {
           handleError(res.errors, 'add to cart');
         }
