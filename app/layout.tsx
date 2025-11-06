@@ -67,7 +67,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Toaster />
       <body className={poppins.className}>
         <Navbar />
         <BreadCrumbs />
@@ -75,6 +74,7 @@ export default function RootLayout({
         <ScrollToTop />
         <Footer />
       </body>
+      <Toaster position="top-right" />
     </html>
   );
 }

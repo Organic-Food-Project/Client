@@ -15,7 +15,7 @@ const addToWishlistAction = async (formData: {
   if (!Cookies.get('token')) {
     return {
       data: null,
-      errors: { form: 'Something went wrong' },
+      errors: { form: 'You have to login first' },
       status: 401,
       success: false,
     };
@@ -55,7 +55,7 @@ const deleteFromWishlistAction = async (formData: {
   if (!Cookies.get('token')) {
     return {
       data: null,
-      errors: { form: 'Something went wrong' },
+      errors: { form: 'You have to login first' },
       status: 401,
       success: false,
     };

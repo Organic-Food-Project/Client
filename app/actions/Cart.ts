@@ -16,7 +16,7 @@ const addToCartAction = async (formData: {
   if (!Cookies.get('token')) {
     return {
       data: null,
-      errors: { form: 'Something went wrong' },
+      errors: { form: 'You have to login first' },
       status: 401,
       success: false,
     };
@@ -55,7 +55,7 @@ const updateCartAction = async (formData: {
   if (!Cookies.get('token')) {
     return {
       data: null,
-      errors: { form: 'Something went wrong' },
+      errors: { form: 'You have to login first' },
       status: 401,
       success: false,
     };
@@ -93,7 +93,7 @@ const deleteFromCartAction = async (formData: {
   if (!Cookies.get('token')) {
     return {
       data: null,
-      errors: { form: 'Something went wrong' },
+      errors: { form: 'You have to login first' },
       status: 401,
       success: false,
     };
