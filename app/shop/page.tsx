@@ -72,7 +72,7 @@ const AllProducts = async ({
 };
 
 const AllCategories = async () => {
-  const categories = await Query({ api: 'v1/categories' });
+  const categories = await Query({ api: 'v1/categories?limit=200' });
   if (categories.error) return categories.error;
 
   return (

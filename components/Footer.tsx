@@ -100,7 +100,7 @@ export default function Footer() {
 
         <section className="py-7 border-t-gray-800 border-t-2 flex flex-wrap gap-y-5 sm2:justify-between justify-center items-center">
           <p className="text-body-small font-400 text-gray-500">
-            Ecobazar eCommerce © 2021. All Rights Reserved
+            Ecobazar eCommerce © {new Date().getFullYear()}. All Rights Reserved
           </p>
           <Image
             src={Payments}

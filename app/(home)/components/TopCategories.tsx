@@ -38,7 +38,7 @@ const TopCategories = () => {
 
 const AllCategories = async () => {
   const categories = await Query({
-    api: 'v1/categories/',
+    api: 'v1/categories?limit=200',
   });
 
   if (categories.error) {
