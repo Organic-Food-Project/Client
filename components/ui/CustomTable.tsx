@@ -99,7 +99,7 @@ const CustomTable = <TData, TValue>({
                 {table.getHeaderGroups().map((headerGroup) => (
                   <TableRow
                     key={headerGroup.id}
-                    className={cn('border-gray-100', headerClassName)}
+                    className={cn(' w-fit border-gray-100', headerClassName)}
                   >
                     {headerGroup.headers.map((header) => {
                       return (
@@ -122,29 +122,27 @@ const CustomTable = <TData, TValue>({
             <TableBody>
               {table.getRowModel().rows?.length ? (
                 table.getRowModel().rows.map((row: any) => (
-                  <>
-                    <TableRow
-                      className={`border-gray-100 cursor-pointer text-textPrimary font-medium`}
-                      key={row.id}
-                      data-state={row.getIsSelected() && 'selected'}
-                    >
-                      {row.getVisibleCells().map((cell: any) => {
-                        return (
-                          <TableCell
-                            key={cell.id}
-                            className="p-0 px-2 border-none whitespace-normal"
-                          >
-                            <div className="text-[#4D5359] px-[24px] py-3">
-                              {flexRender(
-                                cell.column.columnDef.cell,
-                                cell.getContext()
-                              )}
-                            </div>
-                          </TableCell>
-                        );
-                      })}
-                    </TableRow>
-                  </>
+                  <TableRow
+                    className={`border-gray-100 cursor-pointer text-textPrimary font-medium`}
+                    key={row.id}
+                    data-state={row.getIsSelected() && 'selected'}
+                  >
+                    {row.getVisibleCells().map((cell: any) => {
+                      return (
+                        <TableCell
+                          key={cell.id}
+                          className="p-0 px-2 border-none"
+                        >
+                          <div className="text-[#4D5359] px-[24px] py-3">
+                            {flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )}
+                          </div>
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
                 ))
               ) : (
                 <TableRow className="border-none">

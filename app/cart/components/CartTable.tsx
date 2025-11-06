@@ -21,28 +21,22 @@ interface List {
   name: string;
   price: number;
   quantity: number;
+  product_quantity: number;
+}
+
+interface Data {
+  _id: string;
+  name: string;
+  price: number;
+  product_quantity: number;
+  images: string[];
+  quantity: number;
 }
 
 interface CartTableProps {
   loading?: boolean;
-  myData: {
-    _id: string;
-    name: string;
-    price: number;
-    images: string[];
-    quantity: number;
-  }[];
-  setMyData?: Dispatch<
-    SetStateAction<
-      {
-        _id: string;
-        name: string;
-        price: number;
-        images: string[];
-        quantity: number;
-      }[]
-    >
-  >;
+  myData: Data[];
+  setMyData?: Dispatch<SetStateAction<Data[]>>;
 }
 
 const CartTable: React.FC<CartTableProps> = ({
@@ -68,9 +62,9 @@ const CartTable: React.FC<CartTableProps> = ({
   };
 
   const handleQuantityChange = useCallback(
-    (_id: string, newQuantity: number) => {
-      // Validate limits: minimum 1, maximum 100
-      if (newQuantity < 1 || newQuantity > 100) return;
+    (_id: string, newQuantity: number, max: number) => {
+      // Validate limits: minimum 1, maximum max
+      if (newQuantity < 1 || newQuantity > max) return;
 
       // Clear existing timer for this product
       if (debounceTimers.current[_id]) {
@@ -159,8 +153,9 @@ const CartTable: React.FC<CartTableProps> = ({
             width={100}
             height={100}
             alt={row.original.name}
+            className="max-h-[100px]"
+            title={row.original.name}
           />
-          <p className="text-body-medium">{row.original.name}</p>
         </div>
       ),
     },
@@ -180,7 +175,11 @@ const CartTable: React.FC<CartTableProps> = ({
         <div className="text-body-medium font-semibold flex rounded-full border border-gray-100 w-fit px-2 h-[50px] items-center min-w-[124px]">
           <button
             onClick={() =>
-              handleQuantityChange(row.original._id, row.original.quantity - 1)
+              handleQuantityChange(
+                row.original._id,
+                row.original.quantity - 1,
+                row.original.product_quantity
+              )
             }
             disabled={isPendingUpdate || row.original.quantity <= 1}
             aria-label="Minus"
@@ -191,9 +190,16 @@ const CartTable: React.FC<CartTableProps> = ({
           <span className="text-center flex-grow">{row.original.quantity}</span>
           <button
             onClick={() =>
-              handleQuantityChange(row.original._id, row.original.quantity + 1)
+              handleQuantityChange(
+                row.original._id,
+                row.original.quantity + 1,
+                row.original.product_quantity
+              )
             }
-            disabled={isPendingUpdate || row.original.quantity >= 100}
+            disabled={
+              isPendingUpdate ||
+              row.original.quantity >= row.original.product_quantity
+            }
             aria-label="Plus"
             className="cursor-pointer bg-gray-50 rounded-full flex items-center justify-center size-[34px] text-black disabled:opacity-50 disabled:cursor-not-allowed"
           >
@@ -242,6 +248,7 @@ const CartTable: React.FC<CartTableProps> = ({
           name: el.name,
           price: el.price,
           quantity: el.quantity,
+          product_quantity: el.product_quantity,
         })) ?? []
       }
     />

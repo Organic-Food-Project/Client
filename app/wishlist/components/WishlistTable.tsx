@@ -52,8 +52,8 @@ const WishlistTable: React.FC<WishlistTableProps> = ({
             width={100}
             height={100}
             alt={row.original.name}
+            title={row.original.name}
           />
-          <p className="text-body-medium">{row.original.name}</p>
         </div>
       ),
     },

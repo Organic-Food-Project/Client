@@ -12,6 +12,7 @@ interface MyCartProps {
     price: number;
     images: string[];
     quantity: number;
+    product_quantity: number;
   }[];
 }
 
