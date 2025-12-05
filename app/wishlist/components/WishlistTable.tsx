@@ -9,8 +9,8 @@ import { Button } from '@/components/ui/button';
 import { X } from 'lucide-react';
 import { useState, useTransition } from 'react';
 import Toast from '@/components/ui/Toast';
-import { addToCartAction } from '@/app/actions/Cart';
-import { deleteFromWishlistAction } from '@/app/actions/Wishlist';
+import { addToCartAction } from '@/lib/actions/Cart';
+import { deleteFromWishlistAction } from '@/lib/actions/Wishlist';
 import { useRouter } from 'next/navigation';
 
 interface List {

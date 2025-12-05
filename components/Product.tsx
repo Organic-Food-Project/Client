@@ -10,11 +10,11 @@ import { slugify } from '@/lib/utils';
 import Toast from './ui/Toast';
 import Rating from './Rating';
 import ProductInfo from './ProductInfo';
-import { addToCartAction } from '@/app/actions/Cart';
+import { addToCartAction } from '@/lib/actions/Cart';
 import {
   addToWishlistAction,
   deleteFromWishlistAction,
-} from '@/app/actions/Wishlist';
+} from '@/lib/actions/Wishlist';
 import { useRouter } from 'next/navigation';
 
 interface ProductProps {

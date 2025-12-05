@@ -12,7 +12,7 @@ import {
 import Image from 'next/image';
 import { currencyFormated } from '@/lib/utils';
 import { Minus, Plus, X } from 'lucide-react';
-import { updateCartAction, deleteFromCartAction } from '@/app/actions/Cart';
+import { updateCartAction, deleteFromCartAction } from '@/lib/actions/Cart';
 import Toast from '@/components/ui/Toast';
 
 interface List {

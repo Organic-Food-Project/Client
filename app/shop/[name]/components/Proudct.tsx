@@ -2,11 +2,11 @@
 import type React from 'react';
 import { useState, useTransition } from 'react';
 import Toast from '@/components/ui/Toast';
-import { addToCartAction } from '@/app/actions/Cart';
+import { addToCartAction } from '@/lib/actions/Cart';
 import {
   addToWishlistAction,
   deleteFromWishlistAction,
-} from '@/app/actions/Wishlist';
+} from '@/lib/actions/Wishlist';
 import ProductInfo from '@/components/ProductInfo';
 import type { ProductData } from '@/types/global';
 import { useRouter } from 'next/navigation';

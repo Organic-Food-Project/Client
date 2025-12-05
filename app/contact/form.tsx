@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { useActionState } from 'react';
-import { ContactAction } from '@/app/actions/ContactAction';
+import { ContactAction } from '@/lib/actions/ContactAction';
 import { useState } from 'react';
 import Toast from '@/components/ui/Toast';
 

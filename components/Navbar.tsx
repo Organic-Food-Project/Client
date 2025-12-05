@@ -1,5 +1,4 @@
 import Telephone from '@/assets/icons/Telephone.svg';
-import Search from '@/assets/icons/Search.svg';
 import User from '@/assets/icons/User.svg';
 import Heart from '@/assets/icons/Heart.svg';
 
@@ -8,19 +7,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Menu } from 'lucide-react';
 import ActiveLink from './ui/ActiveLink';
-import CartComponent from './Cart';
 import Cart from '@/assets/icons/Cart.svg';
 import SearchComponent from './SearchComponent';
-// import Query from '@/lib/Query';
-// import { cookies } from 'next/headers';
 
 export default async function Navbar() {
-  // const cookieStore = await cookies();
-  // const token = cookieStore.get('token')?.value;
-  // const cart = token
-  //   ? await Query({ api: 'v1/cart' })
-  //   : { data: { data: [] }, error: null };
-
   return (
     <nav className="sticky top-0 mainPadding py-6 flex justify-between bg-white font-500 z-[100] shadow-md ">
       <ul className="max-lg3:hidden flex items-center text-gray-500 text-body-medium gap-7">
@@ -56,11 +46,6 @@ export default async function Navbar() {
             <Image src={Heart} alt="Heart" width={32} height={32} />
           </Link>
         </li>
-        {/* {!cart.error && (
-          <li className="max-sm:hidden relative">
-            <CartComponent cart={cart} />
-          </li>
-        )} */}
         <li className="max-sm:hidden ">
           <Link href="/cart">
             <Image src={Cart} alt="Cart" width={32} height={32} />

@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { X } from 'lucide-react';
 import Link from 'next/link';
 import { currencyFormated } from '@/lib/utils';
-import { deleteFromCartAction } from '@/app/actions/Cart';
+import { deleteFromCartAction } from '@/lib/actions/Cart';
 import Toast from './ui/Toast';
 
 interface CartComponentProps {

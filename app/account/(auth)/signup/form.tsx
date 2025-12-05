@@ -1,7 +1,7 @@
 'use client';
 import { useActionState, useState } from 'react';
 import { Input } from '@/components/ui/input';
-import { SignupAction } from '@/app/actions/SignupAction';
+import { SignupAction } from '@/lib/actions/SignupAction';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 

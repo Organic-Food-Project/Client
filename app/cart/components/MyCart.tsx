@@ -4,7 +4,7 @@ import CartTable from '@/app/cart/components/CartTable';
 import { Button } from '@/components/ui/button';
 import { currencyFormated } from '@/lib/utils';
 import React, { useState, useTransition } from 'react';
-import { checkOutAction } from '@/app/actions/Cart';
+import { checkOutAction } from '@/lib/actions/Cart';
 import Toast from '@/components/ui/Toast';
 
 interface MyCartProps {
