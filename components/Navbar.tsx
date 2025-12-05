@@ -33,9 +33,6 @@ export default async function Navbar() {
           <ActiveLink href="/shop">Shop</ActiveLink>
         </li>
         <li className="flex items-center hover:text-gray-900">
-          <ActiveLink href="/pages">Pages</ActiveLink>
-        </li>
-        <li className="flex items-center hover:text-gray-900">
           <ActiveLink href="/about-us" exact>
             About Us
           </ActiveLink>

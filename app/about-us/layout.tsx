@@ -2,9 +2,12 @@ import type { Metadata } from 'next';
 import React from 'react';
 
 export const metadata: Metadata = {
-  title: 'About Us - Organic Food',
+  title: {
+    default: 'Wishlist',
+    template: '%s | Organic Food',
+  },
   description:
-    'Learn about Organic Food mission to deliver organic and healthy food products',
+    'Discover fresh, healthy, and 100% organic food online. Shop fruits, vegetables, and groceries sourced from trusted farms. Eat clean, live better with Organic Food.',
 };
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {

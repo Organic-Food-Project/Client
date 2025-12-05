@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import React from 'react';
 
 export const metadata: Metadata = {
-  title: 'About Us - Organic Food',
+  title: 'Terms & Conditions - Organic Food',
   description:
-    'Learn about Organic Food mission to deliver organic and healthy food products',
+    'Terms and conditions for using Organic Food organic food delivery service',
 };
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
