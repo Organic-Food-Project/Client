@@ -5,7 +5,7 @@ import React, { Suspense } from 'react';
 import Query from '@/lib/Query';
 import FiltersSectionLoading from './components/FiltersSectionLoading';
 import { ProductData } from '@/types/global';
-import SortSection from './components/SortSection';
+import Header from './components/Header';
 
 const Shop = async ({
   searchParams,
@@ -39,7 +39,7 @@ const AllProducts = async ({
 
   return (
     <div className="flex flex-col flex-grow text-center">
-      <SortSection meta={products?.data?.meta} />
+      <Header meta={products?.data?.meta} />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-6 ">
         {products.data?.data?.length > 0 ? (
           products.data?.data?.map((el: ProductData) => (
@@ -92,14 +92,14 @@ const ProductsLoading = () => {
   const products = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
   return (
     <div className="flex flex-col flex-grow text-center">
-      <div className="sm:h-[45px] mb-[24px] flex justify-between items-center flex-wrap gap-2">
-        <div className="text-bodu-small text-gray-500 flex items-center flex-wrap gap-2">
-          <span>Sort by:</span>
+      <div className="flex max-sm:flex-col gap-4 flex-grow pb-4">
+        <div className="max-sm:w-full text-bodu-small text-gray-500 flex items-center flex-wrap gap-2">
+          <label htmlFor="search">Search: </label>
           <span className="bg-gray-100 animate-pulse block w-[250px] h-[36px]" />
         </div>
-        <div className="flex items-center gap-2 text-body-medium text-gray-600">
-          <span className="bg-gray-100 animate-pulse block w-[30px] h-[21px]"></span>{' '}
-          Results Found
+        <div className="max-sm:w-full text-bodu-small text-gray-500 flex items-center flex-wrap gap-2">
+          <span>Sort by:</span>
+          <span className="bg-gray-100 animate-pulse block w-[250px] h-[36px]" />
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-6 ">
