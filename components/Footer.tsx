@@ -3,14 +3,19 @@ import Logo from '@/assets/LogoPlant.png';
 import Payments from '@/assets/Payments.webp';
 import Image from 'next/image';
 import ActiveLink from './ui/ActiveLink';
+import Query from '@/lib/Query';
 
-export default function Footer() {
+export default async function Footer() {
+  const categories = await Query({
+    api: 'v1/categories?limit=4',
+  });
+
   const navItems = [
     {
       section: 'My Account',
       links: [
         { text: 'My Account', to: '/account' },
-        { text: 'Order History', to: '/order-history' },
+        { text: 'Order History', to: '/account/order-history' },
         { text: 'Shopping Cart', to: '/cart' },
         { text: 'Wishlist', to: '/wishlist' },
       ],
@@ -29,18 +34,16 @@ export default function Footer() {
       links: [
         { text: 'About', to: '/about-us' },
         { text: 'Shop', to: '/shop' },
-        { text: 'Product', to: '/product' },
-        { text: 'Track Order', to: '/track-order' },
       ],
     },
     {
       section: 'Categories',
-      links: [
-        { text: 'Fruit & Vegetables', to: '/shop' },
-        { text: 'Meat & Fish', to: '/shop' },
-        { text: 'Bread & Bakery', to: '/shop' },
-        { text: 'Beauty & Health', to: '/shop' },
-      ],
+      links: categories?.data
+        ? categories?.data?.data?.map((el: { name: string; _id: string }) => ({
+            text: el?.name,
+            to: `/shop?filter[category]=${el?._id}`,
+          }))
+        : [],
     },
   ];
   return (
@@ -70,9 +73,12 @@ export default function Footer() {
               <span className="text-body-medium font-400 text-gray-500  ">
                 or
               </span>
-              <p className="text-body-small font-500 text-white border-b-primary border-b-2 pb-1">
-                Proxy@gmail.com
-              </p>
+              <a
+                href="mailto:ameen2bman@gmail.com"
+                className="text-body-small font-500 text-white border-b-primary border-b-2 pb-1"
+              >
+                ameen2bman
+              </a>
             </div>
           </div>
 
@@ -82,7 +88,7 @@ export default function Footer() {
                 {section}
               </h2>
               <ul className="space-y-3">
-                {links.map((link) => (
+                {links.map((link: { text: string; to: string }) => (
                   <li key={link.text}>
                     <ActiveLink
                       href={link.to}

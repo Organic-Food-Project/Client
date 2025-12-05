@@ -63,6 +63,7 @@ const LoginForm = () => {
             checked={formData.remember_me}
             type="checkbox"
             className="w-4 h-4"
+            parentClassName="w-fit"
           />
           <label
             htmlFor="remember_me"

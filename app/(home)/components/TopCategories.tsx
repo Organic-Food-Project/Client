@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
-import Category, { LoadingCategory } from '@/components/Category';
+import { LoadingCategory } from '@/components/Category';
 import Leaf from '@/assets/icons/Leaf.svg';
 import Image from 'next/image';
 import ButtonLeft from '@/components/ui/ButtonLeft';

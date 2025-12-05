@@ -6,8 +6,6 @@ import { useRouter, usePathname } from 'next/navigation';
 import {
   LayoutGrid,
   RefreshCw,
-  Heart,
-  ShoppingBag,
   Settings,
   LogOut as LogOutIcon,
 } from 'lucide-react';

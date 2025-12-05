@@ -6,6 +6,7 @@ import { Eye, EyeClosed } from 'lucide-react';
 
 interface InputProps extends React.ComponentProps<'input'> {
   error?: string;
+  parentClassName?: string;
   required?: boolean;
   Label?: string;
   labelClassName?: string;
@@ -13,6 +14,7 @@ interface InputProps extends React.ComponentProps<'input'> {
 
 function Input({
   className,
+  parentClassName,
   required = false,
   error,
   Label = '',
@@ -22,7 +24,7 @@ function Input({
 }: InputProps) {
   const [inputType, setInputType] = useState(type);
   return (
-    <div className="w-full">
+    <div className={cn('w-full', parentClassName)}>
       {Label && (
         <>
           <label htmlFor={props.id} className={cn('', labelClassName)}>
