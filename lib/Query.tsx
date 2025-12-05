@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
 import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 import { QueryProps } from '@/types/global';
 
 interface ExtendedQueryProps extends QueryProps {
@@ -16,10 +17,7 @@ export const Query = async ({
     const token = cookieStore.get('token')?.value;
 
     const headers: Record<string, string> = {};
-
-    if (token) {
-      headers['Authorization'] = `Bearer ${token}`;
-    }
+    if (token) headers['Authorization'] = `Bearer ${token}`;
 
     const queryParams = new URLSearchParams();
     for (const key in filters) {
@@ -35,17 +33,20 @@ export const Query = async ({
       queryParams.toString() ? `?${queryParams.toString()}` : ''
     }`;
 
-    const response = await axios.get(url, {
-      headers,
-    });
-    console.log({ url, response });
+    const response = await axios.get(url, { headers });
 
     return { data: response.data, error: null };
   } catch (err: any) {
-    console.log(err);
+    if (err?.response?.status === 401) {
+      const cookieStore = await cookies();
+      cookieStore.delete('token');
+      redirect('/account/login');
+    }
+
     const errorMsg =
       err?.response?.data?.message ||
       err?.response?.data ||
+      err?.response ||
       err?.message ||
       'Network error';
 

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { cookies } from 'next/headers';
 import axios, { AxiosRequestConfig } from 'axios';
+import { redirect } from 'next/navigation';
 import { MutationProps } from '@/types/global';
 
 const Mutation = async ({
@@ -24,14 +25,10 @@ const Mutation = async ({
       withCredentials: true,
     };
 
-    // Detect body type
-    if (body instanceof FormData) {
-      // axios بيتعامل مع FormData أوتوماتيك
-    } else if (body) {
+    if (!(body instanceof FormData) && body) {
       config.headers!['Content-Type'] = 'application/json';
     }
 
-    // Add token if exists
     if (token) {
       config.headers!['Authorization'] = `Bearer ${token}`;
     }
@@ -40,22 +37,22 @@ const Mutation = async ({
 
     return { data: res.data, error: null, status: res.status };
   } catch (err: any) {
-    if (err.response.status === 401) {
+    if (err?.response?.status === 401) {
+      const cookieStore = await cookies();
       cookieStore.delete('token');
+      redirect('/account/login');
     }
-    if (err.response) {
-      return {
-        data: null,
-        error:
-          err.response.data?.message || err.response.data || 'Unknown error',
-        status: err.response.status,
-      };
-    }
+    const errorMsg =
+      err?.response?.data?.message ||
+      err?.response?.data ||
+      err?.response ||
+      err?.message ||
+      'Network error';
 
     return {
       data: null,
-      error: err?.message || 'Network error',
-      status: 400,
+      error: errorMsg,
+      status: err.response?.status || 400,
     };
   }
 };

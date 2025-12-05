@@ -3,7 +3,9 @@
 import CartTable from '@/app/cart/components/CartTable';
 import { Button } from '@/components/ui/button';
 import { currencyFormated } from '@/lib/utils';
-import React, { useState } from 'react';
+import React, { useState, useTransition } from 'react';
+import { checkOutAction } from '@/app/actions/Cart';
+import Toast from '@/components/ui/Toast';
 
 interface MyCartProps {
   data: {
@@ -18,6 +20,22 @@ interface MyCartProps {
 
 const MyCart: React.FC<MyCartProps> = ({ data }) => {
   const [myData, setMyData] = useState(data);
+  const [isPending, startTransition] = useTransition();
+
+  const handleCheckout = () => {
+    startTransition(async () => {
+      const result = await checkOutAction();
+
+      if (result.success) {
+        window.location.href = result.data;
+      } else {
+        Toast({
+          Message: result?.error || 'Failed to checkout',
+          type: 'error',
+        });
+      }
+    });
+  };
   return (
     <div className="flex flex-col-reverse lg:grid grid-cols-6 gap-6">
       <div className="col-span-4">
@@ -59,7 +77,13 @@ const MyCart: React.FC<MyCartProps> = ({ data }) => {
             )}
           </p>
         </div>
-        <Button className="w-full py-4 mt-5">Proceed to checkout</Button>
+        <Button
+          className="w-full py-4 mt-5"
+          onClick={handleCheckout}
+          disabled={isPending}
+        >
+          {isPending ? 'Processing...' : 'Proceed to checkout'}
+        </Button>
       </div>
     </div>
   );

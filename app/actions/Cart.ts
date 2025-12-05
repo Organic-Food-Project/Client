@@ -2,6 +2,23 @@
 'use server';
 import { cookies } from 'next/headers';
 import Mutation from '@/lib/Mutation';
+import Query from '@/lib/Query';
+
+const checkOutAction = async () => {
+  const { data, error } = await Query({
+    api: 'v1/checkout',
+  });
+
+  if (error) {
+    return {
+      data: null,
+      error: error?.data ?? error ?? 'Something went wrong',
+      success: false,
+    };
+  } else {
+    return { data: data?.data, error: null, success: true };
+  }
+};
 
 const addToCartAction = async (formData: {
   _id: string;
@@ -118,4 +135,9 @@ const deleteFromCartAction = async (formData: {
   }
 };
 
-export { addToCartAction, updateCartAction, deleteFromCartAction };
+export {
+  checkOutAction,
+  addToCartAction,
+  updateCartAction,
+  deleteFromCartAction,
+};
