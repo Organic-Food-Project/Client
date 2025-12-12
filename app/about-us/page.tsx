@@ -1,12 +1,6 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { CheckCircle } from 'lucide-react';
 
-export const metadata = {
-  title: 'About Us - EcoFila',
-  description:
-    'Learn about EcoFila mission to deliver organic and healthy food products',
-};
-
 export default function AboutPage() {
   return (
     <>
@@ -29,11 +23,10 @@ export default function AboutPage() {
             Our Mission
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed mb-4">
-            EcoFila is committed to revolutionizing the way people access
-            fresh, organic, and healthy food products. Our mission is to bridge
-            the gap between local farmers and conscious consumers, ensuring that
-            every family has access to pesticide-free, sustainably grown
-            produce.
+            EcoFila is committed to revolutionizing the way people access fresh,
+            organic, and healthy food products. Our mission is to bridge the gap
+            between local farmers and conscious consumers, ensuring that every
+            family has access to pesticide-free, sustainably grown produce.
           </p>
           <p className="text-muted-foreground text-lg leading-relaxed">
             We believe that healthy eating should be accessible to everyone, and

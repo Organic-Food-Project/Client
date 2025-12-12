@@ -17,7 +17,6 @@ const Settings = async () => {
   const userData = await Query({
     api: 'v1/users',
   });
-  console.log({ userData: userData?.data?.data });
 
   return (
     <div className="space-y-8">

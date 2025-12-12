@@ -3,7 +3,7 @@ import React from 'react';
 
 export const metadata: Metadata = {
   title: {
-    default: 'FAQS',
+    default: 'FAQs',
     template: '%s | EcoFila',
   },
   description:

@@ -3,7 +3,7 @@
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { useActionState } from 'react';
+import { useActionState, useEffect } from 'react';
 import { ContactAction } from '@/lib/actions/ContactAction';
 import { useState } from 'react';
 import Toast from '@/components/ui/Toast';
@@ -30,19 +30,21 @@ export default function ContactForm() {
     }));
   };
 
-  if (state.success) {
-    Toast({
-      Message: 'Your message has been sent successfully!',
-      type: 'success',
-    });
+  useEffect(() => {
+    if (state.success) {
+      Toast({
+        Message: 'Your message has been sent successfully!',
+        type: 'success',
+      });
 
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: '',
-    });
-  }
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+      });
+    }
+  }, [state]);
 
   return (
     <form action={action}>
@@ -100,23 +102,13 @@ export default function ContactForm() {
         </p>
       )}
 
-      <Button
-        loading={loading || state.success}
-        disabled={loading || state.success}
-        className="w-full mt-2"
-      >
+      <Button loading={loading} disabled={loading} className="w-full mt-2">
         Send Message
       </Button>
 
       {state?.errors?.form && (
         <p className="text-body-small my-2 text-danger">
           {state?.errors?.form}
-        </p>
-      )}
-
-      {state?.success && (
-        <p className="text-green-600 text-body-small mt-3">
-          Message sent successfully!
         </p>
       )}
     </form>

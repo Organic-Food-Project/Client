@@ -34,7 +34,7 @@ export const ContactAction = async (
   }
 
   const { error } = await Mutation({
-    api: 'v1/contact',
+    api: 'v1/contactUs',
     method: 'POST',
     body: parsed.data,
   });
