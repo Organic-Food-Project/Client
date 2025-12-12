@@ -36,7 +36,14 @@ export default function ProfileSettings({ data }: ProfileSettingsProps) {
   );
   const [preview, setPreview] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
-
+  const [firstName, setFirstName] = useState(data.firstName);
+  const [lastName, setLastName] = useState(data.lastName);
+  const [phone, setPhone] = useState(data.Phone_Number || '');
+  const [savedState, setSavedState] = useState({
+    firstName: data.firstName,
+    lastName: data.lastName,
+    phone: data.Phone_Number || '',
+  });
   // دمج حالة الرفع المعروضة
   const uploading = isUploading || isPending;
 
@@ -78,6 +85,11 @@ export default function ProfileSettings({ data }: ProfileSettingsProps) {
   useEffect(() => {
     if (profileState.success) {
       Toast({ Message: 'Profile updated successfully!', type: 'success' });
+      setSavedState({
+        firstName,
+        lastName,
+        phone,
+      });
     } else if (
       profileState.errors &&
       Object.keys(profileState.errors).length > 0
@@ -86,7 +98,11 @@ export default function ProfileSettings({ data }: ProfileSettingsProps) {
       const errorMsg =
         profileState.errors.form || Object.values(profileState.errors)[0];
       Toast({ Message: errorMsg as string, type: 'error' });
+      setFirstName(savedState.firstName);
+      setLastName(savedState.lastName);
+      setPhone(savedState.phone);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [profileState]);
 
   const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -126,7 +142,8 @@ export default function ProfileSettings({ data }: ProfileSettingsProps) {
             name="firstName"
             Label="First name"
             type="string"
-            defaultValue={data.firstName}
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
             disabled={loadingProfile}
             required
           />
@@ -134,7 +151,8 @@ export default function ProfileSettings({ data }: ProfileSettingsProps) {
             name="lastName"
             Label="Last name"
             type="string"
-            defaultValue={data.lastName}
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
             disabled={loadingProfile}
             required
           />
@@ -142,7 +160,8 @@ export default function ProfileSettings({ data }: ProfileSettingsProps) {
             name="Phone_Number"
             Label="Phone"
             type="string"
-            defaultValue={data.Phone_Number || ''}
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
             disabled={loadingProfile}
           />
 

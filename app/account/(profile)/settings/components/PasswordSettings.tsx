@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState, useEffect, useRef } from 'react';
+import { useActionState, useEffect, useRef, useState } from 'react';
 import Toast from '@/components/ui/Toast';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -8,6 +8,9 @@ import { changePasswordAction } from '@/lib/actions/UserActions';
 
 export default function PasswordSettings() {
   const formRef = useRef<HTMLFormElement>(null);
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const [passwordState, passwordAction, loadingPassword] = useActionState(
     changePasswordAction,
@@ -18,6 +21,9 @@ export default function PasswordSettings() {
     if (passwordState.success) {
       Toast({ Message: 'Password changed!', type: 'success' });
       formRef.current?.reset();
+      setCurrentPassword('');
+      setNewPassword('');
+      setConfirmPassword('');
     }
   }, [passwordState]);
 
@@ -36,6 +42,8 @@ export default function PasswordSettings() {
           name="currentPassword"
           type="password"
           Label="Current Password"
+          value={currentPassword}
+          onChange={(e) => setCurrentPassword(e.target.value)}
           required
         />
 
@@ -44,12 +52,17 @@ export default function PasswordSettings() {
             name="NewPassword"
             type="password"
             Label="New Password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
             required
           />
+
           <Input
             name="confirmPassword"
             type="password"
             Label="Confirm Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
         </div>
