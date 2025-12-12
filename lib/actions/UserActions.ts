@@ -4,13 +4,15 @@
 import { z } from 'zod';
 import Mutation from '@/lib/Mutation';
 
-type ActionState = { errors: Record<string, string> | null; success?: boolean };
+// Consistent ActionState type
+type ActionState =
+  | { errors: Record<string, string>; success?: never }
+  | { success: true; errors?: never };
 
 const profileSchema = z.object({
-  first_name: z.string().min(1, 'Required'),
-  last_name: z.string().min(1, 'Required'),
-  email: z.string().email('Invalid email'),
-  phone: z.string().optional(),
+  firstName: z.string().min(1, 'Required'),
+  lastName: z.string().min(1, 'Required'),
+  Phone_Number: z.string().optional(),
 });
 
 const billingSchema = z.object({
@@ -26,15 +28,23 @@ const billingSchema = z.object({
 });
 
 const passwordSchema = z.object({
-  current_password: z.string().min(6, 'Required'),
-  new_password: z.string().min(6, 'Required'),
-  confirm_password: z.string().min(6, 'Required'),
+  currentPassword: z
+    .string()
+    .min(6, 'Current Password is Required and must be at least 6'),
+  NewPassword: z
+    .string()
+    .min(6, 'New Password is Required and must be at least 6'),
+  confirmPassword: z
+    .string()
+    .min(6, 'Confirm Password is Required and must be at least 6'),
 });
 
 function parseForm(schema: any, formData: FormData) {
   const values: Record<string, any> = {};
 
-  schema._def.shape().forEach((_val: any, key: string) => {
+  const shape = schema.shape;
+
+  Object.keys(shape).forEach((key) => {
     values[key] = formData.get(key);
   });
 
@@ -43,7 +53,7 @@ function parseForm(schema: any, formData: FormData) {
   if (!parsed.success) {
     const errors: Record<string, string> = {};
     parsed.error.issues.forEach((issue: any) => {
-      errors[issue.path[0] as string] = issue.message;
+      errors[issue.path[0]] = issue.message;
     });
     return { errors };
   }
@@ -51,13 +61,16 @@ function parseForm(schema: any, formData: FormData) {
   return { data: parsed.data };
 }
 
-export async function updateProfileAction(prev: any, formData: FormData) {
+export async function updateProfileAction(
+  prev: any,
+  formData: FormData
+): Promise<ActionState> {
   const parsed = parseForm(profileSchema, formData);
   if (parsed.errors) return { errors: parsed.errors };
 
   const { error } = await Mutation({
-    api: 'v1/user/profile',
-    method: 'POST',
+    api: 'v1/users/updateuser',
+    method: 'PUT',
     body: parsed.data,
   });
 
@@ -68,12 +81,12 @@ export async function updateProfileAction(prev: any, formData: FormData) {
 export async function updateBillingAddressAction(
   prev: any,
   formData: FormData
-) {
+): Promise<ActionState> {
   const parsed = parseForm(billingSchema, formData);
   if (parsed.errors) return { errors: parsed.errors };
 
   const { error } = await Mutation({
-    api: 'v1/user/billing',
+    api: 'v1/user',
     method: 'POST',
     body: parsed.data,
   });
@@ -82,17 +95,20 @@ export async function updateBillingAddressAction(
   return { success: true };
 }
 
-export async function changePasswordAction(prev: any, formData: FormData) {
+export async function changePasswordAction(
+  prev: any,
+  formData: FormData
+): Promise<ActionState> {
   const parsed = parseForm(passwordSchema, formData);
   if (parsed.errors) return { errors: parsed.errors };
 
-  if (parsed.data.new_password !== parsed.data.confirm_password) {
+  if (parsed.data.NewPassword !== parsed.data.confirmPassword) {
     return { errors: { confirm_password: 'Passwords do not match' } };
   }
 
   const { error } = await Mutation({
-    api: 'v1/user/change-password',
-    method: 'POST',
+    api: 'v1/users/updatepassword',
+    method: 'PUT',
     body: parsed.data,
   });
 
@@ -105,37 +121,37 @@ export async function uploadProfileImageAction(
   formData: FormData
 ): Promise<ActionState> {
   const file = formData.get('image') as File;
+  console.log('---- FormData ----');
+  for (const [key, value] of formData.entries()) {
+    console.log(key, value);
+  }
 
   // Check if file exists and is actually a File object
   if (!file || !(file instanceof File) || file.size === 0) {
-    return { success: false, errors: { image: 'No image uploaded' } };
+    return { errors: { image: 'No image uploaded' } };
   }
 
   // Validate file type
   if (!file.type.startsWith('image/')) {
-    return {
-      success: false,
-      errors: { image: 'Please upload a valid image file' },
-    };
+    return { errors: { image: 'Please upload a valid image file' } };
   }
 
   const maxSize = 5 * 1024 * 1024; // 5MB
   if (file.size > maxSize) {
-    return {
-      success: false,
-      errors: { image: 'Image size must be less than 5MB' },
-    };
+    return { errors: { image: 'Image size must be less than 5MB' } };
   }
 
   const Form = new FormData();
   Form.append('profileImage', file);
 
-  const { error } = await Mutation({
+  const { data, error } = await Mutation({
     api: 'v1/users/updateImage',
     method: 'PUT',
     body: Form,
   });
 
-  if (error) return { success: false, errors: { image: error } };
-  return { success: true, errors: null };
+  console.log({ data });
+
+  if (error) return { errors: { image: error } };
+  return { success: true };
 }

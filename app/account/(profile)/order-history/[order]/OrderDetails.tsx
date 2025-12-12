@@ -92,54 +92,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
-          {/* Billing Address */}
-          <div className="flex flex-col sm:flex-row max-sm:gap-6 col-span-2">
-            <div className="border-t-1 border-l-1 border-b-1 border-gray-100 py-[20px]">
-              <h3 className="text-base font-medium text-gray-400 uppercase tracking-wider pb-4 mb-4 border-b border-gray-100 pl-[20px] pr-[10px]">
-                Billing Address
-              </h3>
-              <div className="space-y-2 pl-[20px] pr-[10px]">
-                <p className="font-medium text-gray-900">{orderDetails.name}</p>
-                <p className="text-sm text-gray-600">{orderDetails.address}</p>
-                <div className="pt-8">
-                  <p className="text-xs font-medium text-gray-400 uppercase mb-1">
-                    Email
-                  </p>
-                  <p className="text-sm text-gray-900">{orderDetails.email}</p>
-                </div>
-                <div>
-                  <p className="text-xs font-medium text-gray-400 uppercase mb-1">
-                    Phone
-                  </p>
-                  <p className="text-sm text-gray-900">{orderDetails.phone}</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Shipping Address */}
-            <div className="border-1 border-gray-100 py-[20px]">
-              <h3 className="text-base font-medium text-gray-400 uppercase tracking-wider pb-4 mb-4 border-b border-gray-100 pl-[20px] pr-[10px]">
-                Shipping Address
-              </h3>
-              <div className="space-y-2 pl-[20px] pr-[10px]">
-                <p className="font-medium text-gray-900">{orderDetails.name}</p>
-                <p className="text-sm text-gray-600">{orderDetails.address}</p>
-                <div className="pt-8">
-                  <p className="text-xs font-medium text-gray-400 uppercase mb-1">
-                    Email
-                  </p>
-                  <p className="text-sm text-gray-900">{orderDetails.email}</p>
-                </div>
-                <div>
-                  <p className="text-xs font-medium text-gray-400 uppercase mb-1">
-                    Phone
-                  </p>
-                  <p className="text-sm text-gray-900">{orderDetails.phone}</p>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="grid grid-cols-1 gap-6 p-6">
           {/* Right Column - Order Summary */}
           <div className="border-1 border-gray-100">
             <div className="">

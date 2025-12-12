@@ -1,12 +1,14 @@
 'use client';
 
-import { useActionState, useEffect } from 'react';
+import { useActionState, useEffect, useRef } from 'react';
 import Toast from '@/components/ui/Toast';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { changePasswordAction } from '@/lib/actions/UserActions';
 
 export default function PasswordSettings() {
+  const formRef = useRef<HTMLFormElement>(null);
+
   const [passwordState, passwordAction, loadingPassword] = useActionState(
     changePasswordAction,
     { errors: {} }
@@ -15,8 +17,9 @@ export default function PasswordSettings() {
   useEffect(() => {
     if (passwordState.success) {
       Toast({ Message: 'Password changed!', type: 'success' });
+      formRef.current?.reset();
     }
-  }, [passwordState.success]);
+  }, [passwordState]);
 
   return (
     <div className="bg-white rounded-lg border-1 border-gray-100">
@@ -24,9 +27,13 @@ export default function PasswordSettings() {
         Change Password
       </h2>
 
-      <form action={passwordAction} className="space-y-6 px-6 py-6">
+      <form
+        ref={formRef}
+        action={passwordAction}
+        className="space-y-6 px-6 py-6"
+      >
         <Input
-          name="current_password"
+          name="currentPassword"
           type="password"
           Label="Current Password"
           required
@@ -34,20 +41,31 @@ export default function PasswordSettings() {
 
         <div className="grid grid-cols-2 gap-4">
           <Input
-            name="new_password"
+            name="NewPassword"
             type="password"
             Label="New Password"
             required
           />
           <Input
-            name="confirm_password"
+            name="confirmPassword"
             type="password"
             Label="Confirm Password"
             required
           />
         </div>
 
+        {passwordState.errors?.form && (
+          <p className="text-red-500 text-sm">{passwordState.errors.form}</p>
+        )}
+
+        {passwordState.errors?.confirmPassword && (
+          <p className="text-red-500 text-sm">
+            {passwordState.errors.confirmPassword}
+          </p>
+        )}
+
         <Button
+          type="submit"
           className="w-[194px]"
           loading={loadingPassword}
           disabled={loadingPassword}

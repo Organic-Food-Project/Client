@@ -56,11 +56,7 @@ const Order = () => {
     subtotal: 365.0,
     total: 84.0,
   };
-  return (
-    <div>
-      <OrderDetails products={products} orderDetails={orderDetails} />
-    </div>
-  );
+  return <OrderDetails products={products} orderDetails={orderDetails} />;
 };
 
 export default Order;
