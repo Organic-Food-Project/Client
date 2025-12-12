@@ -65,7 +65,9 @@ const AllProducts = async ({
         )}
       </div>
       {products.data?.data?.length > 0 && (
-        <Pagination metaData={products.data?.meta} />
+        <Suspense>
+          <Pagination metaData={products.data?.meta} />
+        </Suspense>
       )}
     </div>
   );

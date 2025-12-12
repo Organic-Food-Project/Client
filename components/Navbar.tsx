@@ -9,6 +9,7 @@ import { Menu } from 'lucide-react';
 import ActiveLink from './ui/ActiveLink';
 import Cart from '@/assets/icons/Cart.svg';
 import SearchComponent from './SearchComponent';
+import { Suspense } from 'react';
 
 export default async function Navbar() {
   return (
@@ -39,7 +40,9 @@ export default async function Navbar() {
           (123) 456-7890
         </li>
         <li className="max-sm:hidden flex items-center">
-          <SearchComponent />
+          <Suspense>
+            <SearchComponent />
+          </Suspense>
         </li>
         <li className="max-sm:hidden ">
           <Link href="/wishlist">
