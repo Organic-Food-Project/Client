@@ -4,6 +4,8 @@
 import { z } from 'zod';
 import Mutation from '@/lib/Mutation';
 
+type ActionState = { errors: Record<string, string> | null; success?: boolean };
+
 const profileSchema = z.object({
   first_name: z.string().min(1, 'Required'),
   last_name: z.string().min(1, 'Required'),
@@ -71,7 +73,7 @@ export async function updateBillingAddressAction(
   if (parsed.errors) return { errors: parsed.errors };
 
   const { error } = await Mutation({
-    api: 'v1/user/billing', // <- غير الـ endpoint
+    api: 'v1/user/billing',
     method: 'POST',
     body: parsed.data,
   });
@@ -98,11 +100,31 @@ export async function changePasswordAction(prev: any, formData: FormData) {
   return { success: true };
 }
 
-export async function uploadProfileImageAction(prev: any, formData: FormData) {
+export async function uploadProfileImageAction(
+  prev: any,
+  formData: FormData
+): Promise<ActionState> {
   const file = formData.get('image') as File;
-console.log({ file });
-  if (!file) {
-    return { errors: { form: 'No image uploaded' } };
+
+  // Check if file exists and is actually a File object
+  if (!file || !(file instanceof File) || file.size === 0) {
+    return { success: false, errors: { image: 'No image uploaded' } };
+  }
+
+  // Validate file type
+  if (!file.type.startsWith('image/')) {
+    return {
+      success: false,
+      errors: { image: 'Please upload a valid image file' },
+    };
+  }
+
+  const maxSize = 5 * 1024 * 1024; // 5MB
+  if (file.size > maxSize) {
+    return {
+      success: false,
+      errors: { image: 'Image size must be less than 5MB' },
+    };
   }
 
   const Form = new FormData();
@@ -114,6 +136,6 @@ console.log({ file });
     body: Form,
   });
 
-  if (error) return { errors: { form: error } };
-  return { success: true };
+  if (error) return { success: false, errors: { image: error } };
+  return { success: true, errors: null };
 }
