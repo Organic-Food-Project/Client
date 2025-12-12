@@ -15,10 +15,10 @@ export default function Terms() {
               1. Acceptance of Terms
             </h2>
             <p>
-              By accessing and using the Organic Food website and purchasing
-              organic products through our service, you agree to be bound by
-              these Terms and Conditions. If you do not agree with any part of
-              these terms, please do not use our service.
+              By accessing and using the EcoFila website and purchasing organic
+              products through our service, you agree to be bound by these Terms
+              and Conditions. If you do not agree with any part of these terms,
+              please do not use our service.
             </p>
           </section>
 
@@ -27,13 +27,12 @@ export default function Terms() {
               2. Product Information & Availability
             </h2>
             <p>
-              All products listed on Organic Food are organic certified and
-              sourced from verified local farmers. Product descriptions,
-              including nutritional information and organic certification
-              status, are provided in good faith. Availability is subject to
-              seasonal variations and crop yields. We reserve the right to
-              adjust product availability and pricing based on market
-              conditions.
+              All products listed on EcoFila are organic certified and sourced
+              from verified local farmers. Product descriptions, including
+              nutritional information and organic certification status, are
+              provided in good faith. Availability is subject to seasonal
+              variations and crop yields. We reserve the right to adjust product
+              availability and pricing based on market conditions.
             </p>
           </section>
 
@@ -42,8 +41,8 @@ export default function Terms() {
               3. Ordering & Purchases
             </h2>
             <p>
-              When you place an order on Organic Food, you are making an offer
-              to purchase products. We reserve the right to accept or refuse any
+              When you place an order on EcoFila, you are making an offer to
+              purchase products. We reserve the right to accept or refuse any
               order. All orders must include accurate delivery information and
               contact details. Prices are subject to change without notice, and
               any price changes will be reflected before checkout.
@@ -81,11 +80,11 @@ export default function Terms() {
               6. Quality Guarantee
             </h2>
             <p>
-              All products sold through Organic Food are certified organic and
-              meet strict quality standards. We guarantee the freshness and
-              quality of our produce. If you receive defective, damaged, or
-              expired products, we will provide a full refund or replacement at
-              no additional cost.
+              All products sold through EcoFila are certified organic and meet
+              strict quality standards. We guarantee the freshness and quality
+              of our produce. If you receive defective, damaged, or expired
+              products, we will provide a full refund or replacement at no
+              additional cost.
             </p>
           </section>
 
@@ -108,12 +107,11 @@ export default function Terms() {
               8. Allergies & Health Disclaimers
             </h2>
             <p>
-              While all Organic Food products are organic and processed
-              carefully, we cannot guarantee complete absence of allergens.
-              Customers with severe allergies should contact us before ordering.
-              Organic Food is not responsible for allergic reactions caused by
-              product consumption. Always verify ingredient information before
-              purchase.
+              While all EcoFila products are organic and processed carefully, we
+              cannot guarantee complete absence of allergens. Customers with
+              severe allergies should contact us before ordering. EcoFila is not
+              responsible for allergic reactions caused by product consumption.
+              Always verify ingredient information before purchase.
             </p>
           </section>
 
@@ -135,7 +133,7 @@ export default function Terms() {
               10. Limitation of Liability
             </h2>
             <p>
-              Organic Food shall not be liable for any indirect, incidental, or
+              EcoFila shall not be liable for any indirect, incidental, or
               consequential damages arising from product use. Our liability is
               limited to the purchase price of the specific product. This
               limitation applies to all damages regardless of the cause.
@@ -158,7 +156,7 @@ export default function Terms() {
               12. Changes to Terms
             </h2>
             <p>
-              Organic Food reserves the right to modify these terms at any time.
+              EcoFila reserves the right to modify these terms at any time.
               Changes will be posted on this page with an updated date.
               Continued use of our service constitutes acceptance of modified
               terms.

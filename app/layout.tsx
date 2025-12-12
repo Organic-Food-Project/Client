@@ -6,16 +6,19 @@ import BreadCrumbs from '@/components/BreadCrumbs';
 import ScrollToTop from '@/components/ScrollToTop';
 import { Poppins } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Organic Food',
-    template: '%s | Organic Food',
+    default: 'EcoFila',
+    template: '%s | EcoFila',
   },
   description:
     'Discover fresh and healthy organic food products made with natural ingredients. Shop organic fruits, vegetables, and eco-friendly groceries online.',
 
   keywords: [
+    'EcoFila',
     'organic food',
     'healthy groceries',
     'natural products',
@@ -26,17 +29,17 @@ export const metadata: Metadata = {
   ],
 
   openGraph: {
-    title: 'Organic Food Store',
+    title: 'EcoFila | Organic Store',
     description:
       'Buy fresh, natural, and sustainable organic food products online. Healthy groceries, organic fruits, vegetables, and eco-friendly choices delivered to your door.',
-    url: 'https://organicfood-client.vercel.app',
-    siteName: 'Organic Food Store',
+    url: 'https://ecofila.vercel.app',
+    siteName: 'EcoFila | Organic Store',
     images: [
       {
-        url: 'https://organicfood-client.vercel.app/Logo.ico',
+        url: 'https://ecofila.vercel.app/Logo.ico',
         width: 1200,
         height: 630,
-        alt: 'Fresh Organic Food Banner',
+        alt: 'EcoFila Logo',
       },
     ],
     locale: 'en_US',
@@ -45,14 +48,14 @@ export const metadata: Metadata = {
 
   twitter: {
     card: 'summary_large_image',
-    title: 'Organic Food Store',
+    title: 'EcoFila | Organic Store',
     description:
       'Shop fresh, healthy, and sustainable organic food online. Enjoy natural groceries, fruits, vegetables, and eco-friendly products.',
-    images: ['https://organicfood-client.vercel.app/Logo.ico'],
+    images: ['https://ecofila.vercel.app/Logo.ico'],
   },
 
   alternates: {
-    canonical: 'https://organicfood-client.vercel.app',
+    canonical: 'https://ecofila.vercel.app',
   },
 };
 
@@ -67,13 +70,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={poppins.className}>
+      <body className={`${poppins.className} bg-white`}>
         <Navbar />
         <BreadCrumbs />
         {children}
         <ScrollToTop />
         <Footer />
       </body>
+      <Analytics />
+      <SpeedInsights />
       <Toaster position="top-right" />
     </html>
   );

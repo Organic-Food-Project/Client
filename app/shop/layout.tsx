@@ -4,7 +4,7 @@ import React from 'react';
 export const metadata: Metadata = {
   title: {
     default: 'Shop',
-    template: '%s | Organic Food',
+    template: '%s | EcoFila',
   },
   description:
     'Discover fresh organic food, healthy products, and natural groceries online. Shop high-quality organic items for a better and healthier lifestyle.',

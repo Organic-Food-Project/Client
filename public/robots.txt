@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://organicfood-client.vercel.app
+Host: https://ecofila.vercel.app
 
 # Sitemaps
-Sitemap: https://organicfood-client.vercel.app/sitemap.xml
+Sitemap: https://ecofila.vercel.app/sitemap.xml

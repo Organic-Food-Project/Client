@@ -2,9 +2,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import { CheckCircle } from 'lucide-react';
 
 export const metadata = {
-  title: 'About Us - Organic Food',
+  title: 'About Us - EcoFila',
   description:
-    'Learn about Organic Food mission to deliver organic and healthy food products',
+    'Learn about EcoFila mission to deliver organic and healthy food products',
 };
 
 export default function AboutPage() {
@@ -14,7 +14,7 @@ export default function AboutPage() {
       <div className="py-12 px-4">
         <div>
           <h1 className="text-4xl font-extrabold text-foreground mb-3 tracking-tight">
-            About Organic Food
+            About EcoFila
           </h1>
           <p className="text-muted-foreground text-lg leading-relaxed">
             Bringing fresh, organic produce directly to your doorstep
@@ -29,7 +29,7 @@ export default function AboutPage() {
             Our Mission
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed mb-4">
-            Organic Food is committed to revolutionizing the way people access
+            EcoFila is committed to revolutionizing the way people access
             fresh, organic, and healthy food products. Our mission is to bridge
             the gap between local farmers and conscious consumers, ensuring that
             every family has access to pesticide-free, sustainably grown
@@ -92,7 +92,7 @@ export default function AboutPage() {
         {/* Why Choose */}
         <section>
           <h2 className="text-3xl font-bold mb-6 tracking-tight text-foreground">
-            Why Choose Organic Food?
+            Why Choose EcoFila?
           </h2>
           <ul className="space-y-4 text-muted-foreground leading-relaxed">
             {[

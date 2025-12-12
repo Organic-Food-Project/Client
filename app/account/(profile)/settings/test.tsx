@@ -96,11 +96,11 @@ export default function UserSettings() {
           {/* Profile Image */}
           <div className="flex flex-col items-center gap-4">
             <Image
-              src={preview || ''}
+              src={preview || '/default-user.png'}
               alt="Profile"
               width={224}
               height={224}
-              className="bg-gray-100 rounded-full h-[224px] w-[224px] min-h-[224px] min-w-[224px] max-w-[224px] min-h-[224px]"
+              className="rounded-full min-h-[224px] min-w-[224px] max-w-[224px] min-h-[224px]"
             />
 
             <label
@@ -128,16 +128,23 @@ export default function UserSettings() {
         </h2>
 
         <form action={billingAction} className="space-y-6 px-6 py-6">
-          <div className="grid grid-cols-1 gap-4">
+          <div className="grid grid-cols-3 gap-4">
+            <Input name="billing_first_name" Label="First name" required />
+            <Input name="billing_last_name" Label="Last name" required />
             <Input name="company_name" Label="Company Name" />
           </div>
 
-          <Input name="street" Label="Street Address" />
+          <Input name="street" Label="Street Address" required />
 
           <div className="grid grid-cols-3 gap-4">
-            <Input name="country" Label="Country" />
-            <Input name="state" Label="State" />
-            <Input name="zip" Label="Zip Code" />
+            <Input name="country" Label="Country" required />
+            <Input name="state" Label="State" required />
+            <Input name="zip" Label="Zip Code" required />
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <Input name="billing_email" Label="Email" type="email" required />
+            <Input name="billing_phone" Label="Phone" required />
           </div>
 
           <Button

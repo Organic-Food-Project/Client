@@ -4,10 +4,10 @@ import React from 'react';
 export const metadata: Metadata = {
   title: {
     default: 'Contact Us',
-    template: '%s | Organic Food',
+    template: '%s | EcoFila',
   },
   description:
-    'Get in touch with the Organic Food team for inquiries, support, or feedback. We’re here to help you enjoy a smoother, healthier, and more natural shopping experience.',
+    'Get in touch with the EcoFila team for inquiries, support, or feedback. We’re here to help you enjoy a smoother, healthier, and more natural shopping experience.',
 };
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {

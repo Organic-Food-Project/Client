@@ -5,10 +5,10 @@ import OrderTable from './OrderTable';
 export const metadata: Metadata = {
   title: {
     default: 'Order history',
-    template: '%s | Organic Food',
+    template: '%s | EcoFila',
   },
   description:
-    'View and track your past orders, check delivery status, and manage your purchase history on Organic Food.',
+    'View and track your past orders, check delivery status, and manage your purchase history on EcoFila.',
 };
 
 const Orders = () => {

@@ -55,12 +55,12 @@ export default async function Footer() {
             <div className="flex items-center gap-2">
               <Image
                 src={Logo}
-                alt="Ecobazar Logo"
+                alt="EcoFila Logo"
                 width={32}
                 height={32}
                 className="h-full"
               />
-              <h2 className="text-white font-medium text-[32px]">Ecobazar</h2>
+              <h2 className="text-white font-medium text-[32px]">EcoFila</h2>
             </div>
             <p className="text-gray-500 text-body-small font-400">
               Stay fresh with the latest organic deals and healthy tips! Sign up
@@ -106,7 +106,7 @@ export default async function Footer() {
 
         <section className="py-7 border-t-gray-800 border-t-2 flex flex-wrap gap-y-5 sm2:justify-between justify-center items-center">
           <p className="text-body-small font-400 text-gray-500">
-            Ecobazar eCommerce © {new Date().getFullYear()}. All Rights Reserved
+            EcoFila eCommerce © {new Date().getFullYear()}. All Rights Reserved
           </p>
           <Image
             src={Payments}

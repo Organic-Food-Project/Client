@@ -6,10 +6,10 @@ import Form from './form';
 export const metadata: Metadata = {
   title: {
     default: 'Signup',
-    template: '%s | Organic Food',
+    template: '%s | EcoFila',
   },
   description:
-    'Create your Organic Food account today and start enjoying fresh, healthy, and 100% natural groceries. Sign up to shop organic fruits, vegetables, and eco-friendly products delivered straight to your door.',
+    'Create your EcoFila account today and start enjoying fresh, healthy, and 100% natural groceries. Sign up to shop organic fruits, vegetables, and eco-friendly products delivered straight to your door.',
 };
 
 const SignUp = () => {

@@ -5,18 +5,14 @@ import UserSettings from './UserSettings';
 export const metadata: Metadata = {
   title: {
     default: 'Settings',
-    template: '%s | Organic Food',
+    template: '%s | EcoFila',
   },
   description:
-    'Manage your account settings, update your profile, and customize your shopping experience on Organic Food.',
+    'Manage your account settings, update your profile, and customize your shopping experience on EcoFila.',
 };
 
 const Settings = () => {
-  return (
-    <div>
-      <UserSettings />
-    </div>
-  );
+  return <UserSettings />;
 };
 
 export default Settings;

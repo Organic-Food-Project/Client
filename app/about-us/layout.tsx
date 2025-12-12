@@ -4,10 +4,10 @@ import React from 'react';
 export const metadata: Metadata = {
   title: {
     default: 'Wishlist',
-    template: '%s | Organic Food',
+    template: '%s | EcoFila',
   },
   description:
-    'Discover fresh, healthy, and 100% organic food online. Shop fruits, vegetables, and groceries sourced from trusted farms. Eat clean, live better with Organic Food.',
+    'Discover fresh, healthy, and 100% organic food online. Shop fruits, vegetables, and groceries sourced from trusted farms. Eat clean, live better with EcoFila.',
 };
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {

@@ -17,7 +17,7 @@ const NotFound = () => {
       </h3>
       <p className="text-body-medium font-400 text-gray-500 max-w-[600px] py-5">
         This is 404 page please navigate to home and explore our best organic
-        and healty food in Ecobazar.
+        and healty food in EcoFila.
       </p>
       <Link
         href="/"

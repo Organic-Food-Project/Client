@@ -35,6 +35,7 @@ const Mutation = async ({
 
     const res = await axios.request(config);
 
+    console.log({ res });
     return { data: res.data, error: null, status: res.status };
   } catch (err: any) {
     if (err?.response?.status === 401) {
@@ -42,6 +43,7 @@ const Mutation = async ({
       cookieStore.delete('token');
       redirect('/account/login');
     }
+
     const errorMsg =
       err?.response?.data?.message ||
       err?.response?.data ||
@@ -49,6 +51,7 @@ const Mutation = async ({
       err?.message ||
       'Network error';
 
+    console.log({ errorMsg });
     return {
       data: null,
       error: errorMsg,

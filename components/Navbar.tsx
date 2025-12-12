@@ -30,7 +30,7 @@ export default async function Navbar() {
       </ul>
       <div>
         <Link href="/">
-          <Image src={Logo} alt="Ecobazar Logo" width={183} height={38} />
+          <Image src={Logo} alt="EcoFila Logo" width={183} height={38} />
         </Link>
       </div>
       <ul className="flex items-center text-gray-900 gap-5">

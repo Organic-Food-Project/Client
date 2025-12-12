@@ -6,10 +6,10 @@ import TempProduct from '@/assets/TempProduct.webp';
 export const metadata: Metadata = {
   title: {
     default: 'Order Details',
-    template: '%s | Organic Food',
+    template: '%s | EcoFila',
   },
   description:
-    'Manage your Organic Food account with ease. Track your orders, update your profile, and explore fresh, healthy products all in one place.',
+    'Manage your EcoFila account with ease. Track your orders, update your profile, and explore fresh, healthy products all in one place.',
 };
 
 const Order = () => {

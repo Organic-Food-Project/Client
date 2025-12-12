@@ -6,10 +6,10 @@ import LoginForm from './form';
 export const metadata: Metadata = {
   title: {
     default: 'Login',
-    template: '%s | Organic Food',
+    template: '%s | EcoFila',
   },
   description:
-    'Access your organic food profile to manage account details, track healthy grocery orders, and enjoy fresh, natural, and sustainable products. Shop organic fruits, vegetables, and eco-friendly food online with ease.',
+    'Access your EcoFila profile to manage account details, track healthy grocery orders, and enjoy fresh, natural, and sustainable products. Shop organic fruits, vegetables, and eco-friendly food online with ease.',
 };
 
 const Login = () => {

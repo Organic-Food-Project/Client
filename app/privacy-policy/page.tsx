@@ -15,12 +15,12 @@ export default function PrivacyPage() {
               1. Introduction
             </h2>
             <p>
-              Organic Food (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;)
-              operates the Organic Food website. We are committed to protecting
-              your privacy and ensuring you have a positive experience on our
-              platform. This Privacy Policy outlines how we collect, use, and
-              protect your personal information when you use our organic food
-              delivery service.
+              EcoFila (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) operates
+              the EcoFila website. We are committed to protecting your privacy
+              and ensuring you have a positive experience on our platform. This
+              Privacy Policy outlines how we collect, use, and protect your
+              personal information when you use our organic food delivery
+              service.
             </p>
           </section>
 
@@ -95,11 +95,11 @@ export default function PrivacyPage() {
               6. Cookies & Tracking
             </h2>
             <p>
-              Organic Food uses cookies to improve your browsing experience and
-              track website usage. We use both session and persistent cookies.
-              You can disable cookies in your browser settings, though this may
-              limit functionality. We use Google Analytics to understand user
-              behavior and improve our organic product offerings.
+              EcoFila uses cookies to improve your browsing experience and track
+              website usage. We use both session and persistent cookies. You can
+              disable cookies in your browser settings, though this may limit
+              functionality. We use Google Analytics to understand user behavior
+              and improve our organic product offerings.
             </p>
           </section>
 
@@ -164,11 +164,11 @@ export default function PrivacyPage() {
               11. Children&apos;s Privacy
             </h2>
             <p>
-              Organic Food is not intended for children under 13 years old. We
-              do not knowingly collect information from children. If we discover
-              we have collected data from a child, we will delete it
-              immediately. Parents or guardians who believe their child provided
-              information should contact us.
+              EcoFila is not intended for children under 13 years old. We do not
+              knowingly collect information from children. If we discover we
+              have collected data from a child, we will delete it immediately.
+              Parents or guardians who believe their child provided information
+              should contact us.
             </p>
           </section>
 
@@ -178,9 +178,9 @@ export default function PrivacyPage() {
             </h2>
             <p>
               Your information may be processed and stored in different
-              countries. By using Organic Food, you consent to the transfer of
-              your information to countries that may have different data
-              protection laws. We ensure appropriate safeguards are in place for
+              countries. By using EcoFila, you consent to the transfer of your
+              information to countries that may have different data protection
+              laws. We ensure appropriate safeguards are in place for
               international data transfers.
             </p>
           </section>
@@ -203,7 +203,7 @@ export default function PrivacyPage() {
             </h2>
             <p>
               For privacy concerns or to exercise your privacy rights, contact
-              us at Support@Organic Food.com or call (201) 555-0124. Our privacy
+              us at ameen2bman@gmail.com or call (123) 456-7890. Our privacy
               team will respond within 5 business days.
             </p>
           </section>

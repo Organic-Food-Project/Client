@@ -1,4 +1,4 @@
 module.exports = {
-  siteUrl: 'https://organicfood-client.vercel.app',
+  siteUrl: 'https://ecofila.vercel.app',
   generateRobotsTxt: true,
 };
