@@ -23,7 +23,7 @@ const Dashboard = async () => {
   return (
     <div className="flex flex-col gap-[24px]">
       <UserSettings user={userData?.data?.data} />
-      <OrderHistory orders={orders?.data?.data} />
+      <OrderHistory orders={[]} />
     </div>
   );
 };

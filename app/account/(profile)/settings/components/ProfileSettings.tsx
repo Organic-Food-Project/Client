@@ -32,17 +32,17 @@ export default function ProfileSettings({ data }: ProfileSettingsProps) {
 
   // Track current profile image (either from server or preview)
   const [currentImage, setCurrentImage] = useState<string>(
-    data.Profile_Image_URL || ''
+    data?.Profile_Image_URL || 'Logo.ico'
   );
   const [preview, setPreview] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
-  const [firstName, setFirstName] = useState(data.firstName);
-  const [lastName, setLastName] = useState(data.lastName);
-  const [phone, setPhone] = useState(data.Phone_Number || '');
+  const [firstName, setFirstName] = useState(data?.firstName);
+  const [lastName, setLastName] = useState(data?.lastName);
+  const [phone, setPhone] = useState(data?.Phone_Number || '');
   const [savedState, setSavedState] = useState({
-    firstName: data.firstName,
-    lastName: data.lastName,
-    phone: data.Phone_Number || '',
+    firstName: data?.firstName,
+    lastName: data?.lastName,
+    phone: data?.Phone_Number || '',
   });
   // دمج حالة الرفع المعروضة
   const uploading = isUploading || isPending;
@@ -137,7 +137,7 @@ export default function ProfileSettings({ data }: ProfileSettingsProps) {
 
       <div className="flex gap-12 px-6 py-6">
         <form action={profileAction} className="flex-1 space-y-6">
-          <Input Label="Email" defaultValue={data.email} disabled />
+          <Input Label="Email" defaultValue={data?.email} disabled />
           <Input
             name="firstName"
             Label="First name"
