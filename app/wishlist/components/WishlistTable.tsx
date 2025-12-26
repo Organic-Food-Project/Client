@@ -92,7 +92,7 @@ const WishlistTable: React.FC<WishlistTableProps> = ({
         <div className="w-full flex justify-end items-center gap-6">
           <Button
             onClick={() => handleAddToCart(row?.original?._id, 1)}
-            disabled={isPendingAddToCart}
+            disabled={!row.original.inStock || isPendingAddToCart}
             className="px-[32px]"
           >
             {isPendingAddToCart ? 'Adding...' : 'Add to Cart'}

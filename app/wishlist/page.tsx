@@ -18,6 +18,7 @@ const Wishlist = () => {
 const AllWishlist = async () => {
   const allWishlist = await Query({ api: 'v1/wishlist' });
   if (allWishlist.error) return allWishlist.error;
+
   return (
     <WishlistTable
       data={allWishlist.data?.data}

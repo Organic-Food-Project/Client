@@ -71,7 +71,7 @@ const OrderHistoryFetch = async ({
 }) => {
   const filters = await searchParams;
   const orders = await Query({
-    api: 'v1/users/orderhistory',
+    api: 'v1/users/orderhistory?limit=4',
     filters,
   });
   return <OrderHistory orders={orders?.data?.data ?? []} />;
