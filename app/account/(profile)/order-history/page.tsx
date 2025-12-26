@@ -43,7 +43,10 @@ const OrderHistoryFetch = async ({
   const filters = await searchParams;
   const orders = await Query({
     api: 'v1/users/orderhistory',
-    filters,
+    filters: {
+      ...filters,
+      limit: '10',
+    },
   });
   return (
     <OrderTable

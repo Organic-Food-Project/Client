@@ -61,10 +61,10 @@ const OrderTable: React.FC<OrderProps> = ({
     {
       accessorKey: 'actions',
       header: '',
-      cell: () => (
+      cell: ({ row }) => (
         <div className="w-full flex justify-end items-center">
           <Link
-            href="/account/order-history/1"
+            href={`/account/order-history/${row.original._id}`}
             className="ursor-pointer text-center font-medium text-body-medium text-primary"
           >
             View Details

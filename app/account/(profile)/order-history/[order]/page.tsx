@@ -17,18 +17,23 @@ export const metadata: Metadata = {
     'Manage your EcoFila account with ease. Track your orders, update your profile, and explore fresh, healthy products all in one place.',
 };
 
-const Order = () => {
+interface ProductPageProps {
+  params: { order: string };
+}
+const Order = async ({ params }: ProductPageProps) => {
+  const orderId = params.order.replace('-', ' ');
   return (
     <Suspense fallback={<OrderLoading />}>
-      <OrderFetch />
+      <OrderFetch orderId={orderId} />
     </Suspense>
   );
 };
 
-const OrderFetch = async () => {
+const OrderFetch = async ({ orderId }: { orderId: string }) => {
   const order = await Query({
-    api: 'v1/users/691d9204412b37d426906993',
+    api: `v1/users/${orderId}`,
   });
+
   // const products = order?.data?.data?.products?.map((el: ProductData) => ({
   //   product: {
   //     name: el.name,

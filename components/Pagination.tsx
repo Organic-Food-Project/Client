@@ -9,11 +9,11 @@ interface PaginationProps {
 }
 
 const Pagination: React.FC<PaginationProps> = ({ metaData }) => {
-  const currentPage: number = 1;
+  const searchParams = useSearchParams();
+  const currentPage: number = Number(searchParams.get('page') ?? 1);
   const lastPage: number = Math.ceil(metaData?.total / metaData?.limit) ?? 10;
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   const goToPage = (number: number) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -33,7 +33,7 @@ const Pagination: React.FC<PaginationProps> = ({ metaData }) => {
             aria-label="Go to previous page"
             disabled={currentPage === 1}
             onClick={() => goToPage(1)}
-            className="cursor-pointer disabled:cursor-not-allowed px-2 py-2 rounded-full cursor-pointer disabled:text-gray-300 disabled:bg-gray-50 text-gray-900 bg-white border-[2px] border-gray-100"
+            className="cursor-pointer disabled:cursor-not-allowed px-2 py-2 rounded-full  disabled:text-gray-300 disabled:bg-gray-50 text-gray-900 bg-white border-[2px] border-gray-100"
           >
             <ChevronLeft />
           </button>
@@ -83,7 +83,7 @@ const Pagination: React.FC<PaginationProps> = ({ metaData }) => {
             aria-label="Go to next page"
             onClick={() => goToPage(lastPage)}
             disabled={currentPage === lastPage}
-            className="cursor-pointer disabled:cursor-not-allowed px-2 py-2 rounded-full cursor-pointer disabled:text-gray-300 disabled:bg-gray-50 text-gray-900 bg-white border-[2px] border-gray-100"
+            className="disabled:cursor-not-allowed px-2 py-2 rounded-full cursor-pointer disabled:text-gray-300 disabled:bg-gray-50 text-gray-900 bg-white border-[2px] border-gray-100"
           >
             <ChevronRight />
           </button>
