@@ -15,14 +15,17 @@ const FiltersSection = ({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
   const [expandedSections, setExpandedSections] = useState({
     categories: true,
     price: true,
     rating: true,
   });
-  const [priceRange, setPriceRange] = useState([1, 1500]);
-  const [selectedCategories, setSelectedCategories] = useState(['']);
-  const [selectedRating, setSelectedRating] = useState('1');
+
+  const [priceRange, setPriceRange] = useState<[number, number]>([1, 1500]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedRating, setSelectedRating] = useState<string>('');
+  const [hasUserInteracted, setHasUserInteracted] = useState(false);
 
   const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -41,23 +44,22 @@ const FiltersSection = ({
     }));
   };
 
-  const renderStars = (rating: number) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <span key={i}>
-        <Star
-          className={`size-[14px] ${
-            i < rating
-              ? 'text-warning fill-warning'
-              : 'text-gray-200 fill-gray-200'
-          }`}
-        />
-      </span>
+  const renderStars = (rating: number) =>
+    Array.from({ length: 5 }, (_, i) => (
+      <Star
+        key={i}
+        className={`size-[14px] ${
+          i < rating
+            ? 'text-warning fill-warning'
+            : 'text-gray-200 fill-gray-200'
+        }`}
+      />
     ));
-  };
 
   const updateFiltersInUrl = useCallback(() => {
     const params = new URLSearchParams(searchParams.toString());
     const filterKeys = ['min_price', 'max_price', 'rate', 'category'];
+
     filterKeys.forEach((key) => {
       params.delete(`filter[${key}]`);
     });
@@ -66,13 +68,13 @@ const FiltersSection = ({
       { key: 'min_price', value: priceRange[0] },
       { key: 'max_price', value: priceRange[1] },
       { key: 'rate', value: selectedRating },
-      ...selectedCategories.map((el: string) => ({
+      ...selectedCategories.map((id) => ({
         key: 'category',
-        value: el,
+        value: id,
       })),
-    ].forEach((el: { key: string; value: string | number }) => {
-      if (el.value !== '' && el.value !== null && el.value !== undefined) {
-        params.append(`filter[${el.key}]`, String(el.value));
+    ].forEach((item) => {
+      if (item.value !== '' && item.value !== undefined) {
+        params.append(`filter[${item.key}]`, String(item.value));
       }
     });
 
@@ -87,6 +89,8 @@ const FiltersSection = ({
   ]);
 
   useEffect(() => {
+    if (!hasUserInteracted) return;
+
     if (debounceTimerRef.current) {
       clearTimeout(debounceTimerRef.current);
     }
@@ -100,64 +104,56 @@ const FiltersSection = ({
         clearTimeout(debounceTimerRef.current);
       }
     };
-  }, [updateFiltersInUrl]);
+  }, [updateFiltersInUrl, hasUserInteracted]);
 
   useEffect(() => {
     setPriceRange([
       Number(searchParams.get('filter[min_price]')) || 1,
       Number(searchParams.get('filter[max_price]')) || 1500,
     ]);
-    setSelectedRating(searchParams.get('filter[rate]') || '1');
-    setSelectedCategories(searchParams.getAll('filter[category]') || ['']);
+
+    setSelectedRating(searchParams.get('filter[rate]') || '');
+    setSelectedCategories(searchParams.getAll('filter[category]'));
   }, [searchParams]);
 
   return (
     <div className="bg-white h-fit space-y-6">
-      {/* Filter Button Section */}
-      <button className="cursor-pointer w-fit flex items-center justify-center gap-4 font-bold text-body-medium font-semibold bg-primary text-white rounded-full px-7 h-[45px]">
+      <button className="cursor-pointer w-fit flex items-center gap-4 font-semibold bg-primary text-white rounded-full px-7 h-[45px]">
         Filters
         <SlidersHorizontal size={24} />
       </button>
 
-      {/* Categories Section */}
-      <div className="">
+      <div>
         <button
           onClick={() => toggleSection('categories')}
-          className="cursor-pointer flex items-center justify-between w-full font-semibold  text-gray-900 text-body-xl mb-4"
+          className="flex justify-between w-full font-semibold mb-4"
         >
           All Categories
           {expandedSections.categories ? (
-            <ChevronUp className="size-4" />
+            <ChevronUp size={16} />
           ) : (
-            <ChevronDown className="size-4" />
+            <ChevronDown size={16} />
           )}
         </button>
 
         {expandedSections.categories && (
           <div className="space-y-3">
             {categories.map((category) => (
-              <div key={category.name} className="flex items-center space-x-3">
+              <div key={category.id} className="flex items-center space-x-3">
                 <Checkbox
-                  id={category.name}
+                  id={category.id}
                   checked={selectedCategories.includes(category.id)}
                   checkBoxType="circle"
                   onCheckedChange={(checked) => {
-                    if (checked) {
-                      setSelectedCategories([
-                        ...selectedCategories,
-                        category.id,
-                      ]);
-                    } else {
-                      setSelectedCategories(
-                        selectedCategories.filter((c) => c !== category.id)
-                      );
-                    }
+                    setHasUserInteracted(true);
+                    setSelectedCategories((prev) =>
+                      checked
+                        ? [...prev, category.id]
+                        : prev.filter((c) => c !== category.id)
+                    );
                   }}
                 />
-                <label
-                  htmlFor={category.name}
-                  className=" text-body-small cursor-pointer flex-1"
-                >
+                <label htmlFor={category.id} className="cursor-pointer flex-1">
                   {category.name}{' '}
                   <span className="text-gray-500">({category.count})</span>
                 </label>
@@ -167,52 +163,49 @@ const FiltersSection = ({
         )}
       </div>
 
-      {/* Price Section */}
       <div className="border-y border-gray-100 py-4">
         <button
           onClick={() => toggleSection('price')}
-          className="cursor-pointer flex items-center justify-between w-full font-semibold  text-gray-900 text-body-xl mb-4"
+          className="flex justify-between w-full font-semibold mb-4"
         >
           Price
           {expandedSections.price ? (
-            <ChevronUp className="size-4" />
+            <ChevronUp size={16} />
           ) : (
-            <ChevronDown className="size-4" />
+            <ChevronDown size={16} />
           )}
         </button>
 
         {expandedSections.price && (
-          <div className="space-y-4">
+          <>
             <Slider
               value={priceRange}
-              onValueChange={setPriceRange}
-              max={1500}
+              onValueChange={(value) => {
+                setHasUserInteracted(true);
+                setPriceRange(value as [number, number]);
+              }}
               min={1}
+              max={1500}
               step={10}
-              className="w-full"
             />
-            <div className="text-body-small text-gray-700">
-              Price:{' '}
-              <span className="text-gray-900 font-semibold">
-                {currencyFormated(priceRange[0])} —{' '}
-                {currencyFormated(priceRange[1])}
-              </span>
+            <div className="mt-2 text-sm">
+              {currencyFormated(priceRange[0])} —{' '}
+              {currencyFormated(priceRange[1])}
             </div>
-          </div>
+          </>
         )}
       </div>
 
-      {/* Rating Section */}
-      <div className="">
+      <div>
         <button
           onClick={() => toggleSection('rating')}
-          className="cursor-pointer flex items-center justify-between w-full font-semibold  text-gray-900 text-body-xl mb-4"
+          className="flex justify-between w-full font-semibold mb-4"
         >
           Rating
           {expandedSections.rating ? (
-            <ChevronUp className="size-4" />
+            <ChevronUp size={16} />
           ) : (
-            <ChevronDown className="size-4" />
+            <ChevronDown size={16} />
           )}
         </button>
 
@@ -224,17 +217,11 @@ const FiltersSection = ({
                   id={rating.value}
                   checked={selectedRating === rating.value}
                   onCheckedChange={(checked) => {
-                    if (checked) {
-                      setSelectedRating(rating.value);
-                    } else {
-                      setSelectedRating('');
-                    }
+                    setHasUserInteracted(true);
+                    setSelectedRating(checked ? rating.value : '');
                   }}
                 />
-                <label
-                  htmlFor={rating.value}
-                  className="text-sm text-gray-700 cursor-pointer flex items-center space-x-2"
-                >
+                <label className="flex items-center space-x-2 cursor-pointer">
                   <div className="flex">{renderStars(5 - index)}</div>
                   <span>{rating.label}</span>
                 </label>
