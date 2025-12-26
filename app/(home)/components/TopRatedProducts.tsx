@@ -55,7 +55,7 @@ const AllProducts = async () => {
           description={el?.description}
           name={el?.name}
           price={el?.price}
-          rate={el?.rate?.avg}
+          rate={el?.rate}
           quantity={el?.quantity}
           inWishlist={el?.inWishlist ?? false}
           key={el?._id}

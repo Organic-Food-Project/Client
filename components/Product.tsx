@@ -23,7 +23,11 @@ interface ProductProps {
   description: string;
   name: string;
   price: number;
-  rate: number;
+  rate: {
+    avg: number;
+    number_of_rates: number;
+    total: number;
+  };
   quantity: number;
   category: {
     name: string;
@@ -158,7 +162,7 @@ const Product: React.FC<ProductProps> = ({
           </p>
           <p className="text-body-medium font-semibold text-left">${price}</p>
           <div className="flex">
-            <Rating rate={rate} />
+            <Rating rate={rate.avg} />
           </div>
         </div>
         <button
@@ -182,7 +186,6 @@ const Product: React.FC<ProductProps> = ({
         </button>
       </div>
 
-      {/* الأزرار اللي بتظهر في الهوفر */}
       <AnimatePresence>
         {isHoverd && (
           <div className="absolute top-0 right-0 space-y-[6px] p-4">
