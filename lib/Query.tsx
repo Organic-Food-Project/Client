@@ -42,10 +42,6 @@ export const Query = async ({
   } catch (err: unknown) {
     if (axios.isAxiosError(err)) {
       if (err.response?.status === 401) {
-        await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/logout`, {
-          method: 'POST',
-        });
-
         redirect('/account/login');
       }
 
