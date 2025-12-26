@@ -4,7 +4,6 @@ import UserSettings from './UserSettings';
 import OrderHistory from './OrderHistory';
 import Query from '@/lib/Query';
 import Link from 'next/link';
-import CustomTable from '@/components/ui/CustomTable';
 
 export const metadata: Metadata = {
   title: {

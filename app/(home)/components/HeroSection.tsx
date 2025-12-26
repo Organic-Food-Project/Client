@@ -66,7 +66,7 @@ const HeroSection = () => {
               <Link
                 href="/shop"
                 aria-label="Shop now"
-                className="w-fit flex items-center justify-center gap-4 font-bold text-body-medium font-semibold bg-primary text-white rounded-full px-10 py-4"
+                className="w-fit flex items-center justify-center gap-4 text-body-medium font-semibold bg-primary text-white rounded-full px-10 py-4"
               >
                 Shop now
                 <ArrowRight />

@@ -10,24 +10,6 @@ import VigBG from '@/assets/VigBG.webp';
 import StaticsCard from '@/components/StaticsCard';
 import Query from '@/lib/Query';
 const WhyChooseUs = () => {
-  const Statics = [
-    {
-      title: 37,
-      description: 'Years of Hard Work',
-    },
-    {
-      title: 500,
-      description: 'Happy Customer',
-    },
-    {
-      title: 28,
-      description: 'Qualified Team Member',
-    },
-    {
-      title: 750,
-      description: 'Total Orders',
-    },
-  ];
   const CheckBox = () => {
     return (
       <div className="flex gap-2 bg-primary rounded-full w-fit p-1">

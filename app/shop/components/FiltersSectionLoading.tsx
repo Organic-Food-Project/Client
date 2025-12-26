@@ -20,7 +20,7 @@ const FiltersSectionLoading = () => {
   return (
     <div className="bg-white h-fit space-y-6">
       {/* Filter Button Section */}
-      <button className="w-fit flex items-center justify-center gap-4 font-bold text-body-medium font-semibold bg-primary text-white rounded-full px-7 h-[45px]">
+      <button className="w-fit flex items-center justify-center gap-4 text-body-medium font-semibold bg-primary text-white rounded-full px-7 h-[45px]">
         Filter
         <SlidersHorizontal size={24} />
       </button>
