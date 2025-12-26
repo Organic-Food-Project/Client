@@ -46,7 +46,7 @@ export default function FeedBack({
   useEffect(() => {
     if (state.success && state.review) {
       // Add new review to the beginning of the list
-      setReviews((prev) => [state.review, ...prev]);
+      setReviews((prev) => [...prev, state.review]);
       // Reset form
       setComment('');
       setRating(0);
