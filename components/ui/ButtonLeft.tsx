@@ -22,7 +22,7 @@ const ButtonLeft: React.FC<ButtonLeftProps> = ({
       className={cn(
         'group rounded-full border border-gray-200 p-3',
         disabled
-          ? 'cursor-not-allowed bg-gray-100 border-gray-300 text-gray-400 duration-0'
+          ? 'cursor-not-allowed bg-white/50 border-black/10 text-black/10 duration-0'
           : 'cursor-pointer bg-white hover:bg-primary duration-300',
         className
       )}
@@ -30,7 +30,7 @@ const ButtonLeft: React.FC<ButtonLeftProps> = ({
       <ArrowLeft
         className={cn(
           disabled
-            ? 'text-gray-400 duration-0'
+            ? 'text-black/10 duration-0'
             : 'group-hover:text-white duration-300'
         )}
       />
