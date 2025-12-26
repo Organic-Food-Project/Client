@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React from 'react';
+import React, { Suspense } from 'react';
 import WhyUs from '@/assets/WhyUS.webp';
 import Link from 'next/link';
 import { ArrowRight, Check } from 'lucide-react';
@@ -8,16 +8,15 @@ import Leaf2 from '@/assets/icons/Leaf2.svg';
 import StaticsBG from '@/assets/StaticsBG.webp';
 import VigBG from '@/assets/VigBG.webp';
 import StaticsCard from '@/components/StaticsCard';
+import Query from '@/lib/Query';
 const WhyChooseUs = () => {
   const Statics = [
     {
       title: 37,
-      suffix: '+',
       description: 'Years of Hard Work',
     },
     {
       title: 500,
-      suffix: 'k+',
       description: 'Happy Customer',
     },
     {
@@ -26,7 +25,6 @@ const WhyChooseUs = () => {
     },
     {
       title: 750,
-      suffix: 'k',
       description: 'Total Orders',
     },
   ];
@@ -70,7 +68,7 @@ const WhyChooseUs = () => {
           <Link
             href="/shop"
             aria-label="Shop now"
-            className="w-fit flex items-center justify-center gap-4 font-bold text-body-medium font-semibold bg-primary text-white rounded-full px-10 py-4"
+            className="w-fit flex items-center justify-center gap-4 text-body-medium font-semibold bg-primary text-white rounded-full px-10 py-4"
           >
             Shop now
             <ArrowRight />
@@ -106,18 +104,77 @@ const WhyChooseUs = () => {
           alt="Statics BG"
         />
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 flex-grow w-full ">
-          {Statics.map((item, index) => (
-            <StaticsCard
-              key={index}
-              title={item.title}
-              suffix={item.suffix}
-              description={item.description}
-            />
-          ))}
+          <Suspense fallback={<AllStaticsLoading />}>
+            <AllStatics />
+          </Suspense>
         </div>
       </div>
     </>
   );
+};
+
+const AllStatics = async () => {
+  const Analytics = await Query({
+    api: 'v1/analytics',
+  });
+  const Statics = [
+    {
+      title: Analytics?.data?.Years,
+      suffix: '+',
+      description: 'Years of Hard Work',
+    },
+    {
+      title: Analytics?.data?.Happy_Customers,
+      description: 'Happy Customer',
+    },
+    {
+      title: Analytics?.data?.Qualified_Team_Member,
+      description: 'Qualified Team Member',
+    },
+    {
+      title: Analytics?.data?.Total_Orders,
+      description: 'Total Orders',
+    },
+  ];
+  return Statics.map((item, index) => (
+    <StaticsCard
+      key={index}
+      title={item.title}
+      suffix={item.suffix}
+      description={item.description}
+    />
+  ));
+};
+
+const AllStaticsLoading = () => {
+  const Statics = [
+    {
+      title: 1,
+      suffix: '+',
+      description: 'Years of Hard Work',
+    },
+    {
+      title: 1,
+      description: 'Happy Customer',
+    },
+    {
+      title: 1,
+      description: 'Qualified Team Member',
+    },
+    {
+      title: 1,
+      description: 'Total Orders',
+    },
+  ];
+  return Statics.map((item, index) => (
+    <StaticsCard
+      loading={true}
+      key={index}
+      title={item.title}
+      suffix={item.suffix}
+      description={item.description}
+    />
+  ));
 };
 
 export default WhyChooseUs;
