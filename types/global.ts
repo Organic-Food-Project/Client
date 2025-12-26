@@ -14,9 +14,13 @@ export type ProductData = {
   };
   images: string[];
   quantity: number;
-  rate: number;
+  rate: {
+    avg: number;
+    number_of_rates: number;
+    total: number;
+  };
   price: number;
-  feddBack: string[];
+  feedBack: string[];
   inWishlist: boolean;
 };
 

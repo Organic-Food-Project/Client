@@ -29,7 +29,7 @@ interface ProductProps {
     name: string;
     _id: string;
   };
-  feddBack: string[];
+  feedBack: string[];
   inWishlist: boolean;
 }
 
@@ -43,7 +43,7 @@ const Product: React.FC<ProductProps> = ({
   quantity = 0,
   inWishlist = false,
   category,
-  feddBack,
+  feedBack,
 }) => {
   const [isPendingAddToCart, startAddToCart] = useTransition();
   const [isPendingAddToWishlist, startAddToWishlist] = useTransition();
@@ -262,7 +262,7 @@ const Product: React.FC<ProductProps> = ({
                   rate,
                   quantity,
                   category,
-                  feddBack,
+                  feedBack,
                   inWishlist,
                 }}
               />

@@ -4,6 +4,7 @@ import type { ColumnDef } from '@tanstack/react-table';
 import type React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import dayjs from 'dayjs';
 
 export const metadata: Metadata = {
   title: {
@@ -15,34 +16,34 @@ export const metadata: Metadata = {
 };
 
 interface Order {
-  id: string;
-  date: string;
+  _id: string;
+  createdAt: string;
   total: string;
   status: string;
 }
 
 interface OrderProps {
   orders: Order[];
+  loading?: boolean;
   metaData: {
     total: number;
     limit: number;
   };
 }
 
-const OrderTable: React.FC<OrderProps> = ({ orders, metaData }) => {
+const OrderTable: React.FC<OrderProps> = ({
+  loading = false,
+  orders,
+  metaData,
+}) => {
   const columns: ColumnDef<Order>[] = [
     {
-      accessorKey: 'id',
-      header: 'Order ID',
-      cell: ({ row }) => (
-        <div className="font-medium text-foreground">{row.original.id}</div>
-      ),
-    },
-    {
-      accessorKey: 'date',
+      accessorKey: 'createdAt',
       header: 'Date',
       cell: ({ row }) => (
-        <div className="text-foreground">{row.original.date}</div>
+        <div className="text-foreground">
+          {dayjs(new Date(row.original.createdAt)).format('YYYY/MM/DD h:mm A')}
+        </div>
       ),
     },
     {
@@ -55,9 +56,7 @@ const OrderTable: React.FC<OrderProps> = ({ orders, metaData }) => {
     {
       accessorKey: 'status',
       header: 'Status',
-      cell: ({ row }) => (
-        <div className="text-foreground">{row.original.status}</div>
-      ),
+      cell: () => <div className="text-foreground">Completed</div>,
     },
     {
       accessorKey: 'actions',
@@ -81,6 +80,7 @@ const OrderTable: React.FC<OrderProps> = ({ orders, metaData }) => {
         <p className="text-body-xl font-medium ">Order History</p>
       </div>
       <CustomTable
+        loading={loading}
         columns={columns}
         data={orders}
         metaData={metaData}

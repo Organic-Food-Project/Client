@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import type { Metadata } from 'next';
 import UserSettings from './UserSettings';
 import OrderHistory from './OrderHistory';
 import Query from '@/lib/Query';
+import Link from 'next/link';
+import CustomTable from '@/components/ui/CustomTable';
 
 export const metadata: Metadata = {
   title: {
@@ -13,19 +15,66 @@ export const metadata: Metadata = {
     'Manage your EcoFila account with ease. Track your orders, update your profile, and explore fresh, healthy products all in one place.',
 };
 
-const Dashboard = async () => {
+const Dashboard = ({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[]>>;
+}) => {
+  return (
+    <div className="flex flex-col gap-[24px]">
+      <Suspense fallback={<UserSettingsLoading />}>
+        <UserSettingsFetch />
+      </Suspense>
+      <div>
+        <div className="flex justify-between items-center p-[24px] border-t-1 border-r-1 border-l-1 border-gray-100">
+          <p className="text-body-xl font-medium ">Recet Order History</p>
+          <Link
+            href="/account/order-history"
+            className="ursor-pointer text-center font-medium text-body-medium text-primary"
+          >
+            View All
+          </Link>
+        </div>
+        <Suspense fallback={<OrderHistory loading orders={[]} />}>
+          <OrderHistoryFetch searchParams={searchParams} />
+        </Suspense>
+      </div>
+    </div>
+  );
+};
+
+const UserSettingsFetch = async () => {
   const userData = await Query({
     api: 'v1/users',
   });
-  const orders = await Query({
-    api: 'v1/users/orderhistory',
-  });
+  return <UserSettings user={userData?.data?.data} />;
+};
+
+const UserSettingsLoading = () => {
   return (
-    <div className="flex flex-col gap-[24px]">
-      <UserSettings user={userData?.data?.data} />
-      <OrderHistory orders={[]} />
+    <div className="border-1 border-gray-100 h-[278px] w-full p-8 flex flex-col items-center justify-center text-center animate-pulse">
+      <div className="rounded-full min-h-[120px] min-w-[120px] w-[120px] h-[120px] bg-gray-200" />
+
+      <div className="mt-4 h-5 w-40 rounded-md bg-gray-200" />
+
+      <div className="mt-2 h-4 w-24 rounded-md bg-gray-200" />
+
+      <div className="mt-2 pt-3 h-4 w-20 rounded-md bg-gray-200" />
     </div>
   );
+};
+
+const OrderHistoryFetch = async ({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[]>>;
+}) => {
+  const filters = await searchParams;
+  const orders = await Query({
+    api: 'v1/users/orderhistory',
+    filters,
+  });
+  return <OrderHistory orders={orders?.data?.data ?? []} />;
 };
 
 export default Dashboard;

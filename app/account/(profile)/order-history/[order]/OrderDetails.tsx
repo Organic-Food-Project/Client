@@ -18,11 +18,6 @@ interface Product {
 interface OrderDetailsProps {
   products: Product[];
   orderDetails: {
-    name: string;
-    address: string;
-    email: string;
-    phone: string;
-    orderId: string;
     date: string;
     productCount: number;
     paymentMethod: string;
@@ -98,22 +93,12 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
             <div className="">
               {/* Order ID and Payment */}
               <div className="grid grid-cols-2 gap-4 border-b-1 border-gray-100 pb-3 py-[20px] pl-[20px] pr-[10px]">
-                <div className="border-r-1 border-gray-100">
-                  <p className="text-xs font-medium text-gray-400 uppercase mb-1">
-                    Order ID:
-                  </p>
-                  <p className="font-medium text-gray-900">
-                    {orderDetails.orderId}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-xs font-medium text-gray-400 uppercase mb-1">
-                    Payment Method:
-                  </p>
-                  <p className="font-medium text-gray-900">
-                    {orderDetails.paymentMethod}
-                  </p>
-                </div>
+                <p className="font-medium text-gray-400 uppercase">
+                  Payment Method:
+                </p>
+                <p className="font-medium text-gray-900">
+                  {orderDetails.paymentMethod}
+                </p>
               </div>
               <div>
                 {/* Pricing Breakdown */}

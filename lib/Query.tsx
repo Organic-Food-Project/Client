@@ -32,11 +32,13 @@ export const Query = async ({
     const url = `${process.env.BE_BASE_URL}/${api}${
       queryParams.toString() ? `?${queryParams.toString()}` : ''
     }`;
+    console.log({ url });
 
     const response = await axios.get(url, { headers });
 
     return { data: response.data, error: null };
   } catch (err: any) {
+    console.log({ err });
     if (err?.response?.status === 401) {
       const cookieStore = await cookies();
       cookieStore.delete('token');

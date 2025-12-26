@@ -6,6 +6,7 @@ import Vig1 from '@/assets/Vig1.webp';
 import Image from 'next/image';
 import Query from '@/lib/Query';
 import { Suspense } from 'react';
+import { ProductData } from '@/types/global';
 
 const TopRatedProducts = async () => {
   return (
@@ -45,37 +46,21 @@ const AllProducts = async () => {
   }
   return (
     <>
-      {products.data?.data.map(
-        (el: {
-          _id: string;
-          images?: string[];
-          description: string;
-          name: string;
-          price: number;
-          rate: number;
-          quantity: number;
-          category: {
-            name: string;
-            _id: string;
-          };
-          feddBack: string[];
-          inWishlist: boolean;
-        }) => (
-          <Product
-            _id={el?._id}
-            images={el?.images}
-            category={el?.category}
-            feddBack={el?.feddBack}
-            description={el?.description}
-            name={el?.name}
-            price={el?.price}
-            rate={el?.rate}
-            quantity={el?.quantity}
-            inWishlist={el?.inWishlist ?? false}
-            key={el?._id}
-          />
-        )
-      )}
+      {products.data?.data.map((el: ProductData) => (
+        <Product
+          _id={el?._id}
+          images={el?.images}
+          category={el?.category}
+          feedBack={el?.feedBack}
+          description={el?.description}
+          name={el?.name}
+          price={el?.price}
+          rate={el?.rate?.avg}
+          quantity={el?.quantity}
+          inWishlist={el?.inWishlist ?? false}
+          key={el?._id}
+        />
+      ))}
     </>
   );
 };

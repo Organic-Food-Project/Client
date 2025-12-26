@@ -46,6 +46,9 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
     }
   };
 
+  console.log({ productData });
+  
+
   return (
     <div>
       <div className="grid lg:grid-cols-2 gap-8 lg:gap-[24px]">
@@ -100,10 +103,10 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
             {/* Rating */}
             <div className="flex items-center gap-4 text-body-small mb-4">
               <div className="flex items-center gap-1">
-                <Rating rate={productData.rate} />
+                <Rating rate={productData.rate.avg} />
                 <span className="">
-                  {productData.feddBack.length} Review
-                  {productData.feddBack.length > 1 ? 's' : ''}
+                  {productData.rate.number_of_rates} Review
+                  {productData.rate.number_of_rates > 1 ? 's' : ''}
                 </span>
               </div>
             </div>

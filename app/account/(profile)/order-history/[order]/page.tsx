@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import type { Metadata } from 'next';
 import OrderDetails from './OrderDetails';
 import TempProduct from '@/assets/TempProduct.webp';
+import CustomTable from '@/components/ui/CustomTable';
+import OrderLoading from './OrderLoading';
+import Query from '@/lib/Query';
+import { ProductData } from '@/types/global';
+import dayjs from 'dayjs';
 
 export const metadata: Metadata = {
   title: {
@@ -13,6 +18,33 @@ export const metadata: Metadata = {
 };
 
 const Order = () => {
+  return (
+    <Suspense fallback={<OrderLoading />}>
+      <OrderFetch />
+    </Suspense>
+  );
+};
+
+const OrderFetch = async () => {
+  const order = await Query({
+    api: 'v1/users/691d9204412b37d426906993',
+  });
+  // const products = order?.data?.data?.products?.map((el: ProductData) => ({
+  //   product: {
+  //     name: el.name,
+  //     image: el.images?.[0] ?? '',
+  //   },
+  //   price: el.price,
+  //   quantity: el.quantity,
+  //   subtotal: el.price * el.quantity,
+  // }));
+  // const orderDetails = {
+  //   date: dayjs(new Date(order?.data?.data?.createdAt)).format('MMMM D, YYYY'),
+  //   productCount: order?.data?.data?.products.length,
+  //   paymentMethod: order?.data?.data?.paymentMethod ?? 'Paypal',
+  //   subtotal: order?.data?.data?.total,
+  //   total: order?.data?.data?.total,
+  // };
   const products = [
     {
       product: {
@@ -43,13 +75,7 @@ const Order = () => {
     },
   ];
   const orderDetails = {
-    // BILLING_ADDRESS
-    name: 'Dianne Russell',
-    address: '4140 Parker Rd. Allentown, New Mexico 31134',
-    email: 'dianne.ressell@gmail.com',
-    phone: '(671) 555-0110',
     // ORDER_INFO
-    orderId: '#4152',
     date: 'April 24, 2021',
     productCount: 3,
     paymentMethod: 'Paypal',

@@ -7,7 +7,7 @@ import FiltersSectionLoading from './components/FiltersSectionLoading';
 import { ProductData } from '@/types/global';
 import Header from './components/Header';
 
-const Shop = async ({
+const Shop = ({
   searchParams,
 }: {
   searchParams: Promise<Record<string, string | string[]>>;
@@ -49,11 +49,11 @@ const AllProducts = async ({
               description={el.description}
               name={el.name}
               price={el.price}
-              rate={el.rate}
+              rate={el.rate?.avg}
               quantity={el.quantity}
               key={el._id}
               category={el.category}
-              feddBack={el.feddBack}
+              feedBack={el.feedBack}
               inWishlist={el.inWishlist ?? false}
             />
           ))

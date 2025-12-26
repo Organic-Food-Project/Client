@@ -29,10 +29,10 @@ interface ProfileSettingsProps {
 
 export default function ProfileSettings({ data }: ProfileSettingsProps) {
   const [isPending, startTransition] = useTransition();
-
+  console.log({ data });
   // Track current profile image (either from server or preview)
   const [currentImage, setCurrentImage] = useState<string>(
-    data?.Profile_Image_URL || 'Logo.ico'
+    data?.Profile_Image_URL || ''
   );
   const [preview, setPreview] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
@@ -44,10 +44,8 @@ export default function ProfileSettings({ data }: ProfileSettingsProps) {
     lastName: data?.lastName,
     phone: data?.Phone_Number || '',
   });
-  // دمج حالة الرفع المعروضة
   const uploading = isUploading || isPending;
 
-  // Image Upload State
   const [imageState, imageAction] = useActionState<ActionState, FormData>(
     uploadProfileImageAction,
     {
@@ -55,13 +53,11 @@ export default function ProfileSettings({ data }: ProfileSettingsProps) {
     }
   );
 
-  // Profile Form State
   const [profileState, profileAction, loadingProfile] = useActionState(
     updateProfileAction,
     { errors: {} }
   );
 
-  // Handle image upload response
   useEffect(() => {
     if (imageState.success) {
       Toast({ Message: 'Profile image updated!', type: 'success' });
@@ -81,7 +77,6 @@ export default function ProfileSettings({ data }: ProfileSettingsProps) {
     }
   }, [imageState, preview]);
 
-  // Handle profile update response
   useEffect(() => {
     if (profileState.success) {
       Toast({ Message: 'Profile updated successfully!', type: 'success' });
@@ -94,7 +89,6 @@ export default function ProfileSettings({ data }: ProfileSettingsProps) {
       profileState.errors &&
       Object.keys(profileState.errors).length > 0
     ) {
-      // Show error toast
       const errorMsg =
         profileState.errors.form || Object.values(profileState.errors)[0];
       Toast({ Message: errorMsg as string, type: 'error' });
