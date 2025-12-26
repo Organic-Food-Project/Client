@@ -25,7 +25,7 @@ const MyCart = () => {
           <p>Total:</p>
           <p className="bg-gray-100 animate-pulse w-[70px] h-[21px]" />
         </div>
-        <Button className="w-full py-4 mt-5">Proceed to checkout</Button>
+        <Button disabled className="w-full py-4 mt-5">Proceed to checkout</Button>
       </div>
     </div>
   );

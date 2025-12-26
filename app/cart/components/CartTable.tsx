@@ -37,15 +37,25 @@ interface CartTableProps {
   loading?: boolean;
   myData: Data[];
   setMyData?: Dispatch<SetStateAction<Data[]>>;
+  isPendingSubmit?: boolean;
+  isPendingUpdate?: boolean;
+  startUpdate?: (fn: () => void) => void;
+  isPendingDelete?: boolean;
+  startDelete?: (fn: () => void) => void;
 }
 
 const CartTable: React.FC<CartTableProps> = ({
   loading = false,
   myData,
   setMyData,
+  isPendingSubmit,
+  isPendingUpdate,
+  startUpdate,
+  isPendingDelete,
+  startDelete,
 }) => {
-  const [isPendingUpdate, startUpdate] = useTransition();
-  const [isPendingDelete, startDelete] = useTransition();
+  // const [isPendingUpdate, startUpdate] = useTransition();
+  // const [isPendingDelete, startDelete] = useTransition();
 
   const debounceTimers = useRef<{ [key: string]: NodeJS.Timeout }>({});
 
@@ -80,7 +90,7 @@ const CartTable: React.FC<CartTableProps> = ({
 
       // Set debounce timer (300ms)
       debounceTimers.current[_id] = setTimeout(() => {
-        startUpdate(async () => {
+        startUpdate?.(async () => {
           try {
             const res: {
               errors: { form: string } | null;
@@ -114,7 +124,7 @@ const CartTable: React.FC<CartTableProps> = ({
   );
 
   const handleDeleteFromCart = (_id: string) => {
-    startDelete(async () => {
+    startDelete?.(async () => {
       try {
         const res: {
           errors: { form: string } | null;
@@ -181,7 +191,9 @@ const CartTable: React.FC<CartTableProps> = ({
                 row.original.product_quantity
               )
             }
-            disabled={isPendingUpdate || row.original.quantity <= 1}
+            disabled={
+              isPendingSubmit || isPendingUpdate || row.original.quantity <= 1
+            }
             aria-label="Minus"
             className="cursor-pointer bg-gray-50 rounded-full flex items-center justify-center size-[34px] text-black disabled:opacity-50 disabled:cursor-not-allowed"
           >
@@ -197,6 +209,7 @@ const CartTable: React.FC<CartTableProps> = ({
               )
             }
             disabled={
+              isPendingSubmit ||
               isPendingUpdate ||
               row.original.quantity >= row.original.product_quantity
             }
@@ -226,7 +239,7 @@ const CartTable: React.FC<CartTableProps> = ({
         <div className="w-full flex justify-end items-center">
           <button
             onClick={() => handleDeleteFromCart(row.original._id)}
-            disabled={isPendingDelete}
+            disabled={isPendingSubmit || isPendingDelete}
             aria-label="Delete"
             className="cursor-pointer rounded-full border border-gray-20 size-[32px] flex justify-center items-center disabled:opacity-50 disabled:cursor-not-allowed"
           >

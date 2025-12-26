@@ -21,6 +21,8 @@ interface MyCartProps {
 const MyCart: React.FC<MyCartProps> = ({ data }) => {
   const [myData, setMyData] = useState(data);
   const [isPending, startTransition] = useTransition();
+  const [isPendingUpdate, startUpdate] = useTransition();
+  const [isPendingDelete, startDelete] = useTransition();
 
   const handleCheckout = () => {
     startTransition(async () => {
@@ -39,7 +41,15 @@ const MyCart: React.FC<MyCartProps> = ({ data }) => {
   return (
     <div className="flex flex-col-reverse lg:grid grid-cols-6 gap-6">
       <div className="col-span-4">
-        <CartTable setMyData={setMyData} myData={myData} />
+        <CartTable
+          isPendingSubmit={isPending}
+          isPendingUpdate={isPendingUpdate}
+          startUpdate={startUpdate}
+          isPendingDelete={isPendingDelete}
+          startDelete={startDelete}
+          setMyData={setMyData}
+          myData={myData}
+        />
       </div>
       <div className="lg:sticky top-[110] col-span-2 border border-gray-100 p-6 h-fit">
         <p className="text-body-xl font-semibold pb-[7px]">Cart Total</p>
@@ -80,7 +90,12 @@ const MyCart: React.FC<MyCartProps> = ({ data }) => {
         <Button
           className="w-full py-4 mt-5"
           onClick={handleCheckout}
-          disabled={isPending}
+          disabled={
+            myData.length === 0 ||
+            isPending ||
+            isPendingUpdate ||
+            isPendingDelete
+          }
         >
           {isPending ? 'Processing...' : 'Proceed to checkout'}
         </Button>
