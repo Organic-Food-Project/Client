@@ -60,7 +60,6 @@ export default function ProfileSettings({ data }: ProfileSettingsProps) {
 
   useEffect(() => {
     if (imageState.success) {
-      Toast({ Message: 'Profile image updated!', type: 'success' });
       // Keep the preview as the new current image
       if (preview) {
         setCurrentImage(preview);
@@ -68,14 +67,20 @@ export default function ProfileSettings({ data }: ProfileSettingsProps) {
       }
       setIsUploading(false);
     } else if (imageState.errors && Object.keys(imageState.errors).length > 0) {
-      // Show error toast
-      const errorMsg = Object.values(imageState.errors)[0];
-      Toast({ Message: errorMsg as string, type: 'error' });
       // Revert to old image
       setPreview(null);
       setIsUploading(false);
     }
   }, [imageState, preview]);
+
+  useEffect(() => {
+    if (imageState.success) {
+      Toast({ Message: 'Profile image updated!', type: 'success' });
+    } else if (imageState.errors && Object.keys(imageState.errors).length > 0) {
+      const errorMsg = Object.values(imageState.errors)[0];
+      Toast({ Message: errorMsg as string, type: 'error' });
+    }
+  }, [imageState]);
 
   useEffect(() => {
     if (profileState.success) {
