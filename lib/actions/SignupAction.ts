@@ -5,6 +5,14 @@ import Mutation from '@/lib/Mutation';
 const formSchema = z
   .object({
     email: z.email('Invalid email'),
+    firstName: z
+      .string()
+      .min(1, 'First name is required and at least 1 characters')
+      .max(10, 'First name is required and at most 10 characters'),
+    lastName: z
+      .string()
+      .min(1, 'Last name is required and at least 1 characters')
+      .max(10, 'Last name is required and at most 10 characters'),
     password: z
       .string()
       .min(6, 'Password is required and at least 6 characters'),
@@ -23,6 +31,8 @@ export const SignupAction = async (
 ): Promise<{ errors?: Record<string, string>; success?: boolean }> => {
   const values = {
     email: formData.get('email'),
+    firstName: formData.get('firstName'),
+    lastName: formData.get('lastName'),
     password: formData.get('password'),
     confirmPassword: formData.get('confirmPassword'),
   };

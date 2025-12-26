@@ -7,6 +7,9 @@ import { QueryProps } from '@/types/global';
 interface ExtendedQueryProps extends QueryProps {
   filters?: Record<string, string | string[]>;
 }
+interface ApiError {
+  message?: string;
+}
 
 export const Query = async ({
   api,
@@ -37,22 +40,27 @@ export const Query = async ({
     const response = await axios.get(url, { headers });
 
     return { data: response.data, error: null };
-  } catch (err: any) {
-    console.log({ err });
-    if (err?.response?.status === 401) {
-      const cookieStore = await cookies();
-      cookieStore.delete('token');
-      redirect('/account/login');
+  } catch (err: unknown) {
+    if (axios.isAxiosError(err)) {
+      if (err.response?.status === 401) {
+        const cookieStore = await cookies();
+        cookieStore.delete('token');
+        redirect('/login');
+      }
+
+      const errorMsg =
+        (err.response?.data as ApiError)?.message ||
+        err.message ||
+        'Network error';
+
+      return { data: null, error: errorMsg };
     }
 
-    const errorMsg =
-      err?.response?.data?.message ||
-      err?.response?.data ||
-      err?.response ||
-      err?.message ||
-      'Network error';
+    if (err instanceof Error) {
+      return { data: null, error: err.message };
+    }
 
-    return { data: null, error: errorMsg };
+    return { data: null, error: 'Unknown error' };
   }
 };
 

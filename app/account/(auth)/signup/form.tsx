@@ -11,6 +11,8 @@ const Form = () => {
 
   const [formData, setFormData] = useState({
     email: '',
+    firstName: '',
+    lastName: '',
     password: '',
     confirmPassword: '',
   });
@@ -40,7 +42,31 @@ const Form = () => {
         className="mb-3 h-[49px]"
       />
       <Input
-        Label="Email"
+        Label="First Name"
+        labelClassName="sr-only"
+        id="firstName"
+        name="firstName"
+        placeholder="First Password"
+        type="string"
+        onChange={handleChange}
+        value={formData.firstName}
+        error={state?.errors?.firstName}
+        className="mb-4 h-[49px]"
+      />
+      <Input
+        Label="Last Name"
+        labelClassName="sr-only"
+        id="lastName"
+        name="lastName"
+        placeholder="Last Password"
+        type="string"
+        onChange={handleChange}
+        value={formData.lastName}
+        error={state?.errors?.lastName}
+        className="mb-4 h-[49px]"
+      />
+      <Input
+        Label="Password"
         labelClassName="sr-only"
         id="password"
         name="password"
@@ -52,7 +78,7 @@ const Form = () => {
         className="mb-4 h-[49px]"
       />
       <Input
-        Label="Email"
+        Label="Confirm Password"
         labelClassName="sr-only"
         id="confirmPassword"
         name="confirmPassword"

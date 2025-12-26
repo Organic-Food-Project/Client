@@ -37,25 +37,41 @@ const Mutation = async ({
 
     console.log({ res });
     return { data: res.data, error: null, status: res.status };
-  } catch (err: any) {
-    if (err?.response?.status === 401) {
-      const cookieStore = await cookies();
-      cookieStore.delete('token');
-      redirect('/account/login');
+  } catch (err: unknown) {
+    if (axios.isAxiosError(err)) {
+      if (err.response?.status === 401) {
+        const cookieStore = await cookies();
+        cookieStore.delete('token');
+        redirect('/login');
+      }
+
+      const errorMsg =
+        err.response?.data?.message ||
+        err.response?.data?.Error ||
+        err.response?.data ||
+        err.message ||
+        'Network error';
+      console.log({ err: body });
+
+      return {
+        data: null,
+        error: String(errorMsg),
+        status: err.response?.status ?? 400,
+      };
     }
 
-    const errorMsg =
-      err?.response?.data?.message ||
-      err?.response?.data ||
-      err?.response ||
-      err?.message ||
-      'Network error';
+    if (err instanceof Error) {
+      return {
+        data: null,
+        error: err.message,
+        status: 500,
+      };
+    }
 
-    console.log({ errorMsg });
     return {
       data: null,
-      error: errorMsg,
-      status: err.response?.status || 400,
+      error: 'Unknown error',
+      status: 500,
     };
   }
 };
