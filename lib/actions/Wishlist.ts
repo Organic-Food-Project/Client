@@ -29,7 +29,6 @@ const addToWishlistAction = async (formData: {
     },
   });
   if (error) {
-    console.log({ error });
     return {
       data: null,
       errors: {
@@ -69,7 +68,6 @@ const deleteFromWishlistAction = async (formData: {
     },
   });
   if (error) {
-    console.log({ error });
     return {
       data: null,
       errors: {

@@ -29,7 +29,6 @@ interface ProfileSettingsProps {
 
 export default function ProfileSettings({ data }: ProfileSettingsProps) {
   const [isPending, startTransition] = useTransition();
-  console.log({ data });
   // Track current profile image (either from server or preview)
   const [currentImage, setCurrentImage] = useState<string>(
     data?.Profile_Image_URL || ''

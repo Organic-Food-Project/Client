@@ -121,10 +121,6 @@ export async function uploadProfileImageAction(
   formData: FormData
 ): Promise<ActionState> {
   const file = formData.get('image') as File;
-  console.log('---- FormData ----');
-  for (const [key, value] of formData.entries()) {
-    console.log(key, value);
-  }
 
   // Check if file exists and is actually a File object
   if (!file || !(file instanceof File) || file.size === 0) {
@@ -144,13 +140,11 @@ export async function uploadProfileImageAction(
   const Form = new FormData();
   Form.append('profileImage', file);
 
-  const { data, error } = await Mutation({
+  const { error } = await Mutation({
     api: 'v1/users/updateImage',
     method: 'PUT',
     body: Form,
   });
-
-  console.log({ data });
 
   if (error) return { errors: { image: error } };
   return { success: true };

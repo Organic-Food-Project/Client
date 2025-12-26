@@ -35,14 +35,15 @@ const Mutation = async ({
 
     const res = await axios.request(config);
 
-    console.log({ res });
     return { data: res.data, error: null, status: res.status };
   } catch (err: unknown) {
     if (axios.isAxiosError(err)) {
       if (err.response?.status === 401) {
-        const cookieStore = await cookies();
-        cookieStore.delete('token');
-        redirect('/login');
+        await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/logout`, {
+          method: 'POST',
+        });
+
+        redirect('/account/login');
       }
 
       const errorMsg =
@@ -51,7 +52,6 @@ const Mutation = async ({
         err.response?.data ||
         err.message ||
         'Network error';
-      console.log({ err: body });
 
       return {
         data: null,

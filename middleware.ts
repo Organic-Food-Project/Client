@@ -6,7 +6,7 @@ export async function middleware(request: NextRequest) {
   if (token) {
     if (request.nextUrl.pathname === '/account')
       return NextResponse.redirect(new URL('/account/dashboard', request.url));
-    else return;
+    else return NextResponse.next();
   } else return NextResponse.redirect(new URL('/account/login', request.url));
 }
 

@@ -35,7 +35,6 @@ export const Query = async ({
     const url = `${process.env.BE_BASE_URL}/${api}${
       queryParams.toString() ? `?${queryParams.toString()}` : ''
     }`;
-    console.log({ url });
 
     const response = await axios.get(url, { headers });
 
@@ -43,15 +42,18 @@ export const Query = async ({
   } catch (err: unknown) {
     if (axios.isAxiosError(err)) {
       if (err.response?.status === 401) {
-        const cookieStore = await cookies();
-        cookieStore.delete('token');
-        redirect('/login');
+        await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/logout`, {
+          method: 'POST',
+        });
+
+        redirect('/account/login');
       }
 
       const errorMsg =
         (err.response?.data as ApiError)?.message ||
         err.message ||
         'Network error';
+      console.log({ error: err.response });
 
       return { data: null, error: errorMsg };
     }

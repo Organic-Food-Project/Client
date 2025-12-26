@@ -22,7 +22,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({ user }) => {
         height={120}
         src={user?.Profile_Image_URL ?? ''}
         alt={user?.firstName + ' ' + user?.lastName + ' profile image'}
-        className="rounded-full min-h-[120px] min-w-[120px] max-w-[20px] w-[120px] h-[120px] bg-gray-100"
+        className="rounded-full object-cover min-h-[120px] min-w-[120px] max-w-[20px] w-[120px] h-[120px] bg-gray-100"
       />
       <h2 className="text-xl font-semibold text-foreground line-clamp-1">
         {user?.firstName + ' ' + user?.lastName}

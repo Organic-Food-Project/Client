@@ -46,9 +46,6 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
     }
   };
 
-  console.log({ productData });
-  
-
   return (
     <div>
       <div className="grid lg:grid-cols-2 gap-8 lg:gap-[24px]">

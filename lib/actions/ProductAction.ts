@@ -65,6 +65,6 @@ export const CreateReview = async (
       errors: { form: error?.data ?? error ?? 'Something went wrong' },
     };
   } else {
-    return { success: true, review: data };
+    return { success: true, review: data?.data };
   }
 };
