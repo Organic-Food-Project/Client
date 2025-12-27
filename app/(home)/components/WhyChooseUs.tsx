@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from 'next/image';
 import React, { Suspense } from 'react';
 import WhyUs from '@/assets/WhyUS.webp';
@@ -9,7 +10,13 @@ import StaticsBG from '@/assets/StaticsBG.webp';
 import VigBG from '@/assets/VigBG.webp';
 import StaticsCard from '@/components/StaticsCard';
 import Query from '@/lib/Query';
-const WhyChooseUs = () => {
+
+const WhyChooseUs = async () => {
+  const analyticsPromise: Promise<{ data: any | null; error: any | null }> =
+    Query({
+      api: 'v1/analytics',
+    });
+
   const CheckBox = () => {
     return (
       <div className="flex gap-2 bg-primary rounded-full w-fit p-1">
@@ -17,6 +24,7 @@ const WhyChooseUs = () => {
       </div>
     );
   };
+
   return (
     <>
       <div className="z-1 relative flex max-xl:flex-col justify-center items-center gap-10  mainPadding pt-[24px] pb-[80px]">
@@ -87,7 +95,7 @@ const WhyChooseUs = () => {
         />
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 flex-grow w-full ">
           <Suspense fallback={<AllStaticsLoading />}>
-            <AllStatics />
+            <AllStatics promise={analyticsPromise} />
           </Suspense>
         </div>
       </div>
@@ -95,10 +103,13 @@ const WhyChooseUs = () => {
   );
 };
 
-const AllStatics = async () => {
-  const Analytics = await Query({
-    api: 'v1/analytics',
-  });
+const AllStatics = async ({
+  promise,
+}: {
+  promise: Promise<{ data: any | null; error: any | null }>;
+}) => {
+  const Analytics = await promise;
+
   const Statics = [
     {
       title: Analytics?.data?.Years,

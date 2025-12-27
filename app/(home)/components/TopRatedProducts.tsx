@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
@@ -9,6 +10,11 @@ import { Suspense } from 'react';
 import { ProductData } from '@/types/global';
 
 const TopRatedProducts = async () => {
+  const productsPromise: Promise<{ data: any | null; error: any | null }> =
+    Query({
+      api: 'v1/products?sort=-rate&limit=4',
+    });
+
   return (
     <div className="mainPadding">
       <div className="flex justify-between items-center pb-[40px]">
@@ -22,7 +28,7 @@ const TopRatedProducts = async () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Suspense fallback={<ProductsLoading />}>
-          <AllProducts />
+          <AllProducts promise={productsPromise} />
         </Suspense>
       </div>
       <Image
@@ -36,17 +42,20 @@ const TopRatedProducts = async () => {
   );
 };
 
-const AllProducts = async () => {
-  const products = await Query({
-    api: 'v1/products?sort=-rate&limit=4',
-  });
+const AllProducts = async ({
+  promise,
+}: {
+  promise: Promise<{ data: any | null; error: any | null }>;
+}) => {
+  const products = await promise;
 
-  if (products.error) {
+  if (products?.error) {
     return products.error;
   }
+
   return (
     <>
-      {products.data?.data.map((el: ProductData) => (
+      {products?.data?.data?.map((el: ProductData) => (
         <Product
           _id={el?._id}
           images={el?.images}

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { Suspense } from 'react';
 import type { Metadata } from 'next';
 import UserSettings from './UserSettings';
@@ -14,15 +15,32 @@ export const metadata: Metadata = {
     'Manage your EcoFila account with ease. Track your orders, update your profile, and explore fresh, healthy products all in one place.',
 };
 
-const Dashboard = ({
+const Dashboard = async ({
   searchParams,
 }: {
   searchParams: Promise<Record<string, string | string[]>>;
 }) => {
+  const userDataPromise: Promise<{ data: any | null; error: any | null }> =
+    Query({
+      api: 'v1/users',
+    });
+
+  const filters = await searchParams;
+
+  const ordersPromise: Promise<{ data: any | null; error: any | null }> = Query(
+    {
+      api: 'v1/users/orderhistory',
+      filters: {
+        ...filters,
+        limit: '4',
+      },
+    }
+  );
+
   return (
     <div className="flex flex-col gap-[24px]">
       <Suspense fallback={<UserSettingsLoading />}>
-        <UserSettingsFetch />
+        <UserSettingsFetch promise={userDataPromise} />
       </Suspense>
       <div>
         <div className="flex justify-between items-center p-[24px] border-t-1 border-r-1 border-l-1 border-gray-100">
@@ -35,17 +53,19 @@ const Dashboard = ({
           </Link>
         </div>
         <Suspense fallback={<OrderHistory loading orders={[]} />}>
-          <OrderHistoryFetch searchParams={searchParams} />
+          <OrderHistoryFetch promise={ordersPromise} />
         </Suspense>
       </div>
     </div>
   );
 };
 
-const UserSettingsFetch = async () => {
-  const userData = await Query({
-    api: 'v1/users',
-  });
+const UserSettingsFetch = async ({
+  promise,
+}: {
+  promise: Promise<{ data: any | null; error: any | null }>;
+}) => {
+  const userData = await promise;
   return <UserSettings user={userData?.data?.data} />;
 };
 
@@ -64,18 +84,11 @@ const UserSettingsLoading = () => {
 };
 
 const OrderHistoryFetch = async ({
-  searchParams,
+  promise,
 }: {
-  searchParams: Promise<Record<string, string | string[]>>;
+  promise: Promise<{ data: any | null; error: any | null }>;
 }) => {
-  const filters = await searchParams;
-  const orders = await Query({
-    api: 'v1/users/orderhistory',
-    filters: {
-      ...filters,
-      limit: '4',
-    },
-  });
+  const orders = await promise;
   return <OrderHistory orders={orders?.data?.data ?? []} />;
 };
 

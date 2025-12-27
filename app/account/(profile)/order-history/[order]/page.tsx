@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { Suspense } from 'react';
 import type { Metadata } from 'next';
 import OrderDetails from './OrderDetails';
@@ -17,21 +18,28 @@ export const metadata: Metadata = {
 interface ProductPageProps {
   params: { order: string };
 }
+
 const Order = async ({ params }: ProductPageProps) => {
   const orderId = params.order.replace('-', ' ');
+
+  const orderPromise: Promise<{ data: any | null; error: any | null }> = Query({
+    api: `v1/users/${orderId}`,
+  });
+
   return (
     <Suspense fallback={<OrderLoading />}>
-      <OrderFetch orderId={orderId} />
+      <OrderFetch promise={orderPromise} />
     </Suspense>
   );
 };
 
-const OrderFetch = async ({ orderId }: { orderId: string }) => {
-  const order = await Query({
-    api: `v1/users/${orderId}`,
-  });
+const OrderFetch = async ({
+  promise,
+}: {
+  promise: Promise<{ data: any | null; error: any | null }>;
+}) => {
+  const order = await promise;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const products = order?.data?.data?.products?.map((el: any) => ({
     product: {
       name: el?.productID?.name,
@@ -41,6 +49,7 @@ const OrderFetch = async ({ orderId }: { orderId: string }) => {
     quantity: el.quantity,
     subtotal: el?.productID?.price * el.quantity,
   }));
+
   const orderDetails = {
     date: dayjs(new Date(order?.data?.data?.createdAt)).format('MMMM D, YYYY'),
     productCount: order?.data?.data?.products.length,
@@ -48,6 +57,7 @@ const OrderFetch = async ({ orderId }: { orderId: string }) => {
     subtotal: order?.data?.data?.total,
     total: order?.data?.data?.total,
   };
+
   return <OrderDetails products={products} orderDetails={orderDetails} />;
 };
 

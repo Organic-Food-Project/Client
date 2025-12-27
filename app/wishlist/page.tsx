@@ -1,27 +1,36 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import WishlistTable from '@/app/wishlist/components/WishlistTable';
 import Query from '@/lib/Query';
 import React, { Suspense } from 'react';
 
-const Wishlist = () => {
+const Wishlist = async () => {
+  const wishlistPromise: Promise<{ data: any | null; error: any | null }> =
+    Query({ api: 'v1/wishlist' });
+
   return (
     <>
       <h1 className="text-heading-05 font-bold text-center pb-8">
         My Wishlist
       </h1>
+
       <Suspense fallback={<LoadingWishlist />}>
-        <AllWishlist />
+        <AllWishlist promise={wishlistPromise} />
       </Suspense>
     </>
   );
 };
 
-const AllWishlist = async () => {
-  const allWishlist = await Query({ api: 'v1/wishlist' });
-  if (allWishlist.error) return allWishlist.error;
+const AllWishlist = async ({
+  promise,
+}: {
+  promise: Promise<{ data: any | null; error: any | null }>;
+}) => {
+  const allWishlist = await promise;
+  if (allWishlist?.error) return allWishlist.error;
 
   return (
     <WishlistTable
-      data={allWishlist.data?.data}
+      data={allWishlist?.data?.data}
       metaData={allWishlist?.data?.meta}
     />
   );

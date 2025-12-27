@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Pagination from '@/components/Pagination';
 import Product, { LoadingProduct } from '@/components/Product';
 import FiltersSection from '@/app/shop/components/FiltersSection';
@@ -7,21 +8,34 @@ import FiltersSectionLoading from './components/FiltersSectionLoading';
 import { ProductData } from '@/types/global';
 import Header from './components/Header';
 
-const Shop = ({
+const Shop = async ({
   searchParams,
 }: {
   searchParams: Promise<Record<string, string | string[]>>;
 }) => {
+  const filters = await searchParams;
+
+  const productsPromise: Promise<{ data: any | null; error: any | null }> =
+    Query({
+      api: 'v1/products',
+      filters,
+    });
+
+  const categoriesPromise: Promise<{ data: any | null; error: any | null }> =
+    Query({
+      api: 'v1/categories?limit=200',
+    });
+
   return (
     <div className="flex max-lg:flex-col gap-6 pt-6">
       <div className="min-w-[250px]">
         <Suspense fallback={<FiltersSectionLoading />}>
-          <AllCategories />
+          <AllCategories promise={categoriesPromise} />
         </Suspense>
       </div>
       <div className="flex flex-col flex-grow">
         <Suspense fallback={<ProductsLoading />}>
-          <AllProducts searchParams={searchParams} />
+          <AllProducts promise={productsPromise} />
         </Suspense>
       </div>
     </div>
@@ -29,20 +43,20 @@ const Shop = ({
 };
 
 const AllProducts = async ({
-  searchParams,
+  promise,
 }: {
-  searchParams: Promise<Record<string, string | string[]>>;
+  promise: Promise<{ data: any | null; error: any | null }>;
 }) => {
-  const filters = await searchParams;
-  const products = await Query({ api: 'v1/products', filters });
-  if (products.error) return products.error;
+  const products = await promise;
+
+  if (products?.error) return products.error;
 
   return (
     <div className="flex flex-col flex-grow text-center">
       <Header meta={products?.data?.meta} />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-6 ">
-        {products.data?.data?.length > 0 ? (
-          products.data?.data?.map((el: ProductData) => (
+        {products?.data?.data?.length > 0 ? (
+          products?.data?.data?.map((el: ProductData) => (
             <Product
               _id={el?._id}
               images={el?.images}
@@ -64,22 +78,27 @@ const AllProducts = async ({
           </div>
         )}
       </div>
-      {products.data?.data?.length > 0 && (
+      {products?.data?.data?.length > 0 && (
         <Suspense>
-          <Pagination metaData={products.data?.meta} />
+          <Pagination metaData={products?.data?.meta} />
         </Suspense>
       )}
     </div>
   );
 };
 
-const AllCategories = async () => {
-  const categories = await Query({ api: 'v1/categories?limit=200' });
-  if (categories.error) return categories.error;
+const AllCategories = async ({
+  promise,
+}: {
+  promise: Promise<{ data: any | null; error: any | null }>;
+}) => {
+  const categories = await promise;
+
+  if (categories?.error) return categories.error;
 
   return (
     <FiltersSection
-      categories={categories.data?.data?.map(
+      categories={categories?.data?.data?.map(
         (el: { name: string; _id: string; products: string[] }) => ({
           name: el.name,
           id: el._id,

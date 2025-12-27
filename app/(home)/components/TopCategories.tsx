@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
@@ -10,7 +11,12 @@ import { Suspense } from 'react';
 import Query from '@/lib/Query';
 import CategoriesSlider from './CategoriesSlider';
 
-const TopCategories = () => {
+const TopCategories = async () => {
+  const categoriesPromise: Promise<{ data: any | null; error: any | null }> =
+    Query({
+      api: 'v1/categories?limit=200',
+    });
+
   return (
     <div className=" bg-gradient-to-b from-green-50 to-white py-[80px]">
       <Image
@@ -30,22 +36,24 @@ const TopCategories = () => {
         </Link>
       </div>
       <Suspense fallback={<CategoriesLoading />}>
-        <AllCategories />
+        <AllCategories promise={categoriesPromise} />
       </Suspense>
     </div>
   );
 };
 
-const AllCategories = async () => {
-  const categories = await Query({
-    api: 'v1/categories?limit=200',
-  });
+const AllCategories = async ({
+  promise,
+}: {
+  promise: Promise<{ data: any | null; error: any | null }>;
+}) => {
+  const categories = await promise;
 
-  if (categories.error) {
+  if (categories?.error) {
     return categories.error;
   }
 
-  return <CategoriesSlider categories={categories.data?.data} />;
+  return <CategoriesSlider categories={categories?.data?.data} />;
 };
 
 const CategoriesLoading = () => {
@@ -64,4 +72,5 @@ const CategoriesLoading = () => {
     </div>
   );
 };
+
 export default TopCategories;

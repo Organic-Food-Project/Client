@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { Suspense } from 'react';
 import type { Metadata } from 'next';
 import Query from '@/lib/Query';
@@ -31,6 +32,11 @@ export async function generateMetadata({
 const ProductPage = async ({ params }: ProductPageProps) => {
   const productName = params.name.replace('-', ' ');
 
+  const productPromise: Promise<{ data: any | null; error: any | null }> =
+    Query({
+      api: `v1/products/${productName}`,
+    });
+
   return (
     <div>
       <Suspense
@@ -42,38 +48,46 @@ const ProductPage = async ({ params }: ProductPageProps) => {
           </>
         }
       >
-        <GetProduct productName={productName} />
+        <GetProduct promise={productPromise} />
       </Suspense>
     </div>
   );
 };
 
-const GetProduct = async ({ productName }: { productName: string }) => {
-  const product = await Query({
-    api: `v1/products/${productName}`,
+const GetProduct = async ({
+  promise,
+}: {
+  promise: Promise<{ data: any | null; error: any | null }>;
+}) => {
+  const product = await promise;
+
+  if (product?.error) {
+    redirect('/shop');
+  }
+
+  const relatedProductsPromise: Promise<{
+    data: any | null;
+    error: any | null;
+  }> = Query({
+    api: `v1/products?category=${product?.data?.data?.category._id}`,
   });
-  const relatedProducts = await Query({
-    api: `v1/products?category=${product.data?.data?.category._id}`,
-  });
+
+  const relatedProducts = await relatedProductsPromise;
 
   const cookieStore = await cookies();
   const hasToken = !!cookieStore.get('token')?.value;
 
-  if (product.error) {
-    redirect('/shop');
-  }
-
   return (
     <>
-      <Product productData={product.data.data} />
+      <Product productData={product?.data?.data} />
       <FeedBack
-        productId={product.data.data?._id}
+        productId={product?.data?.data?._id}
         allReviews={product?.data?.data?.feedBack ?? []}
         hasToken={hasToken}
       />
       <RelatedProducts
-        productData={relatedProducts.data.data}
-        productId={product.data?.data?._id}
+        productData={relatedProducts?.data?.data}
+        productId={product?.data?.data?._id}
       />
     </>
   );
