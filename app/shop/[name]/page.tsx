@@ -20,7 +20,7 @@ interface ProductPageProps {
 export async function generateMetadata({
   params,
 }: ProductPageProps): Promise<Metadata> {
-  const title = params.name.replace('-', ' ');
+  const title = params.name.replaceAll('-', ' ');
   const productName = title.charAt(0).toUpperCase() + title.slice(1);
 
   return {
@@ -30,8 +30,7 @@ export async function generateMetadata({
 }
 
 const ProductPage = async ({ params }: ProductPageProps) => {
-  const productName = params.name.replace('-', ' ');
-
+  const productName = params.name.replaceAll('-', ' ');
   const productPromise: Promise<{ data: any | null; error: any | null }> =
     Query({
       api: `v1/products/${productName}`,
@@ -62,6 +61,7 @@ const GetProduct = async ({
   const product = await promise;
 
   if (product?.error) {
+    console.log(product?.error);
     redirect('/shop');
   }
 

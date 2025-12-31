@@ -18,7 +18,10 @@ const Shop = async ({
   const productsPromise: Promise<{ data: any | null; error: any | null }> =
     Query({
       api: 'v1/products',
-      filters,
+      filters: {
+        ...filters,
+        limit: '9',
+      },
     });
 
   const categoriesPromise: Promise<{ data: any | null; error: any | null }> =
