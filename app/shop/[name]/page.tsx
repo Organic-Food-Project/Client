@@ -69,7 +69,7 @@ const GetProduct = async ({
     data: any | null;
     error: any | null;
   }> = Query({
-    api: `v1/products?filter[category]=${product?.data?.data?.category._id}`,
+    api: `v1/products?sort=-rate&filter[category]=${product?.data?.data?.category._id}`,
   });
 
   const relatedProducts = await relatedProductsPromise;
