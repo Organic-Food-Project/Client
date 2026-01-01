@@ -7,6 +7,8 @@ import { Slider } from '@/components/ui/slider';
 import { currencyFormated } from '@/lib/utils';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
+let oldParams: URLSearchParams;
+
 const FiltersSection = ({
   categories,
 }: {
@@ -59,7 +61,8 @@ const FiltersSection = ({
   const updateFiltersInUrl = useCallback(() => {
     const params = new URLSearchParams(searchParams.toString());
     const filterKeys = ['min_price', 'max_price', 'rate', 'category'];
-    params.set('page', '1');
+
+    let run = true;
 
     filterKeys.forEach((key) => {
       params.delete(`filter[${key}]`);
@@ -77,8 +80,17 @@ const FiltersSection = ({
       if (item.value !== '' && item.value !== undefined) {
         params.append(`filter[${item.key}]`, String(item.value));
       }
+      if (
+        oldParams &&
+        oldParams?.get(`filter[${item.key}]`) !== String(item.value)
+      )
+        run = false;
     });
 
+    if (run) {
+      params.set('page', '1');
+    }
+    oldParams = params;
     router.replace(`${pathname}?${params.toString()}`);
   }, [
     priceRange,
