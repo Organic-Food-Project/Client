@@ -48,7 +48,7 @@ const SearchComponent: React.FC = () => {
 
     if (!query.trim()) return;
 
-    router.push(`/shop?search=${encodeURIComponent(query)}`);
+    router.push(`/shop?search=${encodeURIComponent(query)}&sort=-rate`);
 
     setIsOpen(false);
   };

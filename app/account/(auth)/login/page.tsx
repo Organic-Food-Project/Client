@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import React from 'react';
 import LoginForm from './form';
 import CustomLink from '@/components/CustomLink';

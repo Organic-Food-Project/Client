@@ -2,7 +2,7 @@ import Facebook from '@/assets/icons/Facebook.svg';
 import Instagram from '@/assets/icons/Instagram.svg';
 import Twitter from '@/assets/icons/Twitter.svg';
 import Patreon from '@/assets/icons/Patreon.svg';
-import Link from 'next/link';
+
 import Image from 'next/image';
 import { Button } from './ui/button';
 import CustomLink from './CustomLink';

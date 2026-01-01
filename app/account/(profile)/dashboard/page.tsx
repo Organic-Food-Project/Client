@@ -4,7 +4,6 @@ import type { Metadata } from 'next';
 import UserSettings from './UserSettings';
 import OrderHistory from './OrderHistory';
 import Query from '@/lib/Query';
-import Link from 'next/link';
 import CustomLink from '@/components/CustomLink';
 
 export const metadata: Metadata = {

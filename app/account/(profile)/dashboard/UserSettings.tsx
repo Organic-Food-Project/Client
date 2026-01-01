@@ -1,6 +1,5 @@
 import CustomLink from '@/components/CustomLink';
 import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react';
 
 interface UserSettingsProps {

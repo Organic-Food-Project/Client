@@ -3,7 +3,6 @@
 import CustomTable from '@/components/ui/CustomTable';
 import type { ColumnDef } from '@tanstack/react-table';
 import type React from 'react';
-import Link from 'next/link';
 import dayjs from 'dayjs';
 import CustomLink from '@/components/CustomLink';
 

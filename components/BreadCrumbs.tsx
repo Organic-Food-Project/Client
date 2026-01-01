@@ -3,7 +3,6 @@ import { usePathname } from 'next/navigation';
 import BreadCrumbsBg from '@/assets/Breadcrumbs.webp';
 import Image from 'next/image';
 import { ChevronRight, House } from 'lucide-react';
-import Link from 'next/link';
 import CustomLink from './CustomLink';
 
 const BreadCrumbs = () => {

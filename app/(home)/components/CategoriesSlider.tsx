@@ -11,7 +11,12 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 interface CategoriesSliderProps {
-  categories: { _id: string; name: string; products: string[] }[];
+  categories: {
+    _id: string;
+    name: string;
+    products: string[];
+    image: string;
+  }[];
 }
 
 const CategoriesSlider: React.FC<CategoriesSliderProps> = ({ categories }) => {
@@ -87,11 +92,17 @@ const CategoriesSlider: React.FC<CategoriesSliderProps> = ({ categories }) => {
           onSlideChange={handleSlideChange}
         >
           {categories?.map(
-            (el: { _id: string; name: string; products: string[] }) => (
+            (el: {
+              _id: string;
+              name: string;
+              products: string[];
+              image: string;
+            }) => (
               <SwiperSlide key={el?._id} className="h-auto flex-shrink-0">
                 <Category
                   name={el?.name}
                   id={el?._id}
+                  image={el?.image}
                   products={el?.products}
                 />
               </SwiperSlide>

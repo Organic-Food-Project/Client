@@ -1,15 +1,15 @@
 import TempCategory from '@/assets/Vig2.webp';
 import Image from 'next/image';
-import Link from 'next/link';
 import CustomLink from './CustomLink';
 
 interface CategoryProps {
   name: string;
   id: string;
   products: string[];
+  image: string;
 }
 
-const Category = ({ name, id, products }: CategoryProps) => {
+const Category = ({ name, image, id, products }: CategoryProps) => {
   const CategoryData = {
     imgSrc: TempCategory,
     imgAlt: name,
@@ -19,11 +19,11 @@ const Category = ({ name, id, products }: CategoryProps) => {
   return (
     <div className="relative group border rounded-[8px] border-gray-100 hover:border-hard-primary hover:shadow hover:shadow-soft-primary p-4 bg-white">
       <CustomLink
-        href={`/shop?filter[category]=${id}`}
+        href={`/shop?filter[category]=${id}&sort=-rate`}
         className="flex flex-col items-center justify-center gap-5 pt-4"
       >
         <Image
-          src={CategoryData.imgSrc}
+          src={image ?? CategoryData.imgSrc}
           width={80}
           height={80}
           alt={CategoryData.imgAlt}

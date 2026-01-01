@@ -33,7 +33,7 @@ export default async function Footer() {
       section: 'Proxy',
       links: [
         { text: 'About', to: '/about-us' },
-        { text: 'Shop', to: '/shop' },
+        { text: 'Shop', to: '/shop?sort=-rate' },
       ],
     },
     {
@@ -41,7 +41,7 @@ export default async function Footer() {
       links: categories?.data
         ? categories?.data?.data?.map((el: { name: string; _id: string }) => ({
             text: el?.name,
-            to: `/shop?filter[category]=${el?._id}`,
+            to: `/shop?filter[category]=${el?._id}&sort=-rate`,
           }))
         : [],
     },

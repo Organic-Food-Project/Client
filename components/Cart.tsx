@@ -4,7 +4,6 @@ import Cart from '@/assets/icons/Cart.svg';
 import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
 import { X } from 'lucide-react';
-import Link from 'next/link';
 import { currencyFormated } from '@/lib/utils';
 import { deleteFromCartAction } from '@/lib/actions/Cart';
 import Toast from './ui/Toast';

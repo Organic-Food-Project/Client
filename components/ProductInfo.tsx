@@ -11,7 +11,6 @@ import Instagram from '@/assets/icons/Instagram.svg';
 import Twitter from '@/assets/icons/Twitter.svg';
 import Patreon from '@/assets/icons/Patreon.svg';
 import Brand from '@/assets/icons/Brand.svg';
-import Link from 'next/link';
 import type { ProductData } from '@/types/global';
 import Rating from '@/components/Rating';
 import CustomLink from './CustomLink';

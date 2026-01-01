@@ -2,12 +2,13 @@
 import Image from 'next/image';
 import type { ColumnDef } from '@tanstack/react-table';
 import type React from 'react';
-import Link from 'next/link';
 import CustomTable from '@/components/ui/CustomTable';
 import CustomLink from '@/components/CustomLink';
+import { slugify } from '@/lib/utils';
 
 interface Product {
   product: {
+    _id: string;
     name: string;
     image: string;
   };
@@ -66,6 +67,18 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
       header: 'Subtotal',
       cell: ({ row }) => (
         <div className="text-body-small">{row.original.subtotal}</div>
+      ),
+    },
+    {
+      accessorKey: 'subtotal',
+      header: '',
+      cell: ({ row }) => (
+        <CustomLink
+          href={`/shop/${slugify(row.original.product.name)}`}
+          className="ursor-pointer text-center font-medium text-body-medium text-primary"
+        >
+          View Product
+        </CustomLink>
       ),
     },
   ];

@@ -9,7 +9,6 @@ import CustomerSupport from '@/assets/icons/customer-support.svg';
 import ShoppingBag from '@/assets/icons/shopping-bag.svg';
 import Package from '@/assets/icons/package.svg';
 import { ArrowRight } from 'lucide-react';
-import Link from 'next/link';
 import CustomLink from '@/components/CustomLink';
 
 const HeroSection = () => {
@@ -65,7 +64,7 @@ const HeroSection = () => {
                 Free shipping on all your order. we deliver, you enjoy
               </p>
               <CustomLink
-                href="/shop"
+                href="/shop?sort=-rate"
                 aria-label="Shop now"
                 className="w-fit flex items-center justify-center gap-4 text-body-medium font-semibold bg-primary text-white rounded-full px-10 py-4"
               >

@@ -62,7 +62,7 @@ const GetProduct = async ({
 
   if (product?.error) {
     console.log(product?.error);
-    redirect('/shop');
+    redirect('/shop?sort=-rate');
   }
 
   const relatedProductsPromise: Promise<{

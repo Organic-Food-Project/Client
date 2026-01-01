@@ -22,7 +22,7 @@ const FiltersSection = ({
     rating: true,
   });
 
-  const [priceRange, setPriceRange] = useState<[number, number]>([1, 1500]);
+  const [priceRange, setPriceRange] = useState<[number, number]>([1, 20]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedRating, setSelectedRating] = useState<string>('');
   const [hasUserInteracted, setHasUserInteracted] = useState(false);
@@ -59,6 +59,7 @@ const FiltersSection = ({
   const updateFiltersInUrl = useCallback(() => {
     const params = new URLSearchParams(searchParams.toString());
     const filterKeys = ['min_price', 'max_price', 'rate', 'category'];
+    params.set('page', '1');
 
     filterKeys.forEach((key) => {
       params.delete(`filter[${key}]`);
@@ -109,7 +110,7 @@ const FiltersSection = ({
   useEffect(() => {
     setPriceRange([
       Number(searchParams.get('filter[min_price]')) || 1,
-      Number(searchParams.get('filter[max_price]')) || 1500,
+      Number(searchParams.get('filter[max_price]')) || 20,
     ]);
 
     setSelectedRating(searchParams.get('filter[rate]') || '');
@@ -185,8 +186,8 @@ const FiltersSection = ({
                 setPriceRange(value as [number, number]);
               }}
               min={1}
-              max={1500}
-              step={10}
+              max={20}
+              step={0.1}
             />
             <div className="mt-2 text-sm">
               {currencyFormated(priceRange[0])} —{' '}

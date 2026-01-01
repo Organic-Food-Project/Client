@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ArrowRight } from 'lucide-react';
-import Link from 'next/link';
 import React from 'react';
 import Product, { LoadingProduct } from '@/components/Product';
 import Vig1 from '@/assets/Vig1.webp';
@@ -22,7 +21,10 @@ const TopRatedProducts = async () => {
         <h2 className="text-4xl sm:text-heading-03  font-bold">
           Top Rated Products
         </h2>{' '}
-        <CustomLink href="/shop" className=" text-primary pb-2 flex gap-2">
+        <CustomLink
+          href="/shop?sort=-rate"
+          className=" text-primary pb-2 flex gap-2"
+        >
           View All
           <ArrowRight />
         </CustomLink>

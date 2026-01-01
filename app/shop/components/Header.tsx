@@ -25,6 +25,7 @@ const Header = ({ meta }: { meta: { total: number } }) => {
   const handleSortChange = (value: string) => {
     setSort(value);
     const params = new URLSearchParams(searchParams.toString());
+    params.set('page', '1');
     if (value) {
       params.set('sort', value);
     } else {
@@ -41,6 +42,7 @@ const Header = ({ meta }: { meta: { total: number } }) => {
     const handler = setTimeout(() => {
       const params = new URLSearchParams(searchParams.toString());
       const currentUrlSearch = params.get('search') || '';
+      params.set('page', '1');
 
       if (searchValue !== currentUrlSearch) {
         if (searchValue) {

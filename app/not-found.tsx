@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react';
 import Page404Image from '@/assets/Illustration/Page404.webp';
 import CustomLink from '@/components/CustomLink';

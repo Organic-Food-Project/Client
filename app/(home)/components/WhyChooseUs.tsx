@@ -2,7 +2,6 @@
 import Image from 'next/image';
 import React, { Suspense } from 'react';
 import WhyUs from '@/assets/WhyUS.webp';
-import Link from 'next/link';
 import { ArrowRight, Check } from 'lucide-react';
 import Leaf from '@/assets/icons/Leaf.svg';
 import Leaf2 from '@/assets/icons/Leaf2.svg';
@@ -57,7 +56,7 @@ const WhyChooseUs = async () => {
             </p>
           </div>
           <CustomLink
-            href="/shop"
+            href="/shop?sort=-rate"
             aria-label="Shop now"
             className="w-fit flex items-center justify-center gap-4 text-body-medium font-semibold bg-primary text-white rounded-full px-10 py-4"
           >

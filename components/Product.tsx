@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Cart from '@/assets/icons/Cart.svg';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useTransition } from 'react';
-import Link from 'next/link';
 import { slugify } from '@/lib/utils';
 import Toast from './ui/Toast';
 import Rating from './Rating';
@@ -146,7 +145,7 @@ const Product: React.FC<ProductProps> = ({
           width={302}
           height={302}
           alt={description}
-          className="w-full aspect-square"
+          className="w-full aspect-square object-cove"
         />
       </CustomLink>
 
@@ -287,7 +286,7 @@ const Product: React.FC<ProductProps> = ({
 export const LoadingProduct = () => {
   return (
     <div className="relative group border rounded-[8px] border-gray-100 hover:border-hard-primary hover:shadow hover:shadow-soft-primary p-4 bg-white">
-      <CustomLink href="/shop">
+      <CustomLink href="/shop?sort=-rate">
         <div className="w-full aspect-square bg-gray-100 animate-pulse rounded-[8px]" />
         <div className="self-end flex justify-between items-center gap-2 mt-4">
           <div className="space-y-2 flex-grow">

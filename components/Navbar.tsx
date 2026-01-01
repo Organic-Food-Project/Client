@@ -43,7 +43,7 @@ export default function Navbar() {
             </ActiveLink>
           </li>
           <li className="flex items-center hover:text-gray-900">
-            <ActiveLink href="/shop">Shop</ActiveLink>
+            <ActiveLink href="/shop?sort=-rate">Shop</ActiveLink>
           </li>
           <li className="flex items-center hover:text-gray-900">
             <ActiveLink href="/about-us" exact>
@@ -155,7 +155,7 @@ export default function Navbar() {
               </li>
               <li>
                 <ActiveLink
-                  href="/shop"
+                  href="/shop?sort=-rate"
                   activeClassName="text-gray-900 font-semibold"
                   inactiveClassName="text-gray-700"
                 >

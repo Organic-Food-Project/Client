@@ -8,6 +8,7 @@ import { Poppins } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { NavigationProgress } from '@/components/CustomLink';
 
 export const metadata: Metadata = {
   title: {
@@ -71,6 +72,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className} bg-white`}>
+        <NavigationProgress />
         <Navbar />
         <BreadCrumbs />
         {children}
