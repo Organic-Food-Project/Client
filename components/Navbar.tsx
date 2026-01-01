@@ -193,7 +193,7 @@ export default function Navbar() {
             {/* Search */}
             <div className="flex items-center gap-4 text-gray-700">
               <Suspense>
-                <SearchComponent />
+                <SearchComponent isFromSideBar />
               </Suspense>
               <span className="text-lg">Search</span>
             </div>

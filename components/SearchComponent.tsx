@@ -6,7 +6,11 @@ import { Search as SearchLucide, X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 
-const SearchComponent: React.FC = () => {
+const SearchComponent = ({
+  isFromSideBar = false,
+}: {
+  isFromSideBar?: boolean;
+}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [query, setQuery] = useState<string>('');
   const router = useRouter();
@@ -67,7 +71,7 @@ const SearchComponent: React.FC = () => {
 
       <div
         className={`
-          absolute top-[140%] right-0 z-50
+          absolute top-[140%]
           w-[320px] bg-white 
           border border-gray-100 shadow-xl rounded-lg
           transform transition-all duration-200 ease-out origin-top-right
@@ -76,6 +80,7 @@ const SearchComponent: React.FC = () => {
               ? 'scale-100 opacity-100 translate-y-0 visible'
               : 'scale-95 opacity-0 -translate-y-2 invisible'
           }
+          ${isFromSideBar ? 'right-[-300px]' : 'right-0'}
         `}
       >
         <form

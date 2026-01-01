@@ -133,7 +133,7 @@ export default function ProfileSettings({ data }: ProfileSettingsProps) {
         Account Settings
       </h1>
 
-      <div className="flex gap-12 px-6 py-6">
+      <div className="flex max-md:flex-col gap-12 px-6 py-6">
         <form action={profileAction} className="flex-1 space-y-6">
           <Input Label="Email" defaultValue={data?.email} disabled />
           <Input
