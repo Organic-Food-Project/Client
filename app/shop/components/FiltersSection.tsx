@@ -234,7 +234,10 @@ const FiltersSection = ({
                     setSelectedRating(checked ? rating.value : '');
                   }}
                 />
-                <label className="flex items-center space-x-2 cursor-pointer">
+                <label
+                  htmlFor={rating.value}
+                  className="flex items-center space-x-2 cursor-pointer"
+                >
                   <div className="flex">{renderStars(5 - index)}</div>
                   <span>{rating.label}</span>
                 </label>
