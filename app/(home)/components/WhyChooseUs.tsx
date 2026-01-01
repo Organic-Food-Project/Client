@@ -10,6 +10,7 @@ import StaticsBG from '@/assets/StaticsBG.webp';
 import VigBG from '@/assets/VigBG.webp';
 import StaticsCard from '@/components/StaticsCard';
 import Query from '@/lib/Query';
+import CustomLink from '@/components/CustomLink';
 
 const WhyChooseUs = async () => {
   const analyticsPromise: Promise<{ data: any | null; error: any | null }> =
@@ -55,14 +56,14 @@ const WhyChooseUs = async () => {
               felis. Sed vestibulum nisl sit amet sapien.
             </p>
           </div>
-          <Link
+          <CustomLink
             href="/shop"
             aria-label="Shop now"
             className="w-fit flex items-center justify-center gap-4 text-body-medium font-semibold bg-primary text-white rounded-full px-10 py-4"
           >
             Shop now
             <ArrowRight />
-          </Link>
+          </CustomLink>
         </div>
         <Image
           src={Leaf}

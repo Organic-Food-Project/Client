@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import Page404Image from '@/assets/Illustration/Page404.webp';
+import CustomLink from '@/components/CustomLink';
 
 const NotFound = () => {
   return (
@@ -19,12 +20,12 @@ const NotFound = () => {
         This is 404 page please navigate to home and explore our best organic
         and healty food in EcoFila.
       </p>
-      <Link
+      <CustomLink
         href="/"
         className="rounded-full bg-primary text-body-small font-600 text-white py-4 px-7"
       >
         Back to Home
-      </Link>
+      </CustomLink>
     </div>
   );
 };

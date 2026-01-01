@@ -5,6 +5,7 @@ import Patreon from '@/assets/icons/Patreon.svg';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from './ui/button';
+import CustomLink from './CustomLink';
 
 export default function NewsletterSubscribe() {
   return (
@@ -42,7 +43,7 @@ export default function NewsletterSubscribe() {
         </Button>
       </form>
       <div className="flex gap-4 flex-grow sm2:flex-grow-0 justify-center">
-        <Link href="https://web.facebook.com/" target="_blank">
+        <CustomLink href="https://web.facebook.com/" target="_blank">
           <Image
             src={Facebook}
             alt="Facebook"
@@ -50,8 +51,8 @@ export default function NewsletterSubscribe() {
             height={26}
             className="rounded-full bg-primary p-1 min-w-[26px] aspect-square"
           />
-        </Link>
-        <Link href="https://twitter.com/" target="_blank">
+        </CustomLink>
+        <CustomLink href="https://twitter.com/" target="_blank">
           <Image
             src={Twitter}
             alt="Twitter"
@@ -59,8 +60,8 @@ export default function NewsletterSubscribe() {
             height={26}
             className="min-w-[26px] aspect-square"
           />
-        </Link>
-        <Link href="https://www.patreon.com/" target="_blank">
+        </CustomLink>
+        <CustomLink href="https://www.patreon.com/" target="_blank">
           <Image
             src={Patreon}
             alt="Patreon"
@@ -68,8 +69,8 @@ export default function NewsletterSubscribe() {
             height={26}
             className="min-w-[26px] aspect-square"
           />
-        </Link>
-        <Link href="https://www.instagram.com/" target="_blank">
+        </CustomLink>
+        <CustomLink href="https://www.instagram.com/" target="_blank">
           <Image
             src={Instagram}
             alt="Instagram"
@@ -77,7 +78,7 @@ export default function NewsletterSubscribe() {
             height={26}
             className="min-w-[26px] aspect-square"
           />
-        </Link>
+        </CustomLink>
       </div>
     </section>
   );

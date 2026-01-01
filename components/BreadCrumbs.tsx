@@ -4,6 +4,7 @@ import BreadCrumbsBg from '@/assets/Breadcrumbs.webp';
 import Image from 'next/image';
 import { ChevronRight, House } from 'lucide-react';
 import Link from 'next/link';
+import CustomLink from './CustomLink';
 
 const BreadCrumbs = () => {
   const pathname = usePathname();
@@ -28,9 +29,9 @@ const BreadCrumbs = () => {
 
       <ol className="flex gap-3 items-center flex-wrap text-4xl text-white">
         <li>
-          <Link href="/" aria-label="Home">
+          <CustomLink href="/" aria-label="Home">
             <House className="text-gray-400" />
-          </Link>
+          </CustomLink>
         </li>
 
         {pathArray.map((segment, index) => {
@@ -52,12 +53,12 @@ const BreadCrumbs = () => {
                   {label}
                 </span>
               ) : (
-                <Link
+                <CustomLink
                   href={href}
                   className="text-body-medium text-gray-400 hover:text-white transition"
                 >
                   {label}
-                </Link>
+                </CustomLink>
               )}
             </li>
           );

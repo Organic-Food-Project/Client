@@ -10,6 +10,7 @@ import ShoppingBag from '@/assets/icons/shopping-bag.svg';
 import Package from '@/assets/icons/package.svg';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import CustomLink from '@/components/CustomLink';
 
 const HeroSection = () => {
   const Cards = [
@@ -63,14 +64,14 @@ const HeroSection = () => {
               <p className="pb-[32px] text-gray-500 text-body-small">
                 Free shipping on all your order. we deliver, you enjoy
               </p>
-              <Link
+              <CustomLink
                 href="/shop"
                 aria-label="Shop now"
                 className="w-fit flex items-center justify-center gap-4 text-body-medium font-semibold bg-primary text-white rounded-full px-10 py-4"
               >
                 Shop now
                 <ArrowRight />
-              </Link>
+              </CustomLink>
             </div>
           </div>
         </div>

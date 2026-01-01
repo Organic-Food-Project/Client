@@ -1,6 +1,7 @@
 import TempCategory from '@/assets/Vig2.webp';
 import Image from 'next/image';
 import Link from 'next/link';
+import CustomLink from './CustomLink';
 
 interface CategoryProps {
   name: string;
@@ -17,7 +18,7 @@ const Category = ({ name, id, products }: CategoryProps) => {
   };
   return (
     <div className="relative group border rounded-[8px] border-gray-100 hover:border-hard-primary hover:shadow hover:shadow-soft-primary p-4 bg-white">
-      <Link
+      <CustomLink
         href={`/shop?filter[category]=${id}`}
         className="flex flex-col items-center justify-center gap-5 pt-4"
       >
@@ -36,7 +37,7 @@ const Category = ({ name, id, products }: CategoryProps) => {
             {CategoryData.count} Products
           </p>
         </div>
-      </Link>
+      </CustomLink>
     </div>
   );
 };
@@ -44,7 +45,7 @@ const Category = ({ name, id, products }: CategoryProps) => {
 export const LoadingCategory = () => {
   return (
     <div className="relative group border rounded-[8px] border-gray-100 hover:border-hard-primary hover:shadow hover:shadow-soft-primary p-4 bg-white">
-      <Link
+      <CustomLink
         href={`/shop`}
         className="flex flex-col items-center justify-center gap-5 pt-4"
       >
@@ -53,7 +54,7 @@ export const LoadingCategory = () => {
           <span className="bg-gray-100 animate-pulse block w-[50%] h-[21px]" />
           <span className="bg-gray-100 animate-pulse block w-[70%] h-[24px]" />
         </div>
-      </Link>
+      </CustomLink>
     </div>
   );
 };

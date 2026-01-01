@@ -8,6 +8,7 @@ import Image from 'next/image';
 import Query from '@/lib/Query';
 import { Suspense } from 'react';
 import { ProductData } from '@/types/global';
+import CustomLink from '@/components/CustomLink';
 
 const TopRatedProducts = async () => {
   const productsPromise: Promise<{ data: any | null; error: any | null }> =
@@ -21,10 +22,10 @@ const TopRatedProducts = async () => {
         <h2 className="text-4xl sm:text-heading-03  font-bold">
           Top Rated Products
         </h2>{' '}
-        <Link href="/shop" className=" text-primary pb-2 flex gap-2">
+        <CustomLink href="/shop" className=" text-primary pb-2 flex gap-2">
           View All
           <ArrowRight />
-        </Link>
+        </CustomLink>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Suspense fallback={<ProductsLoading />}>

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import React from 'react';
 import Form from './form';
+import CustomLink from '@/components/CustomLink';
 
 export const metadata: Metadata = {
   title: {
@@ -23,12 +24,12 @@ const SignUp = () => {
         <span className="text-gray-600 text-body-small">
           Already have account?
         </span>
-        <Link
+        <CustomLink
           href="/account/login"
           className="text-gray-900 text-body-small font-semibold"
         >
           Login
-        </Link>
+        </CustomLink>
       </div>
     </div>
   );

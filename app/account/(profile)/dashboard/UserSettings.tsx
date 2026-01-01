@@ -1,3 +1,4 @@
+import CustomLink from '@/components/CustomLink';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -28,12 +29,12 @@ const UserSettings: React.FC<UserSettingsProps> = ({ user }) => {
         {user?.firstName + ' ' + user?.lastName}
       </h2>
       <p className="text-muted-foreground text-sm pt-2">{user?.role}</p>
-      <Link
+      <CustomLink
         href="/account/settings"
         className="ursor-pointer text-center pt-3 font-medium text-body-medium text-primary"
       >
         Edit Profile
-      </Link>
+      </CustomLink>
     </div>
   );
 };

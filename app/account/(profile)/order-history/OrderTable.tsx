@@ -5,6 +5,7 @@ import type React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import dayjs from 'dayjs';
+import CustomLink from '@/components/CustomLink';
 
 export const metadata: Metadata = {
   title: {
@@ -63,12 +64,12 @@ const OrderTable: React.FC<OrderProps> = ({
       header: '',
       cell: ({ row }) => (
         <div className="w-full flex justify-end items-center">
-          <Link
+          <CustomLink
             href={`/account/order-history/${row.original._id}`}
             className="ursor-pointer text-center font-medium text-body-medium text-primary"
           >
             View Details
-          </Link>
+          </CustomLink>
         </div>
       ),
     },

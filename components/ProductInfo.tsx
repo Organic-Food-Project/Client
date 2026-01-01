@@ -14,6 +14,7 @@ import Brand from '@/assets/icons/Brand.svg';
 import Link from 'next/link';
 import type { ProductData } from '@/types/global';
 import Rating from '@/components/Rating';
+import CustomLink from './CustomLink';
 
 interface ProductInfoProps {
   isWishlisted: boolean;
@@ -130,7 +131,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
               {/* Share Item */}
               <div className="flex gap-4 flex-grow sm2:flex-grow-0 justify-center">
                 <span className="text-body-small ">Share item:</span>
-                <Link href="https://web.facebook.com/" target="_blank">
+                <CustomLink href="https://web.facebook.com/" target="_blank">
                   <Image
                     src={Facebook || '/placeholder.svg'}
                     alt="Facebook"
@@ -138,8 +139,8 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
                     height={26}
                     className="rounded-full bg-primary p-1 min-w-[26px] aspect-square"
                   />
-                </Link>
-                <Link href="https://twitter.com/" target="_blank">
+                </CustomLink>
+                <CustomLink href="https://twitter.com/" target="_blank">
                   <Image
                     src={Twitter || '/placeholder.svg'}
                     alt="Twitter"
@@ -147,8 +148,8 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
                     height={26}
                     className="min-w-[26px] aspect-square"
                   />
-                </Link>
-                <Link href="https://www.patreon.com/" target="_blank">
+                </CustomLink>
+                <CustomLink href="https://www.patreon.com/" target="_blank">
                   <Image
                     src={Patreon || '/placeholder.svg'}
                     alt="Patreon"
@@ -156,8 +157,8 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
                     height={26}
                     className="min-w-[26px] aspect-square"
                   />
-                </Link>
-                <Link href="https://www.instagram.com/" target="_blank">
+                </CustomLink>
+                <CustomLink href="https://www.instagram.com/" target="_blank">
                   <Image
                     src={Instagram || '/placeholder.svg'}
                     alt="Instagram"
@@ -165,7 +166,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
                     height={26}
                     className="min-w-[26px] aspect-square"
                   />
-                </Link>
+                </CustomLink>
               </div>
             </div>
 

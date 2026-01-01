@@ -5,6 +5,7 @@ import UserSettings from './UserSettings';
 import OrderHistory from './OrderHistory';
 import Query from '@/lib/Query';
 import Link from 'next/link';
+import CustomLink from '@/components/CustomLink';
 
 export const metadata: Metadata = {
   title: {
@@ -45,12 +46,12 @@ const Dashboard = async ({
       <div>
         <div className="flex justify-between items-center p-[24px] border-t-1 border-r-1 border-l-1 border-gray-100">
           <p className="text-body-xl font-medium ">Recet Order History</p>
-          <Link
+          <CustomLink
             href="/account/order-history"
             className="ursor-pointer text-center font-medium text-body-medium text-primary"
           >
             View All
-          </Link>
+          </CustomLink>
         </div>
         <Suspense fallback={<OrderHistory loading orders={[]} />}>
           <OrderHistoryFetch promise={ordersPromise} />

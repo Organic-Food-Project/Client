@@ -4,6 +4,7 @@ import type { ColumnDef } from '@tanstack/react-table';
 import type React from 'react';
 import Link from 'next/link';
 import CustomTable from '@/components/ui/CustomTable';
+import CustomLink from '@/components/CustomLink';
 
 interface Product {
   product: {
@@ -79,12 +80,12 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
               • {orderDetails.date} • {orderDetails.productCount} Products
             </span>
           </h1>
-          <Link
+          <CustomLink
             href="/account/order-history"
             className="ursor-pointer text-center pt-3 font-medium text-body-medium text-primary"
           >
             Back to List
-          </Link>
+          </CustomLink>
         </div>
 
         <div className="grid grid-cols-1 gap-6 p-6">

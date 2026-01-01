@@ -6,12 +6,12 @@ import User from '@/assets/icons/User.svg';
 import Heart from '@/assets/icons/Heart.svg';
 import Logo from '@/assets/Logo.png';
 import Cart from '@/assets/icons/Cart.svg';
-import Link from 'next/link';
 import Image from 'next/image';
-import { Menu, X, Search } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import ActiveLink from './ui/ActiveLink';
 import SearchComponent from './SearchComponent';
 import { Suspense } from 'react';
+import CustomLink from './CustomLink';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -54,9 +54,9 @@ export default function Navbar() {
 
         {/* Logo */}
         <div>
-          <Link href="/">
+          <CustomLink href="/">
             <Image src={Logo} alt="EcoFila Logo" width={183} height={38} />
-          </Link>
+          </CustomLink>
         </div>
 
         {/* Desktop Right Icons */}
@@ -76,19 +76,19 @@ export default function Navbar() {
             </Suspense>
           </li>
           <li className="max-md:hidden">
-            <Link href="/wishlist">
+            <CustomLink href="/wishlist">
               <Image src={Heart} alt="Heart" width={32} height={32} />
-            </Link>
+            </CustomLink>
           </li>
           <li className="max-md:hidden">
-            <Link href="/cart">
+            <CustomLink href="/cart">
               <Image src={Cart} alt="Cart" width={32} height={32} />
-            </Link>
+            </CustomLink>
           </li>
           <li className="max-sm:hidden">
-            <Link href="/account/dashboard">
+            <CustomLink href="/account/dashboard">
               <Image src={User} alt="User" width={32} height={32} />
-            </Link>
+            </CustomLink>
           </li>
           <li className="lg3:hidden flex items-center">
             <button
@@ -199,34 +199,34 @@ export default function Navbar() {
             </div>
 
             {/* Wishlist */}
-            <Link
+            <CustomLink
               href="/wishlist"
               className="flex items-center gap-4 text-gray-700 hover:text-gray-900 transition-colors"
               onClick={toggleMenu}
             >
               <Image src={Heart} alt="Wishlist" width={30} height={30} />
               <span className="text-lg">Wishlist</span>
-            </Link>
+            </CustomLink>
 
             {/* Cart */}
-            <Link
+            <CustomLink
               href="/cart"
               className="flex items-center gap-4 text-gray-700 hover:text-gray-900 transition-colors"
               onClick={toggleMenu}
             >
               <Image src={Cart} alt="Cart" width={30} height={30} />
               <span className="text-lg">Cart</span>
-            </Link>
+            </CustomLink>
 
             {/* User Account */}
-            <Link
+            <CustomLink
               href="/account/dashboard"
               className="flex items-center gap-4 text-gray-700 hover:text-gray-900 transition-colors"
               onClick={toggleMenu}
             >
               <Image src={User} alt="Account" width={30} height={30} />
               <span className="text-lg">Account</span>
-            </Link>
+            </CustomLink>
 
             {/* Phone */}
             <a

@@ -9,6 +9,7 @@ import {
   Settings,
   LogOut as LogOutIcon,
 } from 'lucide-react';
+import CustomLink from '@/components/CustomLink';
 
 type NavItem = {
   label: string;
@@ -67,7 +68,7 @@ export function Navigation() {
           }
 
           return (
-            <Link
+            <CustomLink
               key={item.label}
               href={item.href!}
               className={`flex w-full items-center gap-3 py-4 text-left transition-colors hover:bg-green-50 ${
@@ -88,7 +89,7 @@ export function Navigation() {
               >
                 {item.label}
               </span>
-            </Link>
+            </CustomLink>
           );
         })}
       </nav>

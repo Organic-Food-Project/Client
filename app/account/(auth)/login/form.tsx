@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import { useActionState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
+import CustomLink from '@/components/CustomLink';
 
 const LoginForm = () => {
   const [state, action, loading] = useActionState(LoginAction, { errors: {} });
@@ -72,7 +73,7 @@ const LoginForm = () => {
             Remember me
           </label>
         </div>
-        <Link href="/account/forgot-password">Forget Password?</Link>
+        <CustomLink href="/account/forgot-password">Forget Password?</CustomLink>
       </div>
       <Button
         loading={loading || state.success}

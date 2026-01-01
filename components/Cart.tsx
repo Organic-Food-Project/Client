@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { currencyFormated } from '@/lib/utils';
 import { deleteFromCartAction } from '@/lib/actions/Cart';
 import Toast from './ui/Toast';
+import CustomLink from './CustomLink';
 
 interface CartComponentProps {
   cart: {
@@ -137,13 +138,13 @@ const CartComponent: React.FC<CartComponentProps> = ({ cart }) => {
                   <button className="cursor-pointer w-full text-center text-body-medium font-semibold bg-primary text-white rounded-full py-3">
                     Checkout
                   </button>
-                  <Link
+                  <CustomLink
                     onClick={handleShowNav}
                     href="/cart"
                     className="block w-full text-center text-body-medium font-semibold bg-[#56AC59]/10 text-primary rounded-full py-3"
                   >
                     Go To Cart
-                  </Link>
+                  </CustomLink>
                 </div>
               </div>
             </motion.div>

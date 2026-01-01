@@ -10,6 +10,7 @@ import ButtonRight from '@/components/ui/ButtonRight';
 import { Suspense } from 'react';
 import Query from '@/lib/Query';
 import CategoriesSlider from './CategoriesSlider';
+import CustomLink from '@/components/CustomLink';
 
 const TopCategories = async () => {
   const categoriesPromise: Promise<{ data: any | null; error: any | null }> =
@@ -30,10 +31,10 @@ const TopCategories = async () => {
         <h2 className="text-4xl sm:text-heading-03  font-bold">
           Shop by Top Categories
         </h2>{' '}
-        <Link href="/shop" className=" text-primary pb-2 flex gap-2">
+        <CustomLink href="/shop" className=" text-primary pb-2 flex gap-2">
           View All
           <ArrowRight />
-        </Link>
+        </CustomLink>
       </div>
       <Suspense fallback={<CategoriesLoading />}>
         <AllCategories promise={categoriesPromise} />

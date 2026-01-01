@@ -16,6 +16,7 @@ import {
   deleteFromWishlistAction,
 } from '@/lib/actions/Wishlist';
 import { useRouter } from 'next/navigation';
+import CustomLink from './CustomLink';
 
 interface ProductProps {
   _id: string;
@@ -139,7 +140,7 @@ const Product: React.FC<ProductProps> = ({
       onMouseLeave={() => setIsHoverd(false)}
       className="relative group border rounded-[8px] border-gray-100 hover:border-hard-primary hover:shadow hover:shadow-soft-primary p-4 bg-white"
     >
-      <Link href={`/shop/${slugify(name)}`}>
+      <CustomLink href={`/shop/${slugify(name)}`}>
         <Image
           src={images[0] || '/placeholder.svg'}
           width={302}
@@ -147,7 +148,7 @@ const Product: React.FC<ProductProps> = ({
           alt={description}
           className="w-full aspect-square"
         />
-      </Link>
+      </CustomLink>
 
       {isOutOfStock && (
         <div className="absolute top-0 left-0 space-y-[6px] m-4 py-2 px-4 bg-black text-body-small text-white rounded-[4px]">
@@ -286,7 +287,7 @@ const Product: React.FC<ProductProps> = ({
 export const LoadingProduct = () => {
   return (
     <div className="relative group border rounded-[8px] border-gray-100 hover:border-hard-primary hover:shadow hover:shadow-soft-primary p-4 bg-white">
-      <Link href="/shop">
+      <CustomLink href="/shop">
         <div className="w-full aspect-square bg-gray-100 animate-pulse rounded-[8px]" />
         <div className="self-end flex justify-between items-center gap-2 mt-4">
           <div className="space-y-2 flex-grow">
@@ -300,7 +301,7 @@ export const LoadingProduct = () => {
             className="disabled:cursor-not-allowed size-[40px] bg-gray-100 animate-pulse rounded-full flex justify-center items-center"
           />
         </div>
-      </Link>
+      </CustomLink>
     </div>
   );
 };
