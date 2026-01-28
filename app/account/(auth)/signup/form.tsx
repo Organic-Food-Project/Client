@@ -46,7 +46,7 @@ const Form = () => {
         labelClassName="sr-only"
         id="firstName"
         name="firstName"
-        placeholder="First Password"
+        placeholder="First Name"
         type="string"
         onChange={handleChange}
         value={formData.firstName}
@@ -58,7 +58,7 @@ const Form = () => {
         labelClassName="sr-only"
         id="lastName"
         name="lastName"
-        placeholder="Last Password"
+        placeholder="Last Name"
         type="string"
         onChange={handleChange}
         value={formData.lastName}
@@ -113,3 +113,4 @@ const Form = () => {
 };
 
 export default Form;
+
