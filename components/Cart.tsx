@@ -2,6 +2,7 @@
 import React, { useState, useTransition } from 'react';
 import Cart from '@/assets/icons/Cart.svg';
 import Image from 'next/image';
+import { BackendImage } from '@/components/BackendImage';
 import { AnimatePresence, motion } from 'framer-motion';
 import { X } from 'lucide-react';
 import { currencyFormated } from '@/lib/utils';
@@ -175,11 +176,12 @@ const ItemCard: React.FC<{
         idx !== count - 1 && 'border-b border-gray-200'
       }`}
     >
-      <Image
+      <BackendImage
         src={ProductData.imgSrc}
         width={120}
         height={100}
         alt={ProductData.imgAlt}
+        className="object-cover"
       />
       <div className="flex-grow text-body-small">
         <p>{ProductData?.title}</p>

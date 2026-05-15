@@ -9,7 +9,7 @@ import {
   useCallback,
   useRef,
 } from 'react';
-import Image from 'next/image';
+import { BackendImage } from '@/components/BackendImage';
 import { currencyFormated } from '@/lib/utils';
 import { Minus, Plus, X } from 'lucide-react';
 import { updateCartAction, deleteFromCartAction } from '@/lib/actions/Cart';
@@ -158,12 +158,12 @@ const CartTable: React.FC<CartTableProps> = ({
       header: 'Product',
       cell: ({ row }) => (
         <div className="flex gap-[20px] items-center">
-          <Image
-            src={row.original.img || '/placeholder.svg'}
+          <BackendImage
+            src={row.original.img}
             width={100}
             height={100}
             alt={row.original.name}
-            className="max-h-[100px]"
+            className="max-h-[100px] object-cover"
             title={row.original.name}
           />
         </div>

@@ -15,7 +15,7 @@ interface CategoriesSliderProps {
     _id: string;
     name: string;
     products: string[];
-    image: string;
+    image?: string | null;
   }[];
 }
 
@@ -96,7 +96,7 @@ const CategoriesSlider: React.FC<CategoriesSliderProps> = ({ categories }) => {
               _id: string;
               name: string;
               products: string[];
-              image: string;
+              image?: string | null;
             }) => (
               <SwiperSlide key={el?._id} className="h-auto flex-shrink-0">
                 <Category

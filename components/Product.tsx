@@ -2,6 +2,7 @@
 import { Eye, Heart, X, Loader2 } from 'lucide-react';
 import type React from 'react';
 import Image from 'next/image';
+import { BackendImage } from '@/components/BackendImage';
 import Cart from '@/assets/icons/Cart.svg';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useTransition } from 'react';
@@ -39,7 +40,7 @@ interface ProductProps {
 
 const Product: React.FC<ProductProps> = ({
   _id,
-  images = ['/Logo.ico'],
+  images = [],
   description = 'product',
   name,
   price,
@@ -140,12 +141,12 @@ const Product: React.FC<ProductProps> = ({
       className="relative group border rounded-[8px] border-gray-100 hover:border-hard-primary hover:shadow hover:shadow-soft-primary p-4 bg-white"
     >
       <CustomLink href={`/shop/${slugify(name)}`}>
-        <Image
-          src={images[0] || '/placeholder.svg'}
+        <BackendImage
+          src={images[0]}
           width={302}
           height={302}
           alt={description}
-          className="w-full aspect-square object-cove"
+          className="w-full aspect-square object-cover"
         />
       </CustomLink>
 

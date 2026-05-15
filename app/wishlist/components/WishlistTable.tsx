@@ -3,7 +3,7 @@ import CustomTable from '@/components/ui/CustomTable';
 import type { ColumnDef } from '@tanstack/react-table';
 import type React from 'react';
 import type { MetaData } from '@/types/global';
-import Image from 'next/image';
+import { BackendImage } from '@/components/BackendImage';
 import { currencyFormated } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { X } from 'lucide-react';
@@ -49,11 +49,12 @@ const WishlistTable: React.FC<WishlistTableProps> = ({
       header: 'Product',
       cell: ({ row }) => (
         <div className="flex gap-[20px] items-center">
-          <Image
-            src={row.original.img || '/placeholder.svg'}
+          <BackendImage
+            src={row.original.img}
             width={100}
             height={100}
             alt={row.original.name}
+            className="object-cover"
             title={row.original.name}
           />
         </div>

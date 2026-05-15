@@ -1,5 +1,5 @@
 'use client';
-import Image from 'next/image';
+import { BackendImage } from '@/components/BackendImage';
 import type { ColumnDef } from '@tanstack/react-table';
 import type React from 'react';
 import CustomTable from '@/components/ui/CustomTable';
@@ -38,11 +38,12 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
       header: 'Product',
       cell: ({ row }) => (
         <div className="flex items-center gap-3">
-          <Image
-            src={row.original.product.image || '/placeholder.svg'}
+          <BackendImage
+            src={row.original.product.image}
             alt={row.original.product.name}
             width={70}
             height={70}
+            className="object-cover"
           />
           <p className="text-body-small">{row.original.product.name}</p>
         </div>

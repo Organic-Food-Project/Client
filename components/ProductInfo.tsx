@@ -1,11 +1,12 @@
 'use client';
 
 import type React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Heart, Minus, Plus, Loader2 } from 'lucide-react';
 import Image from 'next/image';
+import { BackendImage } from '@/components/BackendImage';
 import Facebook from '@/assets/icons/Facebook.svg';
 import Instagram from '@/assets/icons/Instagram.svg';
 import Twitter from '@/assets/icons/Twitter.svg';
@@ -36,6 +37,19 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
   const [quantity, setQuantity] = useState(1);
   const inStock = productData.quantity !== 0;
 
+  const rawImages = productData.images ?? [];
+  const galleryImages =
+    rawImages.length > 0 ? rawImages : ([null] as (string | null)[]);
+  const galleryLen = galleryImages.length;
+
+  useEffect(() => {
+    setSelectedImage(0);
+  }, [productData._id]);
+
+  useEffect(() => {
+    setSelectedImage((i) => Math.min(i, galleryLen - 1));
+  }, [galleryLen]);
+
   const decreaseQuantity = () => {
     if (quantity > 1) setQuantity(quantity - 1);
   };
@@ -52,7 +66,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
         {/* Image Gallery */}
         <div className="flex max-md:flex-col-reverse items-center gap-4">
           <div className="flex md:flex-col gap-3">
-            {productData.images.map((image, index) => (
+            {galleryImages.map((image, index) => (
               <button
                 key={index}
                 onClick={() => setSelectedImage(index)}
@@ -62,18 +76,18 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
                     : 'hover:border-primary/50'
                 }`}
               >
-                <Image
-                  src={image || '/placeholder.svg'}
+                <BackendImage
+                  src={image ?? undefined}
                   width={80}
                   height={80}
                   alt={`${productData.name} view ${index + 1}`}
-                  className="aspect-square"
+                  className="aspect-square size-full"
                 />
               </button>
             ))}
           </div>
-          <Image
-            src={productData.images[selectedImage] || '/placeholder.svg'}
+          <BackendImage
+            src={galleryImages[selectedImage] ?? undefined}
             alt={productData.name}
             width={556}
             height={556}

@@ -3,7 +3,7 @@
 import { useState, useTransition, useActionState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import Image from 'next/image';
+import { BackendImage } from '@/components/BackendImage';
 import Rating from '@/components/Rating';
 import dayjs from 'dayjs';
 import { CreateReview } from '@/lib/actions/ProductAction';
@@ -84,17 +84,16 @@ export default function FeedBack({
           >
             <div className="flex items-start justify-between mb-3">
               <div className="flex items-center gap-3">
-                <div className="relative w-12 h-12 rounded-full overflow-hidden bg-gray-200">
-                  {review.userID.Profile_Image_URL && (
-                    <Image
-                      src={review.userID.Profile_Image_URL}
-                      alt={
-                        review.userID.firstName + ' ' + review.userID.lastName
-                      }
-                      fill
-                      className="object-cover"
-                    />
-                  )}
+                <div className="relative w-12 h-12 overflow-hidden">
+                  <BackendImage
+                    src={review.userID.Profile_Image_URL}
+                    variant="avatar"
+                    alt={
+                      review.userID.firstName + ' ' + review.userID.lastName
+                    }
+                    fill
+                    className="object-cover"
+                  />
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900">

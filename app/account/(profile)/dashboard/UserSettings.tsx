@@ -1,5 +1,5 @@
 import CustomLink from '@/components/CustomLink';
-import Image from 'next/image';
+import { BackendImage } from '@/components/BackendImage';
 import React from 'react';
 
 interface UserSettingsProps {
@@ -17,12 +17,13 @@ interface UserSettingsProps {
 const UserSettings: React.FC<UserSettingsProps> = ({ user }) => {
   return (
     <div className="border-1 border-gray-100 h-[278px] w-full p-8 flex flex-col items-center justify-center text-center">
-      <Image
+      <BackendImage
         width={120}
         height={120}
-        src={user?.Profile_Image_URL ?? ''}
+        src={user?.Profile_Image_URL}
+        variant="avatar"
         alt={user?.firstName + ' ' + user?.lastName + ' profile image'}
-        className="rounded-full object-cover min-h-[120px] min-w-[120px] max-w-[20px] w-[120px] h-[120px] bg-gray-100"
+        className="rounded-full object-cover min-h-[120px] min-w-[120px] max-w-[20px] w-[120px] h-[120px]"
       />
       <h2 className="text-xl font-semibold text-foreground line-clamp-1">
         {user?.firstName + ' ' + user?.lastName}

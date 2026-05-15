@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { BackendImage } from '@/components/BackendImage';
 import { useActionState, useEffect, useState, useTransition } from 'react';
 import Toast from '@/components/ui/Toast';
 import { Input } from '@/components/ui/input';
@@ -179,12 +179,13 @@ export default function ProfileSettings({ data }: ProfileSettingsProps) {
         {/* Profile Image Upload */}
         <div className="flex flex-col items-center gap-4">
           <div className="relative">
-            <Image
+            <BackendImage
               src={displayImage}
+              variant="avatar"
               alt="Profile"
               width={224}
               height={224}
-              className="rounded-full min-h-[224px] min-w-[224px] max-w-[224px] h-[224px] w-[224px] object-cover bg-gray-100"
+              className="rounded-full min-h-[224px] min-w-[224px] max-w-[224px] h-[224px] w-[224px] object-cover"
             />
 
             {/* Blur overlay when uploading */}
